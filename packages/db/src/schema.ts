@@ -142,6 +142,18 @@ export const bots = sqliteTable(
     apiPort: integer("api_port"),
     apiTokenEnc: blob("api_token_enc"),
 
+    /**
+     * En son gözlenen Docker yeniden başlatma sayacı.
+     *
+     * Sayacın BÜYÜMESİ, Docker'ın botu kimse istemeden geri getirdiği anlamına
+     * gelir. Büyümeyi görmek için önceki değeri bir yerde tutmak şart; tek
+     * başına anlamlı bir sayı olduğu için değil.
+     *
+     * `start()` container'ı yeniden yarattığında Docker'ın sayacı sıfırlanır,
+     * bu sütun da öyle.
+     */
+    restartCount: integer("restart_count").notNull().default(0),
+
     lastError: text("last_error"),
     lastSeenAt: timestamp("last_seen_at"),
 
@@ -164,6 +176,48 @@ export const bots = sqliteTable(
     check("bots_stake_positive", sql`${t.stakeAmount} > 0`),
     check("bots_max_open_trades_positive", sql`${t.maxOpenTrades} > 0`),
   ],
+);
+
+// ---------------------------------------------------------------------------
+// Bot olayları
+// ---------------------------------------------------------------------------
+
+/**
+ * restarted → Docker botu kimse istemeden geri getirdi
+ * failed    → bot çöktü (tek seferlik ya da çöküp duran)
+ * stopped   → container gitti, ama kimse durdurmasını istememişti
+ * recovered → düşmüş bir bot tekrar çalışıyor
+ */
+export const BOT_EVENT_KINDS = ["restarted", "failed", "stopped", "recovered"] as const;
+
+/**
+ * Bir botun başına gelenler.
+ *
+ * Neden bir sütun değil de tablo: botlar `--restart unless-stopped` ile
+ * çalışıyor, yani çöken bir botu Docker geri getiriyor. Tek bir "son hata"
+ * sütunu bir sonraki başarılı açılışta siliniyor ve gece yaşanan çökme yok
+ * oluyor. Kullanıcı sabah baktığında bot "çalışıyor" görünüyor ve kırk kez
+ * çöktüğüne dair hiçbir iz kalmıyor.
+ *
+ * Satırlar yalnızca GEÇİŞTE yazılır, her yoklamada değil — yoksa çöküp duran
+ * bir bot on beş saniyede bir satır üretirdi.
+ */
+export const botEvents = sqliteTable(
+  "bot_events",
+  {
+    id: text("id").primaryKey(),
+    botId: text("bot_id")
+      .notNull()
+      .references(() => bots.id),
+
+    kind: text("kind", { enum: BOT_EVENT_KINDS }).notNull(),
+
+    /** Teknik ayrıntı — `failed` için log kuyruğu. Kullanıcıya isteğe bağlı gösterilir. */
+    detail: text("detail"),
+
+    at: timestamp("at").notNull().default(NOW),
+  },
+  (t) => [index("bot_events_bot_at_idx").on(t.botId, t.at)],
 );
 
 // ---------------------------------------------------------------------------
@@ -272,6 +326,9 @@ export type ExchangeAccountRow = typeof exchangeAccounts.$inferSelect;
 export type NewExchangeAccountRow = typeof exchangeAccounts.$inferInsert;
 export type BotRow = typeof bots.$inferSelect;
 export type NewBotRow = typeof bots.$inferInsert;
+export type BotEventRow = typeof botEvents.$inferSelect;
+export type NewBotEventRow = typeof botEvents.$inferInsert;
+export type BotEventKind = (typeof BOT_EVENT_KINDS)[number];
 export type BacktestRow = typeof backtests.$inferSelect;
 export type NewBacktestRow = typeof backtests.$inferInsert;
 export type TradeRow = typeof trades.$inferSelect;

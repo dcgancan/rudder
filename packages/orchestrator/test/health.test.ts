@@ -11,7 +11,7 @@ import { test } from "node:test";
 
 import type { ContainerState } from "@rudder/host";
 
-import { classify } from "../src/health.ts";
+import { classify, eventsFor } from "../src/health.ts";
 
 const state = (over: Partial<ContainerState>): ContainerState => ({
   id: "abc123",
@@ -89,4 +89,92 @@ test("a container that exited with a real failure is an error", () => {
   for (const exitCode of [1, 2, 127]) {
     assert.equal(classify({ state: state({ exitCode }), reachable: false }), "error");
   }
+});
+
+// --------------------------------------------------------------------------
+// Olaylar
+// --------------------------------------------------------------------------
+
+test("nothing worth recording happens when nothing changes", () => {
+  assert.deepEqual(
+    eventsFor({ status: "running", restartCount: 0 }, { status: "running", restartCount: 0 }),
+    [],
+  );
+});
+
+test("a bot that goes down on its own is recorded", () => {
+  assert.deepEqual(
+    eventsFor({ status: "running", restartCount: 0 }, { status: "stopped", restartCount: 0 }),
+    ["stopped"],
+  );
+});
+
+// Niyetin kaydı satırın kendisinde: `stop()` önce `stopping` yazıyor. Kullanıcı
+// botu kendi durdurduysa bunu ona olay olarak geri anlatmanın anlamı yok.
+test("a bot the user asked to stop is not an event", () => {
+  assert.deepEqual(
+    eventsFor({ status: "stopping", restartCount: 0 }, { status: "stopped", restartCount: 0 }),
+    [],
+  );
+});
+
+test("a bot that has never been up does not report going down", () => {
+  assert.deepEqual(
+    eventsFor({ status: "stopped", restartCount: 0 }, { status: "stopped", restartCount: 0 }),
+    [],
+  );
+});
+
+test("a crash is recorded once", () => {
+  assert.deepEqual(
+    eventsFor({ status: "running", restartCount: 0 }, { status: "error", restartCount: 1 }),
+    ["failed"],
+  );
+});
+
+/*
+ * Asıl sınır bu. Çöküp duran bir bot `error` kalıyor ve Docker onu geri
+ * getirdiği için sayaç HER yoklamada büyüyor. Bu geçiş olay üretseydi, on beş
+ * saniyede bir satır yazılır ve kayıt okunamaz hale gelirdi.
+ */
+test("a crash loop does not write a row on every poll", () => {
+  let previous = { status: "error" as const, restartCount: 4 };
+
+  for (let count = 5; count < 40; count++) {
+    const next = { status: "error" as const, restartCount: count };
+    assert.deepEqual(eventsFor(previous, next), [], `poll at restart ${count} wrote a row`);
+    previous = next;
+  }
+});
+
+test("a bot Docker brought back on its own is recorded", () => {
+  assert.deepEqual(
+    eventsFor({ status: "running", restartCount: 0 }, { status: "running", restartCount: 1 }),
+    ["restarted"],
+  );
+});
+
+// `start()` container'ı yeniden yaratıyor ve Docker'ın sayacı sıfırlanıyor.
+// Bu düşüş bir yeniden başlatma değil, yeni bir container.
+test("a restart count that falls is a new container, not a restart", () => {
+  assert.deepEqual(
+    eventsFor({ status: "running", restartCount: 9 }, { status: "starting", restartCount: 0 }),
+    [],
+  );
+});
+
+// Kullanıcı botu elle başlattığında arada `starting` var, yani bu yol yalnızca
+// Docker'ın kendiliğinden toparladığı — yani sessiz olan — durumu yakalıyor.
+test("a bot that comes back on its own after failing is recorded", () => {
+  assert.deepEqual(
+    eventsFor({ status: "error", restartCount: 6 }, { status: "running", restartCount: 7 }),
+    ["recovered"],
+  );
+});
+
+test("a manual restart after a failure is not reported as a recovery", () => {
+  assert.deepEqual(
+    eventsFor({ status: "error", restartCount: 6 }, { status: "starting", restartCount: 0 }),
+    [],
+  );
 });

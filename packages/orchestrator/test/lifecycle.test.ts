@@ -18,7 +18,7 @@ import { after, before, test } from "node:test";
 import { eq } from "drizzle-orm";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 
-import { bots, createDatabase, rulesets, trades } from "@rudder/db";
+import { botEvents, bots, createDatabase, rulesets, trades } from "@rudder/db";
 import type { Database } from "@rudder/db";
 import { parseRuleset } from "@rudder/ruleset";
 
@@ -170,6 +170,21 @@ test("stopping releases the port and clears the container", { skip: !enabled }, 
 test("a bot stopped on purpose does not read as an error", { skip: !enabled }, async () => {
   assert.equal(await orchestrator.refreshStatus(botId), "stopped");
   assert.equal(row()?.status, "stopped");
+});
+
+/*
+ * Olay kaydı yalnızca İSTENMEYEN şeyleri tutuyor. Buraya kadar her adım —
+ * başlatma, çalışma, işlem, durdurma — kullanıcının kendi istediği şeydi.
+ * Kayıt boş değilse ya sınıflandırma yanlış ya da geçiş kuralları gürültülü,
+ * ve ikisi de kaydı okunmaz hale getirir.
+ */
+test("a lifecycle nobody complained about leaves an empty log", { skip: !enabled }, () => {
+  const events = db.select().from(botEvents).where(eq(botEvents.botId, botId)).all();
+
+  assert.deepEqual(
+    events.map((event) => event.kind),
+    [],
+  );
 });
 
 test("a stopped bot can be started again", { skip: !enabled }, async () => {

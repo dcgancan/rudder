@@ -19,7 +19,7 @@
  * arayüzüyle aynı gerekçe.
  */
 
-import type { BotRow } from "@rudder/db";
+import type { BotEventKind, BotRow } from "@rudder/db";
 import type { ContainerState } from "@rudder/host";
 
 export type BotStatus = BotRow["status"];
@@ -86,4 +86,50 @@ export function classify({ state, reachable }: Observation): BotStatus {
 
   // Container ayakta ama API henüz cevap vermiyor — hâlâ açılıyor.
   return reachable ? "running" : "starting";
+}
+
+// ---------------------------------------------------------------------------
+// Olaylar
+// ---------------------------------------------------------------------------
+
+/** Bir botun iki yoklama arasında karşılaştırılan hali. */
+export type Snapshot = {
+  status: BotStatus;
+  /** En son gözlenen Docker yeniden başlatma sayacı. */
+  restartCount: number;
+};
+
+/**
+ * İki yoklama arasında kaydedilmeye değer ne oldu.
+ *
+ * SAF, ve bilerek cimri: her yoklamada değil yalnızca GEÇİŞTE olay üretir.
+ * Aksi halde çöküp duran bir bot on beş saniyede bir satır yazardı ve kayıt
+ * okunamaz hale gelirdi.
+ *
+ * Kullanıcının kendi istediği şeyler olay değildir. Botu durdurmak bir olay
+ * üretmez; `stopped` yalnızca satır botun AYAKTA olmasını beklerken container
+ * gittiyse yazılır. Niyetin kaydı satırın kendisinde: `stop()` önce
+ * `stopping` yazıyor.
+ */
+export function eventsFor(previous: Snapshot, next: Snapshot): BotEventKind[] {
+  // Çöken bir bot BİR kez yazılır. Docker onu geri getirmeye devam ettiği ve
+  // sayaç her tıkta büyüdüğü için, buradan erken dönmemek kaydı boğardı.
+  if (next.status === "error") {
+    return previous.status === "error" ? [] : ["failed"];
+  }
+
+  const expectedUp = previous.status === "running" || previous.status === "starting";
+
+  if (next.status === "stopped" && expectedUp) return ["stopped"];
+
+  // Düşmüş bir botun kendiliğinden toparlanması. Kullanıcı botu elle yeniden
+  // başlattıysa arada `starting` olduğu için bu yazılmaz — zaten o durumda
+  // botun düştüğünü kullanıcı biliyor. Sessiz olan yol bu.
+  if (next.status === "running" && previous.status === "error") return ["recovered"];
+
+  // Sayacın büyümesi, Docker'ın botu kimse istemeden geri getirdiği demek.
+  // AZALMASI yeni bir container demek (`start()` sayacı sıfırlar), olay değil.
+  if (next.restartCount > previous.restartCount) return ["restarted"];
+
+  return [];
 }

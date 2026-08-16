@@ -24,7 +24,7 @@ import { setTimeout as sleep } from "node:timers/promises";
 
 import { and, eq, isNotNull, isNull, ne } from "drizzle-orm";
 
-import { bots, rulesets, trades } from "@rudder/db";
+import { botEvents, bots, rulesets, trades } from "@rudder/db";
 import type { Database, BotRow } from "@rudder/db";
 import {
   buildCommand,
@@ -48,7 +48,8 @@ import {
 } from "@rudder/host";
 
 import { botPaths, containerName } from "./paths.ts";
-import { classify } from "./health.ts";
+import { classify, eventsFor } from "./health.ts";
+import type { Snapshot } from "./health.ts";
 import { allocatePort, DEFAULT_PORT_RANGE } from "./ports.ts";
 
 export const DEFAULT_IMAGE = "freqtradeorg/freqtrade:stable";
@@ -197,6 +198,9 @@ export class Orchestrator {
       containerId,
       apiPort: port,
       lastError: null,
+      // Yeni container, yeni sayaç. Sıfırlanmazsa eski yüksek değer, gerçek
+      // yeniden başlatmaları o değeri aşana kadar gizlerdi.
+      restartCount: 0,
     });
   }
 
@@ -232,7 +236,11 @@ export class Orchestrator {
    * Container ve API'ye bakıp satırdaki durumu gerçeğe eşitler.
    *
    * Sınıflandırma kuralları `health.ts`'te ve SAF; burada kalan yalnızca
-   * gözlemi toplamak ve sonucu yazmak.
+   * gözlemi toplamak, sonucu yazmak ve değişimi olay kaydına geçmek.
+   *
+   * Olaylar gözcüde değil BURADA yazılıyor. Sebep: sayfa okuması da tazeleme
+   * yapıyor, ve iki ayrı yerde yazılan bir kayıt iki farklı sonuç verirdi.
+   * Gözcü yalnızca kalp atışını sağlıyor.
    */
   async refreshStatus(botId: string): Promise<BotRow["status"]> {
     const bot = this.#requireBot(botId);
@@ -253,21 +261,45 @@ export class Orchestrator {
         : false;
 
     const status = classify({ state, reachable });
+    const detail = status === "error" ? await containerLogs(containerName(botId)) : null;
 
-    if (status === "error") {
-      const logs = await containerLogs(containerName(botId));
-      this.#update(botId, { status, lastError: logs.slice(-2000) });
-      return status;
+    this.#record(botId, { status, restartCount: state?.restartCount ?? 0 }, detail, state !== null);
+    return status;
+  }
+
+  /**
+   * Yeni durumu ve doğurduğu olayları yazar.
+   *
+   * SENKRON, ve satır burada YENİDEN okunuyor. `refreshStatus` hem sayfa
+   * okumasından hem gözcüden çağrılıyor; ikisi arasında `await` varken satırı
+   * baştan taşımak, aynı geçişi iki kez olay kaydına yazmaya yol açardı.
+   * Bu blokta hiç `await` olmadığı için araya başka bir çağrı giremez.
+   */
+  #record(botId: string, next: Snapshot, detail: string | null, exists: boolean): void {
+    const current = this.#db.select().from(bots).where(eq(bots.id, botId)).get();
+    if (!current) return;
+
+    for (const kind of eventsFor(current, next)) {
+      this.#db
+        .insert(botEvents)
+        .values({
+          id: crypto.randomUUID(),
+          botId,
+          kind,
+          detail: detail?.slice(-2000) ?? null,
+          at: new Date(),
+        })
+        .run();
     }
 
     this.#update(botId, {
-      status,
+      status: next.status,
+      restartCount: next.restartCount,
       // Container gitmişse elde tutulan id ölü bir referans.
-      ...(state ? {} : { containerId: null }),
-      ...(status === "running" ? { lastSeenAt: new Date(), lastError: null } : {}),
+      ...(exists ? {} : { containerId: null }),
+      ...(next.status === "error" ? { lastError: detail?.slice(-2000) ?? null } : {}),
+      ...(next.status === "running" ? { lastSeenAt: new Date(), lastError: null } : {}),
     });
-
-    return status;
   }
 
   async waitUntilRunning(botId: string, timeoutMs = 120_000): Promise<void> {

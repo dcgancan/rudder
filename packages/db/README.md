@@ -2,7 +2,7 @@
 
 SQLite şeması ve bağlantısı. Drizzle ORM + `better-sqlite3`.
 
-## Şeman şeklini belirleyen iki karar
+## Şemanın şeklini belirleyen üç karar
 
 ### 1. Kural setleri değişmezdir
 
@@ -22,6 +22,21 @@ Bu, pazaryeri tarafındaki **"kopyala, takip etme"** ilkesinin iç karşılığ�
 `bots.deleted_at` doldurulur, satır silinmez. İşlem geçmişi bot kaldırıldıktan
 sonra da durur — stratejileri birbiriyle karşılaştırabilmenin tek yolu bu.
 
+### 3. Bir botun başına gelenler ayrı bir tabloda tutulur
+
+Botlar `--restart unless-stopped` ile çalışıyor, yani çöken bir botu Docker
+geri getiriyor. Bunun sonucu ölçüldü: kullanıcı sabah baktığında bot
+**"çalışıyor"** görünüyor ve gece kırk kez çöktüğüne dair hiçbir iz kalmıyor.
+
+Tek bir "son hata" sütunu bu bilgiyi tutamaz — bir sonraki başarılı açılışta
+silinir. `bot_events` bu yüzden var: eklemeli, silinmeyen bir kayıt.
+
+Satırlar yalnızca **geçişte** yazılır, her yoklamada değil. Çöküp duran bir bot
+`failed` olarak bir kez yazılır; Docker onu geri getirmeye devam ettiği için
+aksi halde on beş saniyede bir satır üretirdi. Kullanıcının kendi istediği
+şeyler hiç yazılmaz: botu durdurmak olay değildir. Bir entegrasyon testi
+baştan sona normal bir yaşam döngüsünün kaydı **boş** bıraktığını doğrular.
+
 ## Tablolar
 
 | Tablo | Ne tutar |
@@ -29,6 +44,7 @@ sonra da durur — stratejileri birbiriyle karşılaştırabilmenin tek yolu bu.
 | `rulesets` | Sürümlenmiş kural setleri, fork soyağacıyla |
 | `exchange_accounts` | Şifrelenmiş borsa kimlik bilgileri |
 | `bots` | Yapılandırılmış çalıştırıcılar ve container durumu |
+| `bot_events` | Bir botun kendiliğinden düşmesi, dönmesi, toparlanması |
 | `backtests` | Backtest koşuları, vitrin metrikleri ayrı sütunlarda |
 | `trades` | Freqtrade'den aynalanan kapanmış işlemler |
 
