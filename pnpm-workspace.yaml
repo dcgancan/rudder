@@ -1,2 +1,11 @@
 packages:
   - "packages/*"
+
+# esbuild yalnızca drizzle-kit'in (migration üretme aracı) bağımlılığıdır.
+# Çalışma zamanında bulunmaz; kurulum script'i platforma uygun ikiliyi bağlar.
+#
+# better-sqlite3 native bir modüldür; kurulum script'i platforma uygun hazır
+# ikiliyi indirir, yoksa derler.
+allowBuilds:
+  esbuild: true
+  better-sqlite3: true
