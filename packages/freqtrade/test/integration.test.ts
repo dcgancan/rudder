@@ -161,13 +161,21 @@ test("reads account state", { skip: !enabled }, async () => {
 
 test("opens and closes a position on demand", { skip: !enabled }, async () => {
   await client.forceEnter("ETH/USDT");
-  await sleep(2000);
+  await sleep(3000);
 
   const open = await client.status();
   assert.ok(open.length > 0, "forceEnter should have opened a position");
 
+  // Emrin DOLDUĞUNU doğrula, sadece var olduğunu değil. Dolmamış bir limit
+  // emir de burada görünür ama gerçek bir pozisyon değildir ve forceExit onu
+  // kapatmaz, iptal eder.
+  assert.ok((open[0]?.amount ?? 0) > 0, "the entry order should have filled");
+
   const result = await client.forceExit("all");
   assert.match(result.result, /exit orders/i);
+
+  await sleep(5000);
+  assert.equal((await client.status()).length, 0, "the position should be closed");
 });
 
 test("can be stopped through the API", { skip: !enabled }, async () => {

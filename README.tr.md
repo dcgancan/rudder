@@ -86,8 +86,10 @@ Aynı kural seti, iki dilde:
 | Jenerik strateji yorumlayıcısı | ✅ Çalışıyor, gerçek veriyle backtest edildi |
 | Doğrulama / güvenlik sınırı | ✅ Çalışıyor, kötü niyetli kural setlerine karşı test edildi |
 | Açıklama render'ı (TR + EN) | ✅ Çalışıyor |
+| Veri modeli | ✅ Çalışıyor |
+| Bot yaşam döngüsü (paper trading) | ✅ Çalışıyor, gerçek container'larla doğrulandı |
+| Gerçek parayla işlem | ⏳ Kimlik bilgisi şifrelemesi gerekiyor |
 | Web arayüzü | ❌ Başlanmadı |
-| Bot yaşam döngüsü yönetimi | ❌ Başlanmadı |
 | Strateji paylaşımı | ❌ Başlanmadı |
 
 Bugün Rudder, etrafında ürün olmayan çalışan bir motordan ibaret. Hemen
@@ -135,12 +137,14 @@ pnpm test
 | `packages/ruleset/` | Şema, doğrulama ve açıklama render'ı (TypeScript) |
 | `packages/db/` | SQLite şeması ve bağlantısı |
 | `packages/freqtrade/` | Config üretimi ve tipli REST istemcisi |
+| `packages/orchestrator/` | Bot satırlarını çalışan container'lara çevirir |
 | `engine/` | Freqtrade yorumlayıcısı — projedeki tek Python |
 | `ft_lab/` | Tek kullanımlık Freqtrade keşif ortamı |
 
 Belgeler: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
 [`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
+[`packages/orchestrator/README.md`](packages/orchestrator/README.md) ·
 [`engine/README.md`](engine/README.md) ·
 [`ft_lab/README.md`](ft_lab/README.md)
 

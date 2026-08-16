@@ -46,6 +46,28 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/orchestrator:
+    dependencies:
+      '@rudder/db':
+        specifier: workspace:*
+        version: link:../db
+      '@rudder/freqtrade':
+        specifier: workspace:*
+        version: link:../freqtrade
+      '@rudder/ruleset':
+        specifier: workspace:*
+        version: link:../ruleset
+      drizzle-orm:
+        specifier: ^0.44.7
+        version: 0.44.7(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^26.2.0
+        version: 26.2.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   packages/ruleset:
     dependencies:
       zod:

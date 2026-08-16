@@ -181,9 +181,13 @@ class UniversalStrategy(IStrategy):
     ignore_roi_if_entry_signal = False
 
     order_types = {
+        # Stratejinin kendi sinyalleri limit emir kullanır — daha iyi fiyat.
         "entry": "limit",
         "exit": "limit",
-        # Panik satış anında dolmama riski olmaması için market.
+        # Kullanıcının arayüzden verdiği manuel al/sat emirleri market olmalı.
+        # Limit emir asılı kalabilir: "şimdi al" ya da "hemen sat" diyen bir
+        # kullanıcı için dolmayan bir emir, olmayan bir butondan kötüdür.
+        "force_entry": "market",
         "force_exit": "market",
         "emergency_exit": "market",
         "stoploss": "market",

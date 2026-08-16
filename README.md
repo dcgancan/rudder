@@ -86,8 +86,10 @@ No human wrote either sentence.
 | Generic strategy interpreter | ✅ Works, backtested on real data |
 | Validation / security boundary | ✅ Works, tested against malicious rulesets |
 | Description renderer (EN + TR) | ✅ Works |
+| Data model | ✅ Works |
+| Bot lifecycle (paper trading) | ✅ Works, verified against real containers |
+| Live trading | ⏳ Needs credential encryption |
 | Web interface | ❌ Not started |
-| Bot lifecycle management | ❌ Not started |
 | Strategy sharing | ❌ Not started |
 
 Today Rudder is a working engine with no product around it. If you want a bot
@@ -134,12 +136,14 @@ pnpm test
 | `packages/ruleset/` | Schema, validation and description rendering (TypeScript) |
 | `packages/db/` | SQLite schema and client |
 | `packages/freqtrade/` | Config generation and typed REST client |
+| `packages/orchestrator/` | Turns bot rows into running containers |
 | `engine/` | The Freqtrade interpreter — the only Python in the project |
 | `ft_lab/` | Throwaway Freqtrade exploration environment |
 
 Docs: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
 [`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
+[`packages/orchestrator/README.md`](packages/orchestrator/README.md) ·
 [`engine/README.md`](engine/README.md) ·
 [`ft_lab/README.md`](ft_lab/README.md)
 
