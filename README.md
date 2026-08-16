@@ -133,11 +133,13 @@ pnpm test
 | `rulesets/` | Curated strategies, plus `_invalid/` fixtures that must be rejected |
 | `packages/ruleset/` | Schema, validation and description rendering (TypeScript) |
 | `packages/db/` | SQLite schema and client |
+| `packages/freqtrade/` | Config generation and typed REST client |
 | `engine/` | The Freqtrade interpreter — the only Python in the project |
 | `ft_lab/` | Throwaway Freqtrade exploration environment |
 
 Docs: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
+[`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
 [`engine/README.md`](engine/README.md) ·
 [`ft_lab/README.md`](ft_lab/README.md)
 

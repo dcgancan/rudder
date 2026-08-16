@@ -19,6 +19,10 @@ build/
 *.sqlite3
 *.db
 
+# Integration test scratch — bot working directories must live on a path the
+# container runtime shares, so they cannot go in the OS temp dir.
+.rudder-test/
+
 # Python
 __pycache__/
 *.py[cod]

@@ -134,11 +134,13 @@ pnpm test
 | `rulesets/` | Küratörlü stratejiler ve reddedilmesi gereken `_invalid/` fixture'ları |
 | `packages/ruleset/` | Şema, doğrulama ve açıklama render'ı (TypeScript) |
 | `packages/db/` | SQLite şeması ve bağlantısı |
+| `packages/freqtrade/` | Config üretimi ve tipli REST istemcisi |
 | `engine/` | Freqtrade yorumlayıcısı — projedeki tek Python |
 | `ft_lab/` | Tek kullanımlık Freqtrade keşif ortamı |
 
 Belgeler: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
+[`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
 [`engine/README.md`](engine/README.md) ·
 [`ft_lab/README.md`](ft_lab/README.md)
 
