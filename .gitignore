@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Freqtrade lab artifacts — regenerable, large, or credential-bearing.
+# config.example.json is committed; the real config.json is not.
+ft_lab/user_data/config.json
+ft_lab/user_data/data/
+ft_lab/user_data/backtest_results/
+ft_lab/user_data/logs/
+ft_lab/user_data/plot/
+ft_lab/user_data/hyperopt_results/
+
+# Freqtrade's own scaffolding — not ours to vendor.
+# Regenerate with: freqtrade create-userdir
+ft_lab/user_data/strategies/
+ft_lab/user_data/hyperopts/
+ft_lab/user_data/notebooks/
+ft_lab/user_data/freqaimodels/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp

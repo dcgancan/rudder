@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "bb-bounce",
+  "name": {
+    "en": "Bollinger Band Bounce",
+    "tr": "Bollinger Bandı Sekmesi"
+  },
+  "timeframe": "1h",
+  "indicators": [
+    { "id": "bb_lower", "fn": "bbands", "params": { "period": 20, "stds": 2 }, "output": "lower" },
+    { "id": "bb_mid", "fn": "bbands", "params": { "period": 20, "stds": 2 }, "output": "middle" },
+    { "id": "rsi14", "fn": "rsi", "params": { "period": 14 } }
+  ],
+  "entry": {
+    "all": [
+      { "cmp": { "op": "lt", "left": "close", "right": "bb_lower" } },
+      { "cmp": { "op": "lt", "left": "rsi14", "right": 40 } }
+    ]
+  },
+  "exit": {
+    "any": [
+      { "cmp": { "op": "gt", "left": "close", "right": "bb_mid" } }
+    ]
+  },
+  "risk": {
+    "stoploss": -0.06,
+    "roi": { "0": 0.03, "180": 0.015 },
+    "trailing": { "enabled": true, "positive": 0.01, "positive_offset": 0.02, "only_offset_is_reached": true }
+  }
+}

@@ -1,0 +1,3 @@
+{"schema_version":1,"id":"attack-3","name":{"en":"x"},"timeframe":"1h",
+ "indicators":[{"id":"close","fn":"rsi","params":{"period":14}}],
+ "entry":{"cmp":{"op":"lt","left":"close","right":30}},"risk":{"stoploss":-0.05}}

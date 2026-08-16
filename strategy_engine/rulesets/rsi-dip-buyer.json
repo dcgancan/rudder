@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "rsi-dip-buyer",
+  "name": {
+    "en": "RSI Dip Buyer",
+    "tr": "RSI Dip Alıcı"
+  },
+  "timeframe": "1h",
+  "indicators": [
+    { "id": "rsi14", "fn": "rsi", "params": { "period": 14 } },
+    { "id": "ema200", "fn": "ema", "params": { "period": 200 } }
+  ],
+  "entry": {
+    "all": [
+      { "cmp": { "op": "lt", "left": "rsi14", "right": 30 } },
+      { "cmp": { "op": "gt", "left": "close", "right": "ema200" } }
+    ]
+  },
+  "exit": {
+    "any": [
+      { "cmp": { "op": "gt", "left": "rsi14", "right": 70 } }
+    ]
+  },
+  "risk": {
+    "stoploss": -0.08,
+    "roi": { "0": 0.04, "120": 0.02, "480": 0.01 },
+    "trailing": { "enabled": false }
+  }
+}

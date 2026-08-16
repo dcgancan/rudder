@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "ema-cross",
+  "name": {
+    "en": "EMA Crossover",
+    "tr": "EMA Kesişimi"
+  },
+  "timeframe": "1h",
+  "indicators": [
+    { "id": "ema_fast", "fn": "ema", "params": { "period": 12 } },
+    { "id": "ema_slow", "fn": "ema", "params": { "period": 26 } }
+  ],
+  "entry": {
+    "all": [
+      { "cmp": { "op": "cross_above", "left": "ema_fast", "right": "ema_slow" } }
+    ]
+  },
+  "exit": {
+    "any": [
+      { "cmp": { "op": "cross_below", "left": "ema_fast", "right": "ema_slow" } }
+    ]
+  },
+  "risk": {
+    "stoploss": -0.10,
+    "roi": { "0": 0.05, "240": 0.02 },
+    "trailing": { "enabled": false }
+  }
+}

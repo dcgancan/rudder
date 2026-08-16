@@ -1,0 +1,54 @@
+{
+  "timeframe_line": "Evaluated on the {timeframe} chart.",
+  "entry_label": "BUY",
+  "exit_label": "SELL",
+  "entry_sentence": "{label} when {conditions}.",
+  "exit_sentence": "{label} when {conditions}.",
+  "exit_none": "No sell rule — positions close on take-profit or stop-loss only.",
+  "join_all": " and ",
+  "join_any": " or ",
+  "not": "it is not the case that {inner}",
+  "ops": {
+    "lt": "{left} falls below {right}",
+    "lte": "{left} is at or below {right}",
+    "gt": "{left} rises above {right}",
+    "gte": "{left} is at or above {right}",
+    "cross_above": "{left} crosses above {right}",
+    "cross_below": "{left} crosses below {right}"
+  },
+  "columns": {
+    "open": "the candle open",
+    "high": "the candle high",
+    "low": "the candle low",
+    "close": "price",
+    "volume": "volume"
+  },
+  "indicators": {
+    "rsi": "RSI({period})",
+    "ema": "the {period}-period EMA",
+    "sma": "the {period}-period SMA",
+    "atr": "ATR({period})",
+    "adx": "ADX({period})",
+    "macd": {
+      "macd": "the MACD line",
+      "signal": "the MACD signal line",
+      "hist": "the MACD histogram"
+    },
+    "bbands": {
+      "lower": "the lower Bollinger Band",
+      "middle": "the middle Bollinger Band",
+      "upper": "the upper Bollinger Band"
+    }
+  },
+  "risk_heading": "Risk controls",
+  "stoploss": "Stop loss at {pct}",
+  "roi_intro": "Take profit:",
+  "roi_immediate": "{pct} immediately",
+  "roi_after": "{pct} after {duration}",
+  "trailing_off": "No trailing stop.",
+  "trailing_on": "Trailing stop of {pct}, activated once profit reaches {offset}.",
+  "trailing_on_no_offset": "Trailing stop of {pct}.",
+  "dur_minutes": "{n} minutes",
+  "dur_hours": "{n} hours",
+  "dur_days": "{n} days"
+}

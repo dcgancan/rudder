@@ -1,0 +1,54 @@
+{
+  "timeframe_line": "{timeframe} grafiği üzerinde değerlendirilir.",
+  "entry_label": "AL",
+  "exit_label": "SAT",
+  "entry_sentence": "{conditions} {label}.",
+  "exit_sentence": "{conditions} {label}.",
+  "exit_none": "Satış kuralı yok — pozisyonlar yalnızca kâr al ya da zarar kes ile kapanır.",
+  "join_all": " ve ",
+  "join_any": " veya ",
+  "not": "{inner} durumu geçerli değilse",
+  "ops": {
+    "lt": "{left} {right} seviyesinin altına inerse",
+    "lte": "{left} {right} seviyesinde ya da altındaysa",
+    "gt": "{left} {right} seviyesinin üzerine çıkarsa",
+    "gte": "{left} {right} seviyesinde ya da üzerindeyse",
+    "cross_above": "{left} {right} seviyesini yukarı keserse",
+    "cross_below": "{left} {right} seviyesini aşağı keserse"
+  },
+  "columns": {
+    "open": "mum açılışı",
+    "high": "mumun en yükseği",
+    "low": "mumun en düşüğü",
+    "close": "fiyat",
+    "volume": "işlem hacmi"
+  },
+  "indicators": {
+    "rsi": "RSI({period})",
+    "ema": "{period} periyotluk EMA",
+    "sma": "{period} periyotluk SMA",
+    "atr": "ATR({period})",
+    "adx": "ADX({period})",
+    "macd": {
+      "macd": "MACD çizgisi",
+      "signal": "MACD sinyal çizgisi",
+      "hist": "MACD histogramı"
+    },
+    "bbands": {
+      "lower": "alt Bollinger Bandı",
+      "middle": "orta Bollinger Bandı",
+      "upper": "üst Bollinger Bandı"
+    }
+  },
+  "risk_heading": "Risk kontrolleri",
+  "stoploss": "Zarar kes: {pct}",
+  "roi_intro": "Kâr al:",
+  "roi_immediate": "hemen {pct}",
+  "roi_after": "{duration} sonra {pct}",
+  "trailing_off": "Takip eden zarar kes yok.",
+  "trailing_on": "{pct} takip eden zarar kes; kâr {offset} seviyesine ulaştığında devreye girer.",
+  "trailing_on_no_offset": "{pct} takip eden zarar kes.",
+  "dur_minutes": "{n} dakika",
+  "dur_hours": "{n} saat",
+  "dur_days": "{n} gün"
+}
