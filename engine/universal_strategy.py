@@ -40,11 +40,16 @@ OHLCV_COLUMNS = ("open", "high", "low", "close", "volume")
 INDICATOR_FNS = ("rsi", "ema", "sma", "macd", "bbands", "atr", "adx")
 COMPARISON_OPS = ("lt", "lte", "gt", "gte", "cross_above", "cross_below")
 
+# Tek seri üreten indikatörler; params.period zorunlu.
+SINGLE_OUTPUT_FNS = ("rsi", "ema", "sma", "atr", "adx")
+# Birden çok seri üreten indikatörler; output zorunlu.
+MULTI_OUTPUT_FNS = ("macd", "bbands")
+
 # Çok çıktılı indikatörlerde şema adı -> kütüphane sütun adı.
 MACD_OUTPUTS = {"macd": "macd", "signal": "macdsignal", "hist": "macdhist"}
 BBANDS_OUTPUTS = {"lower": "lower", "middle": "mid", "upper": "upper"}
 
-DEFAULT_RULESET = "/freqtrade/strategy_engine/rulesets/rsi-dip-buyer.json"
+DEFAULT_RULESET = "/freqtrade/rulesets/rsi-dip-buyer.json"
 
 
 class RulesetError(ValueError):
@@ -70,6 +75,14 @@ def _validate(ruleset: dict) -> dict:
         if ind_id in seen:
             raise RulesetError(f"Duplicate indicator id: {ind_id!r}")
         seen.add(ind_id)
+
+        params = spec.get("params", {})
+        if fn in SINGLE_OUTPUT_FNS and "period" not in params:
+            raise RulesetError(f"{fn} requires a period: {ind_id!r}")
+        if fn in MULTI_OUTPUT_FNS and "output" not in spec:
+            raise RulesetError(
+                f"{fn} produces multiple series — 'output' must be given explicitly: {ind_id!r}"
+            )
 
     known = seen | set(OHLCV_COLUMNS)
     for branch in ("entry", "exit"):

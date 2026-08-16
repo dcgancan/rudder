@@ -1,0 +1,305 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rudder/rudder/ruleset.schema.json",
+  "title": "Rudder Ruleset",
+  "description": "Generated from packages/ruleset/src/schema.ts — do not edit by hand. Structural checks only; semantic checks live in validateRuleset().",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$"
+    },
+    "name": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z]{2}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      }
+    },
+    "timeframe": {
+      "type": "string",
+      "enum": [
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "4h",
+        "6h",
+        "12h",
+        "1d"
+      ]
+    },
+    "indicators": {
+      "maxItems": 12,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,31}$"
+          },
+          "fn": {
+            "type": "string",
+            "enum": [
+              "rsi",
+              "ema",
+              "sma",
+              "macd",
+              "bbands",
+              "atr",
+              "adx"
+            ]
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 500
+              },
+              "fast": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 200
+              },
+              "slow": {
+                "type": "integer",
+                "minimum": 3,
+                "maximum": 500
+              },
+              "signal": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 200
+              },
+              "stds": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 5
+              }
+            },
+            "additionalProperties": false
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "macd",
+              "signal",
+              "hist",
+              "upper",
+              "middle",
+              "lower"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "fn"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "entry": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "exit": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "risk": {
+      "type": "object",
+      "properties": {
+        "stoploss": {
+          "type": "number",
+          "minimum": -0.99,
+          "exclusiveMaximum": 0
+        },
+        "roi": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^\\d+$"
+          },
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "trailing": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "positive": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "positive_offset": {
+              "type": "number",
+              "minimum": 0
+            },
+            "only_offset_is_reached": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "stoploss"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "timeframe",
+    "indicators",
+    "entry",
+    "risk"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "all": {
+              "minItems": 1,
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema0"
+              }
+            }
+          },
+          "required": [
+            "all"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "any": {
+              "minItems": 1,
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema0"
+              }
+            }
+          },
+          "required": [
+            "any"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/__schema0"
+            }
+          },
+          "required": [
+            "not"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cmp": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "type": "string",
+                  "enum": [
+                    "lt",
+                    "lte",
+                    "gt",
+                    "gte",
+                    "cross_above",
+                    "cross_below"
+                  ]
+                },
+                "left": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "open",
+                        "high",
+                        "low",
+                        "close",
+                        "volume"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                    }
+                  ]
+                },
+                "right": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "open",
+                        "high",
+                        "low",
+                        "close",
+                        "volume"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "op",
+                "left",
+                "right"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "cmp"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

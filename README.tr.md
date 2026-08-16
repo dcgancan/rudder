@@ -110,23 +110,35 @@ docker run --rm -v "$(pwd)/ft_lab/user_data:/freqtrade/user_data" \
 # Bir kural setini backtest et
 docker run --rm \
   -v "$(pwd)/ft_lab/user_data:/freqtrade/user_data" \
-  -v "$(pwd)/strategy_engine:/freqtrade/strategy_engine:ro" \
-  -e FT_RULESET=/freqtrade/strategy_engine/rulesets/rsi-dip-buyer.json \
+  -v "$(pwd)/engine:/freqtrade/engine:ro" \
+  -v "$(pwd)/rulesets:/freqtrade/rulesets:ro" \
+  -e FT_RULESET=/freqtrade/rulesets/rsi-dip-buyer.json \
   freqtradeorg/freqtrade:stable \
   backtesting --config /freqtrade/user_data/config.json \
-  --strategy UniversalStrategy \
-  --strategy-path /freqtrade/strategy_engine/freqtrade \
+  --strategy UniversalStrategy --strategy-path /freqtrade/engine \
   --timerange 20260201- --cache none
 ```
 
-Kural setini istediğiniz dilde render edin (Node 20+ gerekir):
+Kural setini istediğiniz dilde render edin (Node 22.18+ ve pnpm gerekir):
 
 ```sh
-node strategy_engine/describe/describe.mjs strategy_engine/rulesets/bb-bounce.json tr
+pnpm install
+pnpm describe rulesets/bb-bounce.json tr
+pnpm test
 ```
 
-Kurulum notları: [`ft_lab/README.md`](ft_lab/README.md) ·
-Motor içyapısı: [`strategy_engine/README.md`](strategy_engine/README.md)
+## Depo yapısı
+
+| Yol | Ne |
+|---|---|
+| `rulesets/` | Küratörlü stratejiler ve reddedilmesi gereken `_invalid/` fixture'ları |
+| `packages/ruleset/` | Şema, doğrulama ve açıklama render'ı (TypeScript) |
+| `engine/` | Freqtrade yorumlayıcısı — projedeki tek Python |
+| `ft_lab/` | Tek kullanımlık Freqtrade keşif ortamı |
+
+Belgeler: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
+[`engine/README.md`](engine/README.md) ·
+[`ft_lab/README.md`](ft_lab/README.md)
 
 ## Güvenlik ve risk
 

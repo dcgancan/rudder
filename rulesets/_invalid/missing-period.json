@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "missing-period",
+  "name": { "en": "Missing period" },
+  "timeframe": "1h",
+  "indicators": [{ "id": "rsi14", "fn": "rsi" }],
+  "entry": { "cmp": { "op": "lt", "left": "rsi14", "right": 30 } },
+  "risk": { "stoploss": -0.05, "roi": { "0": 0.02 } }
+}

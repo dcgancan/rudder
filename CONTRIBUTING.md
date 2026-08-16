@@ -10,22 +10,35 @@ ruleset.** No `eval`, no `exec`, no dynamic `import`, no `getattr` on
 user-supplied names, no template engine that can reach the runtime.
 
 This is the property the whole project rests on: a shared strategy is data, and
-data cannot own your machine. Two independent layers enforce it — the JSON
-Schema and `_validate()` in `universal_strategy.py`. Both keep explicit
-whitelists of allowed indicator functions and comparison operators. Keep them
-in sync, and keep them closed.
+data cannot own your machine. Two independent layers enforce it —
+`validateRuleset()` in `packages/ruleset/src/schema.ts` (before a ruleset is
+stored) and `_validate()` in `engine/universal_strategy.py` (before it runs).
+Both keep explicit whitelists of allowed indicator functions and comparison
+operators. Keep them in sync, and keep them closed.
 
 Extending what strategies can express means **extending the whitelist**, never
 opening an escape hatch. If a feature seems to require arbitrary code, it needs
 a design discussion first — open an issue.
 
-`strategy_engine/rulesets/_invalid/` holds rulesets that must be rejected. Add
-to it whenever you touch validation.
+`rulesets/_invalid/` holds rulesets that must be rejected. Add to it whenever
+you touch validation — the test suite asserts that every file in there fails,
+and the Python layer is checked against the same fixtures.
+
+## Development setup
+
+Node ≥ 22.18 and pnpm. There is no build step; Node runs the TypeScript
+directly.
+
+```sh
+pnpm install
+pnpm test
+pnpm typecheck
+```
 
 ## Contributing a strategy
 
-A strategy is a single JSON file in `strategy_engine/rulesets/`. Open a normal
-pull request with it.
+A strategy is a single JSON file in `rulesets/`. Open a normal pull request
+with it.
 
 What makes a strategy likely to be merged:
 
@@ -45,7 +58,7 @@ pairs so they can be reproduced.
 
 ## Contributing a language
 
-Add `strategy_engine/describe/locales/<code>.json`. No code changes should be
+Add `packages/ruleset/src/locales/<code>.json`. No code changes should be
 needed — if a translation requires touching the renderer, that is a bug in the
 abstraction, so please say so in the PR.
 
@@ -65,17 +78,23 @@ Four rules, each of which was an actual bug during development:
 Check your work in both directions:
 
 ```sh
-node strategy_engine/describe/describe.mjs strategy_engine/rulesets/bb-bounce.json <code>
+pnpm describe rulesets/bb-bounce.json <code>
 ```
+
+A missing key throws rather than rendering `{left}` to a user, so an incomplete
+locale fails loudly in tests.
 
 ## Contributing code
 
 - Match the surrounding style. There is no linter yet; there will be.
-- Keep the Python side small. `universal_strategy.py` is deliberately the only
-  Python file in the project and should stay that way.
-- If you add an indicator function, add it to the schema whitelist, the
-  interpreter, **and** every locale file. A missing translation is a broken
-  description, not a cosmetic issue.
+- Keep the Python side small. `engine/universal_strategy.py` is deliberately
+  the only Python file in the project and should stay that way.
+- If you add an indicator function, add it to **both** whitelists (TypeScript
+  and Python), the interpreter, **and** every locale file. A missing
+  translation is a broken description, not a cosmetic issue.
+- `packages/ruleset/ruleset.schema.json` is generated. Run
+  `pnpm --filter @rudder/ruleset emit-schema` after changing the schema rather
+  than editing it by hand.
 
 ## Reporting a security issue
 

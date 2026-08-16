@@ -109,23 +109,35 @@ docker run --rm -v "$(pwd)/ft_lab/user_data:/freqtrade/user_data" \
 # Backtest a ruleset
 docker run --rm \
   -v "$(pwd)/ft_lab/user_data:/freqtrade/user_data" \
-  -v "$(pwd)/strategy_engine:/freqtrade/strategy_engine:ro" \
-  -e FT_RULESET=/freqtrade/strategy_engine/rulesets/rsi-dip-buyer.json \
+  -v "$(pwd)/engine:/freqtrade/engine:ro" \
+  -v "$(pwd)/rulesets:/freqtrade/rulesets:ro" \
+  -e FT_RULESET=/freqtrade/rulesets/rsi-dip-buyer.json \
   freqtradeorg/freqtrade:stable \
   backtesting --config /freqtrade/user_data/config.json \
-  --strategy UniversalStrategy \
-  --strategy-path /freqtrade/strategy_engine/freqtrade \
+  --strategy UniversalStrategy --strategy-path /freqtrade/engine \
   --timerange 20260201- --cache none
 ```
 
-Render a ruleset in either language (requires Node 20+):
+Render a ruleset in either language (requires Node 22.18+ and pnpm):
 
 ```sh
-node strategy_engine/describe/describe.mjs strategy_engine/rulesets/bb-bounce.json tr
+pnpm install
+pnpm describe rulesets/bb-bounce.json tr
+pnpm test
 ```
 
-Full setup notes: [`ft_lab/README.md`](ft_lab/README.md) ·
-Engine internals: [`strategy_engine/README.md`](strategy_engine/README.md)
+## Repository layout
+
+| Path | What |
+|---|---|
+| `rulesets/` | Curated strategies, plus `_invalid/` fixtures that must be rejected |
+| `packages/ruleset/` | Schema, validation and description rendering (TypeScript) |
+| `engine/` | The Freqtrade interpreter — the only Python in the project |
+| `ft_lab/` | Throwaway Freqtrade exploration environment |
+
+Docs: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
+[`engine/README.md`](engine/README.md) ·
+[`ft_lab/README.md`](ft_lab/README.md)
 
 ## Safety
 
