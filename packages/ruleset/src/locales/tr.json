@@ -16,6 +16,14 @@
     "cross_above": "{left} {right} seviyesini yukarı keserse",
     "cross_below": "{left} {right} seviyesini aşağı keserse"
   },
+  "picker_ops": {
+    "lt": "şunun altına inerse",
+    "lte": "şunun altında ya da eşitse",
+    "gt": "şunun üzerine çıkarsa",
+    "gte": "şunun üzerinde ya da eşitse",
+    "cross_above": "şunu yukarı keserse",
+    "cross_below": "şunu aşağı keserse"
+  },
   "columns": {
     "open": "mum açılışı",
     "high": "mumun en yükseği",

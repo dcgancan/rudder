@@ -2,9 +2,7 @@ import { join } from "node:path";
 
 import { createDatabase } from "@rudder/db";
 import type { Database } from "@rudder/db";
-// Dar import: bütün orchestrator'ı (Docker, container yönetimi) uygulamanın
-// bundle'ına çekmenin anlamı yok — burada yalnızca veri kökü gerekiyor.
-import { dataRoot } from "@rudder/orchestrator/paths";
+import { dataRoot } from "@rudder/host";
 
 export function databasePath(): string {
   return process.env["RUDDER_DB"] ?? join(dataRoot(), "rudder.db");

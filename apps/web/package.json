@@ -12,7 +12,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@rudder/backtest": "workspace:*",
     "@rudder/db": "workspace:*",
+    "@rudder/freqtrade": "workspace:*",
+    "@rudder/host": "workspace:*",
     "@rudder/orchestrator": "workspace:*",
     "@rudder/ruleset": "workspace:*",
     "drizzle-orm": "^0.44.7",

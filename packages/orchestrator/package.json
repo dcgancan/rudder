@@ -6,8 +6,7 @@
   "license": "AGPL-3.0-or-later",
   "description": "Turns bot rows into running Freqtrade containers",
   "exports": {
-    ".": "./src/index.ts",
-    "./paths": "./src/paths.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "test": "node --test \"test/**/*.test.ts\"",
@@ -16,6 +15,7 @@
   "dependencies": {
     "@rudder/db": "workspace:*",
     "@rudder/freqtrade": "workspace:*",
+    "@rudder/host": "workspace:*",
     "@rudder/ruleset": "workspace:*",
     "drizzle-orm": "^0.44.7"
   },

@@ -1,0 +1,3265 @@
+{
+ "source": "ft_lab bb-bounce, binance 5 pairs 1h, 20260201- \u2014 trades projected to the two fields the curve reads",
+ "strategy": {
+  "UniversalStrategy": {
+   "trades": [
+    {
+     "close_date": "2026-02-03 18:00:00+00:00",
+     "profit_abs": -6.19063576,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-03 20:00:00+00:00",
+     "profit_abs": 2.99837993,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-04 07:00:00+00:00",
+     "profit_abs": -0.90607522,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-04 11:00:00+00:00",
+     "profit_abs": -6.18943915,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-04 22:00:00+00:00",
+     "profit_abs": -6.1906329,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 10:00:00+00:00",
+     "profit_abs": -2.17824651,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 12:00:00+00:00",
+     "profit_abs": -6.17180884,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 15:00:00+00:00",
+     "profit_abs": -6.16478544,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 15:00:00+00:00",
+     "profit_abs": -6.18807582,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 15:00:00+00:00",
+     "profit_abs": -6.18717189,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 16:00:00+00:00",
+     "profit_abs": 0.79750884,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 16:00:00+00:00",
+     "profit_abs": 0.79520979,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 17:00:00+00:00",
+     "profit_abs": -6.18357192,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 17:00:00+00:00",
+     "profit_abs": -6.19233276,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 20:00:00+00:00",
+     "profit_abs": -6.18679785,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 20:00:00+00:00",
+     "profit_abs": -6.189872,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 20:00:00+00:00",
+     "profit_abs": -6.19061196,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 20:00:00+00:00",
+     "profit_abs": -6.1926896,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 21:00:00+00:00",
+     "profit_abs": 0.79790814,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 21:00:00+00:00",
+     "profit_abs": 0.80078004,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 22:00:00+00:00",
+     "profit_abs": -6.15568395,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 22:00:00+00:00",
+     "profit_abs": 3.00200912,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 23:00:00+00:00",
+     "profit_abs": 1.85927346,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-05 23:00:00+00:00",
+     "profit_abs": 2.99735425,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-06 01:00:00+00:00",
+     "profit_abs": 1.49384422,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-07 16:00:00+00:00",
+     "profit_abs": 1.50039876,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-08 18:00:00+00:00",
+     "profit_abs": 1.15734905,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-09 16:00:00+00:00",
+     "profit_abs": 1.49923145,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-09 16:00:00+00:00",
+     "profit_abs": 1.5004308,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-09 17:00:00+00:00",
+     "profit_abs": 0.35903288,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-11 10:00:00+00:00",
+     "profit_abs": -6.16846224,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-11 14:00:00+00:00",
+     "profit_abs": 1.522231,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-11 20:00:00+00:00",
+     "profit_abs": -2.2781699,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-11 20:00:00+00:00",
+     "profit_abs": -1.0761874,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-12 02:00:00+00:00",
+     "profit_abs": 0.3870375,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-12 22:00:00+00:00",
+     "profit_abs": 1.49939498,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-13 08:00:00+00:00",
+     "profit_abs": 0.68027067,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-13 09:00:00+00:00",
+     "profit_abs": 1.06306516,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-13 15:00:00+00:00",
+     "profit_abs": 1.49268196,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-16 09:00:00+00:00",
+     "profit_abs": -1.87261201,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-16 09:00:00+00:00",
+     "profit_abs": -0.44200765,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-16 10:00:00+00:00",
+     "profit_abs": -0.32971995,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-16 18:00:00+00:00",
+     "profit_abs": 1.1327234,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-16 21:00:00+00:00",
+     "profit_abs": 1.23607836,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-16 21:00:00+00:00",
+     "profit_abs": 1.2645127,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-17 16:00:00+00:00",
+     "profit_abs": 1.50208428,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-17 16:00:00+00:00",
+     "profit_abs": 1.94586697,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-17 18:00:00+00:00",
+     "profit_abs": 1.49615498,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-17 19:00:00+00:00",
+     "profit_abs": 1.50433721,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-18 16:00:00+00:00",
+     "profit_abs": 0.98627714,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-19 04:00:00+00:00",
+     "profit_abs": 0.80768307,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-19 07:00:00+00:00",
+     "profit_abs": -0.80227944,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-19 07:00:00+00:00",
+     "profit_abs": 0.98491482,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-19 17:00:00+00:00",
+     "profit_abs": 1.49443281,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-19 19:00:00+00:00",
+     "profit_abs": 1.25830114,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-19 19:00:00+00:00",
+     "profit_abs": 1.3135451,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-20 00:00:00+00:00",
+     "profit_abs": 1.50043244,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-20 15:00:00+00:00",
+     "profit_abs": 3.00262472,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-22 12:00:00+00:00",
+     "profit_abs": 0.60953473,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-23 10:00:00+00:00",
+     "profit_abs": -1.45348545,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-23 10:00:00+00:00",
+     "profit_abs": -1.88564173,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-24 01:00:00+00:00",
+     "profit_abs": -6.15986686,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-25 01:00:00+00:00",
+     "profit_abs": 1.49533344,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-26 19:00:00+00:00",
+     "profit_abs": 1.32361186,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-26 19:00:00+00:00",
+     "profit_abs": 1.2642672,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-26 20:00:00+00:00",
+     "profit_abs": 1.5009867,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-27 04:00:00+00:00",
+     "profit_abs": 1.49774847,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 06:00:00+00:00",
+     "profit_abs": -6.1832111,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 06:00:00+00:00",
+     "profit_abs": -6.18591532,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 07:00:00+00:00",
+     "profit_abs": 0.79764297,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 07:00:00+00:00",
+     "profit_abs": 0.8044649,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 13:00:00+00:00",
+     "profit_abs": 1.49429112,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 13:00:00+00:00",
+     "profit_abs": 1.50227037,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-02-28 14:00:00+00:00",
+     "profit_abs": -2.44524202,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-01 22:00:00+00:00",
+     "profit_abs": 1.73118325,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-01 22:00:00+00:00",
+     "profit_abs": 1.38324806,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-02 00:00:00+00:00",
+     "profit_abs": 1.50013102,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-02 00:00:00+00:00",
+     "profit_abs": 0.99063191,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-03 15:00:00+00:00",
+     "profit_abs": 1.50107834,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-03 16:00:00+00:00",
+     "profit_abs": 1.50034534,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-03 16:00:00+00:00",
+     "profit_abs": 1.4950784,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-05 21:00:00+00:00",
+     "profit_abs": 1.49987026,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-05 21:00:00+00:00",
+     "profit_abs": 1.49946552,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-07 10:00:00+00:00",
+     "profit_abs": -1.91579388,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-07 10:00:00+00:00",
+     "profit_abs": -3.34653641,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-08 09:00:00+00:00",
+     "profit_abs": -4.65620452,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-08 09:00:00+00:00",
+     "profit_abs": -0.9753189,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-08 11:00:00+00:00",
+     "profit_abs": -0.54827016,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-08 20:00:00+00:00",
+     "profit_abs": 0.96362374,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-08 20:00:00+00:00",
+     "profit_abs": 0.77720356,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-08 20:00:00+00:00",
+     "profit_abs": 1.03725332,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-09 03:00:00+00:00",
+     "profit_abs": 1.49182237,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-17 19:00:00+00:00",
+     "profit_abs": 0.47185171,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-19 04:00:00+00:00",
+     "profit_abs": -1.56681564,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-19 12:00:00+00:00",
+     "profit_abs": -6.18431044,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-19 20:00:00+00:00",
+     "profit_abs": -3.86898254,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-20 02:00:00+00:00",
+     "profit_abs": -0.5652075,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-20 02:00:00+00:00",
+     "profit_abs": 0.66253169,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-20 22:00:00+00:00",
+     "profit_abs": 0.38692056,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-20 22:00:00+00:00",
+     "profit_abs": 0.95702475,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-20 23:00:00+00:00",
+     "profit_abs": 0.4805369,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-22 03:00:00+00:00",
+     "profit_abs": 1.49949848,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-22 03:00:00+00:00",
+     "profit_abs": 1.49991422,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-23 05:00:00+00:00",
+     "profit_abs": -0.74613972,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-23 05:00:00+00:00",
+     "profit_abs": 0.8448902,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-23 06:00:00+00:00",
+     "profit_abs": 0.93621726,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-23 11:00:00+00:00",
+     "profit_abs": 1.49894332,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-23 11:00:00+00:00",
+     "profit_abs": 1.50068864,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-23 11:00:00+00:00",
+     "profit_abs": 1.4965808,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-24 21:00:00+00:00",
+     "profit_abs": 1.15591538,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-24 21:00:00+00:00",
+     "profit_abs": 1.66100692,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-24 23:00:00+00:00",
+     "profit_abs": 1.49176586,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-27 02:00:00+00:00",
+     "profit_abs": -2.52904665,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-27 08:00:00+00:00",
+     "profit_abs": -2.70758024,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-27 14:00:00+00:00",
+     "profit_abs": -6.15831696,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-28 06:00:00+00:00",
+     "profit_abs": -1.52675173,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-28 06:00:00+00:00",
+     "profit_abs": 0.55684128,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-28 07:00:00+00:00",
+     "profit_abs": -2.4751442,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-29 21:00:00+00:00",
+     "profit_abs": 0.57394413,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-30 02:00:00+00:00",
+     "profit_abs": 0.56660142,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-30 02:00:00+00:00",
+     "profit_abs": 0.41658562,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-30 02:00:00+00:00",
+     "profit_abs": 0.99798308,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-31 01:00:00+00:00",
+     "profit_abs": 1.50246564,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-31 02:00:00+00:00",
+     "profit_abs": 0.86769627,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-31 13:00:00+00:00",
+     "profit_abs": 1.49922428,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-31 13:00:00+00:00",
+     "profit_abs": 1.49854473,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-03-31 13:00:00+00:00",
+     "profit_abs": 1.49713574,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-02 17:00:00+00:00",
+     "profit_abs": -0.58885518,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-02 21:00:00+00:00",
+     "profit_abs": -2.65937854,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-02 22:00:00+00:00",
+     "profit_abs": -3.47793105,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-04 20:00:00+00:00",
+     "profit_abs": 0.44046464,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-05 16:00:00+00:00",
+     "profit_abs": 0.35873493,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-05 16:00:00+00:00",
+     "profit_abs": 0.56045367,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-05 19:00:00+00:00",
+     "profit_abs": -0.0386688,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-07 10:00:00+00:00",
+     "profit_abs": 0.8942499,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-07 18:00:00+00:00",
+     "profit_abs": -0.32451928,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-07 20:00:00+00:00",
+     "profit_abs": -0.53308624,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-09 10:00:00+00:00",
+     "profit_abs": -0.1724844,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-12 21:00:00+00:00",
+     "profit_abs": 0.2612493,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-12 21:00:00+00:00",
+     "profit_abs": 0.15131592,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-12 22:00:00+00:00",
+     "profit_abs": -0.58750813,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-15 13:00:00+00:00",
+     "profit_abs": -0.08051472,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-16 16:00:00+00:00",
+     "profit_abs": 1.02692444,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-16 19:00:00+00:00",
+     "profit_abs": 1.30673381,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-19 12:00:00+00:00",
+     "profit_abs": -0.87925636,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-19 13:00:00+00:00",
+     "profit_abs": -2.20787428,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-19 14:00:00+00:00",
+     "profit_abs": -1.07306682,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-20 08:00:00+00:00",
+     "profit_abs": -0.13794554,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-20 08:00:00+00:00",
+     "profit_abs": -0.10289447,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-20 08:00:00+00:00",
+     "profit_abs": -0.03028788,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-21 23:00:00+00:00",
+     "profit_abs": 1.4982122,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-21 23:00:00+00:00",
+     "profit_abs": 1.50045444,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-22 00:00:00+00:00",
+     "profit_abs": 1.2127171,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-23 15:00:00+00:00",
+     "profit_abs": -0.14395206,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-23 16:00:00+00:00",
+     "profit_abs": -0.28090803,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-23 23:00:00+00:00",
+     "profit_abs": -1.04864203,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-25 09:00:00+00:00",
+     "profit_abs": 0.20573913,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-25 22:00:00+00:00",
+     "profit_abs": 0.13362943,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-25 23:00:00+00:00",
+     "profit_abs": 0.09271583,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-26 06:00:00+00:00",
+     "profit_abs": -0.40577592,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-28 00:00:00+00:00",
+     "profit_abs": -0.27731985,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-28 20:00:00+00:00",
+     "profit_abs": -1.81561552,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-29 01:00:00+00:00",
+     "profit_abs": -1.5104905,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-29 01:00:00+00:00",
+     "profit_abs": 0.17063932,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-30 01:00:00+00:00",
+     "profit_abs": 0.45992295,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-30 01:00:00+00:00",
+     "profit_abs": 1.33994636,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-04-30 16:00:00+00:00",
+     "profit_abs": -0.8461168,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-02 14:00:00+00:00",
+     "profit_abs": 0.1340874,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-08 09:00:00+00:00",
+     "profit_abs": -0.96481882,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-08 09:00:00+00:00",
+     "profit_abs": -1.17572987,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-08 11:00:00+00:00",
+     "profit_abs": -0.67777476,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-13 02:00:00+00:00",
+     "profit_abs": -1.12369205,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-13 02:00:00+00:00",
+     "profit_abs": 0.0103096,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-13 02:00:00+00:00",
+     "profit_abs": 0.79574399,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-14 06:00:00+00:00",
+     "profit_abs": -0.68651599,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-14 06:00:00+00:00",
+     "profit_abs": 0.04889632,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-14 07:00:00+00:00",
+     "profit_abs": -2.07581507,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-17 04:00:00+00:00",
+     "profit_abs": -1.64053054,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-17 04:00:00+00:00",
+     "profit_abs": -2.88354332,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-17 05:00:00+00:00",
+     "profit_abs": -0.9543576,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-18 13:00:00+00:00",
+     "profit_abs": 0.03511682,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-18 13:00:00+00:00",
+     "profit_abs": 0.73811126,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-18 13:00:00+00:00",
+     "profit_abs": 0.1984716,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-18 19:00:00+00:00",
+     "profit_abs": 0.79807536,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-18 20:00:00+00:00",
+     "profit_abs": 1.55785959,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-18 20:00:00+00:00",
+     "profit_abs": 1.28247371,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-20 04:00:00+00:00",
+     "profit_abs": 0.10166052,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-20 06:00:00+00:00",
+     "profit_abs": 0.57155868,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-20 06:00:00+00:00",
+     "profit_abs": -0.09757388,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-21 16:00:00+00:00",
+     "profit_abs": 0.66991715,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-23 14:00:00+00:00",
+     "profit_abs": -1.59515367,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-23 15:00:00+00:00",
+     "profit_abs": -1.80545555,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-23 15:00:00+00:00",
+     "profit_abs": -2.02355359,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-25 01:00:00+00:00",
+     "profit_abs": 1.49870911,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-25 01:00:00+00:00",
+     "profit_abs": 1.13386464,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-25 05:00:00+00:00",
+     "profit_abs": 1.08396081,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-26 11:00:00+00:00",
+     "profit_abs": 0.70696377,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-26 11:00:00+00:00",
+     "profit_abs": 0.37749504,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-26 11:00:00+00:00",
+     "profit_abs": 0.67448293,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-27 08:00:00+00:00",
+     "profit_abs": 0.4229738,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-27 08:00:00+00:00",
+     "profit_abs": 0.52888316,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-27 16:00:00+00:00",
+     "profit_abs": 0.7202247,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-28 17:00:00+00:00",
+     "profit_abs": -2.68221668,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-28 17:00:00+00:00",
+     "profit_abs": -1.8530289,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-28 19:00:00+00:00",
+     "profit_abs": -3.18566843,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-29 16:00:00+00:00",
+     "profit_abs": 0.71482423,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-31 22:00:00+00:00",
+     "profit_abs": 0.19284115,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-05-31 23:00:00+00:00",
+     "profit_abs": 0.4825344,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-01 01:00:00+00:00",
+     "profit_abs": 0.16681805,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-01 03:00:00+00:00",
+     "profit_abs": 0.47598244,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-01 09:00:00+00:00",
+     "profit_abs": 1.49262828,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-01 17:00:00+00:00",
+     "profit_abs": 1.50109792,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-02 14:00:00+00:00",
+     "profit_abs": -6.1813584,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-02 14:00:00+00:00",
+     "profit_abs": -6.16083177,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-02 23:00:00+00:00",
+     "profit_abs": -6.18419984,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-03 03:00:00+00:00",
+     "profit_abs": -6.19268033,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-03 11:00:00+00:00",
+     "profit_abs": -1.2643526,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-03 21:00:00+00:00",
+     "profit_abs": 1.37086192,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-03 21:00:00+00:00",
+     "profit_abs": 0.7958574,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-03 21:00:00+00:00",
+     "profit_abs": 0.79517511,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 01:00:00+00:00",
+     "profit_abs": -6.18431352,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 01:00:00+00:00",
+     "profit_abs": -6.18004866,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 02:00:00+00:00",
+     "profit_abs": 0.79488323,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 03:00:00+00:00",
+     "profit_abs": 1.76567571,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 03:00:00+00:00",
+     "profit_abs": 1.89293115,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 12:00:00+00:00",
+     "profit_abs": 1.42186288,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-04 12:00:00+00:00",
+     "profit_abs": 1.7209383,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-05 04:00:00+00:00",
+     "profit_abs": -6.18509664,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-05 05:00:00+00:00",
+     "profit_abs": 1.38531463,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-05 06:00:00+00:00",
+     "profit_abs": -6.18351686,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-05 19:00:00+00:00",
+     "profit_abs": -6.18465159,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-05 20:00:00+00:00",
+     "profit_abs": 1.80422402,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-06 04:00:00+00:00",
+     "profit_abs": -6.18476096,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-06 05:00:00+00:00",
+     "profit_abs": 0.80065562,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-06 05:00:00+00:00",
+     "profit_abs": 0.8006985,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-06 08:00:00+00:00",
+     "profit_abs": -2.3163909,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-10 14:00:00+00:00",
+     "profit_abs": -0.40257608,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-10 14:00:00+00:00",
+     "profit_abs": 0.1591724,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-10 14:00:00+00:00",
+     "profit_abs": -0.19992576,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-11 01:00:00+00:00",
+     "profit_abs": 1.5003783,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-11 01:00:00+00:00",
+     "profit_abs": 1.50713681,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-11 01:00:00+00:00",
+     "profit_abs": 1.500234,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-14 21:00:00+00:00",
+     "profit_abs": 1.49916582,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-14 21:00:00+00:00",
+     "profit_abs": 1.50183656,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-14 21:00:00+00:00",
+     "profit_abs": 1.50726466,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-17 06:00:00+00:00",
+     "profit_abs": 0.051783,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-17 15:00:00+00:00",
+     "profit_abs": 1.49821238,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-17 16:00:00+00:00",
+     "profit_abs": 1.07074966,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-17 17:00:00+00:00",
+     "profit_abs": 1.50042808,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-18 03:00:00+00:00",
+     "profit_abs": 1.01250495,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-18 13:00:00+00:00",
+     "profit_abs": 0.70242394,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-18 20:00:00+00:00",
+     "profit_abs": 1.50025927,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-19 13:00:00+00:00",
+     "profit_abs": -2.47840638,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-19 14:00:00+00:00",
+     "profit_abs": -3.34740311,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-22 01:00:00+00:00",
+     "profit_abs": 1.15521025,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-22 01:00:00+00:00",
+     "profit_abs": 0.96970244,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-22 02:00:00+00:00",
+     "profit_abs": 0.73297438,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-23 23:00:00+00:00",
+     "profit_abs": -3.73065462,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-24 00:00:00+00:00",
+     "profit_abs": -1.24275637,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-24 01:00:00+00:00",
+     "profit_abs": -1.43332653,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 05:00:00+00:00",
+     "profit_abs": -0.7789732,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 05:00:00+00:00",
+     "profit_abs": -0.16799698,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 05:00:00+00:00",
+     "profit_abs": -0.82918992,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 14:00:00+00:00",
+     "profit_abs": 2.99335098,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 14:00:00+00:00",
+     "profit_abs": 3.0026347,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 14:00:00+00:00",
+     "profit_abs": 3.00227088,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 14:00:00+00:00",
+     "profit_abs": 0.79675312,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-25 14:00:00+00:00",
+     "profit_abs": 3.00476208,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-26 04:00:00+00:00",
+     "profit_abs": 0.74760422,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-26 07:00:00+00:00",
+     "profit_abs": -0.03244687,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-26 07:00:00+00:00",
+     "profit_abs": 0.87241773,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-28 08:00:00+00:00",
+     "profit_abs": 1.49998876,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-29 03:00:00+00:00",
+     "profit_abs": -1.14683442,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-29 03:00:00+00:00",
+     "profit_abs": 0.56543768,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-29 04:00:00+00:00",
+     "profit_abs": 0.39928018,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-30 14:00:00+00:00",
+     "profit_abs": 1.32422438,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-06-30 18:00:00+00:00",
+     "profit_abs": 1.49934418,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-01 03:00:00+00:00",
+     "profit_abs": 0.94992725,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-01 14:00:00+00:00",
+     "profit_abs": 1.07247344,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-05 14:00:00+00:00",
+     "profit_abs": 0.2940444,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-06 15:00:00+00:00",
+     "profit_abs": 1.49967393,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-06 15:00:00+00:00",
+     "profit_abs": 1.495728,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-06 16:00:00+00:00",
+     "profit_abs": 1.06357113,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-08 20:00:00+00:00",
+     "profit_abs": -2.19155104,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-08 23:00:00+00:00",
+     "profit_abs": -1.02632351,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-08 23:00:00+00:00",
+     "profit_abs": -2.15718032,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-11 09:00:00+00:00",
+     "profit_abs": 0.54644688,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-12 04:00:00+00:00",
+     "profit_abs": 0.43161653,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-12 12:00:00+00:00",
+     "profit_abs": 0.76127958,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-12 13:00:00+00:00",
+     "profit_abs": 0.32031804,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-12 15:00:00+00:00",
+     "profit_abs": 0.48772534,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-14 00:00:00+00:00",
+     "profit_abs": -0.41442473,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-14 01:00:00+00:00",
+     "profit_abs": -1.55182185,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-14 06:00:00+00:00",
+     "profit_abs": -1.5693268,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-16 16:00:00+00:00",
+     "profit_abs": 0.52357027,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-17 17:00:00+00:00",
+     "profit_abs": -2.12075196,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-17 18:00:00+00:00",
+     "profit_abs": -2.44328993,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-17 18:00:00+00:00",
+     "profit_abs": -0.44613745,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-20 11:00:00+00:00",
+     "profit_abs": 1.49847545,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-20 12:00:00+00:00",
+     "profit_abs": 1.15453298,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-20 12:00:00+00:00",
+     "profit_abs": 0.80496592,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-22 14:00:00+00:00",
+     "profit_abs": 0.34098225,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-22 14:00:00+00:00",
+     "profit_abs": 0.53637519,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-22 17:00:00+00:00",
+     "profit_abs": 0.70092517,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-24 04:00:00+00:00",
+     "profit_abs": -0.44211205,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-24 07:00:00+00:00",
+     "profit_abs": -1.06694753,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-24 08:00:00+00:00",
+     "profit_abs": -1.31591298,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-25 00:00:00+00:00",
+     "profit_abs": -0.01748583,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-25 05:00:00+00:00",
+     "profit_abs": -1.36823208,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-25 11:00:00+00:00",
+     "profit_abs": -1.00814463,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-25 13:00:00+00:00",
+     "profit_abs": 0.186779,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-25 13:00:00+00:00",
+     "profit_abs": 0.15123693,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-27 18:00:00+00:00",
+     "profit_abs": 1.02035648,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-28 16:00:00+00:00",
+     "profit_abs": -2.51496044,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-28 16:00:00+00:00",
+     "profit_abs": -1.16119459,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-28 16:00:00+00:00",
+     "profit_abs": 1.19308834,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-07-29 23:00:00+00:00",
+     "profit_abs": 1.16094496,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-01 07:00:00+00:00",
+     "profit_abs": -1.55436943,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-01 07:00:00+00:00",
+     "profit_abs": -1.24107103,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-01 14:00:00+00:00",
+     "profit_abs": -0.8791856,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-02 02:00:00+00:00",
+     "profit_abs": -0.26860625,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-02 02:00:00+00:00",
+     "profit_abs": 0.23551091,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-02 03:00:00+00:00",
+     "profit_abs": -0.68835366,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-03 14:00:00+00:00",
+     "profit_abs": 0.5634776,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-03 14:00:00+00:00",
+     "profit_abs": 0.24750624,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-05 18:00:00+00:00",
+     "profit_abs": 0.06194448,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-06 06:00:00+00:00",
+     "profit_abs": 0.76404339,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-07 02:00:00+00:00",
+     "profit_abs": -0.04636968,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-07 08:00:00+00:00",
+     "profit_abs": -0.70411044,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-07 10:00:00+00:00",
+     "profit_abs": -1.885572,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-07 12:00:00+00:00",
+     "profit_abs": 0.4676751,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-08 02:00:00+00:00",
+     "profit_abs": 1.23535296,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-09 11:00:00+00:00",
+     "profit_abs": 0.01552338,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-10 02:00:00+00:00",
+     "profit_abs": 0.56191748,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-10 07:00:00+00:00",
+     "profit_abs": 0.6432555,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-11 08:00:00+00:00",
+     "profit_abs": 0.17716682,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-11 09:00:00+00:00",
+     "profit_abs": -1.60213996,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-11 09:00:00+00:00",
+     "profit_abs": -0.85357332,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-11 17:00:00+00:00",
+     "profit_abs": 1.3261779,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-11 21:00:00+00:00",
+     "profit_abs": 0.92863875,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-12 06:00:00+00:00",
+     "profit_abs": -0.07442755,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-13 04:00:00+00:00",
+     "profit_abs": 0.84570775,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-13 05:00:00+00:00",
+     "profit_abs": 0.31915412,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-13 06:00:00+00:00",
+     "profit_abs": 0.2353626,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-13 22:00:00+00:00",
+     "profit_abs": 0.34956108,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-14 02:00:00+00:00",
+     "profit_abs": 0.45661054,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-14 16:00:00+00:00",
+     "profit_abs": 0.26359941,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-15 00:00:00+00:00",
+     "profit_abs": -0.08942437,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-15 00:00:00+00:00",
+     "profit_abs": 0.1396098,
+     "is_open": false
+    },
+    {
+     "close_date": "2026-08-15 02:00:00+00:00",
+     "profit_abs": 0.39938013,
+     "is_open": false
+    }
+   ],
+   "locks": [],
+   "best_pair": {
+    "key": "BNB/USDT",
+    "trades": 60,
+    "profit_mean": -0.0018910621494648294,
+    "profit_mean_pct": -0.19,
+    "profit_total_abs": -11.319339379999999,
+    "profit_total": -0.01131933938,
+    "profit_total_pct": -1.13,
+    "duration_avg": "11:20:00",
+    "wins": 39,
+    "draws": 0,
+    "losses": 21,
+    "winrate": 0.65,
+    "cagr": -0.02119040519564086,
+    "expectancy": -0.18865565633333314,
+    "expectancy_ratio": -0.08248748622982638,
+    "sortino": -0.4724339801340071,
+    "sharpe": -0.5213237159697286,
+    "calmar": -5.357893191723353,
+    "sqn": -0.6777,
+    "p_value": 0.500610959431299,
+    "profit_factor": 0.7643214679147815,
+    "max_drawdown_account": 0.020805192179329735,
+    "max_drawdown_abs": 20.867574049999998
+   },
+   "worst_pair": {
+    "key": "BTC/USDT",
+    "trades": 79,
+    "profit_mean": -0.004318140358962888,
+    "profit_mean_pct": -0.43,
+    "profit_total_abs": -34.01988707000002,
+    "profit_total": -0.03401988707000002,
+    "profit_total_pct": -3.4,
+    "duration_avg": "14:05:00",
+    "wins": 45,
+    "draws": 0,
+    "losses": 34,
+    "winrate": 0.569620253164557,
+    "cagr": -0.0630455173669705,
+    "expectancy": -0.4306314818987341,
+    "expectancy_ratio": -0.19874659473910883,
+    "sortino": -1.5818726205674523,
+    "sharpe": -1.5970769142548835,
+    "calmar": -8.711333432945512,
+    "sqn": -1.813,
+    "p_value": 0.07367664864654455,
+    "profit_factor": 0.5382064416356,
+    "max_drawdown_account": 0.03845855238000002,
+    "max_drawdown_abs": 38.45855238000001
+   },
+   "results_per_pair": [
+    {
+     "key": "BNB/USDT",
+     "trades": 60,
+     "profit_mean": -0.0018910621494648294,
+     "profit_mean_pct": -0.19,
+     "profit_total_abs": -11.319339379999999,
+     "profit_total": -0.01131933938,
+     "profit_total_pct": -1.13,
+     "duration_avg": "11:20:00",
+     "wins": 39,
+     "draws": 0,
+     "losses": 21,
+     "winrate": 0.65,
+     "cagr": -0.02119040519564086,
+     "expectancy": -0.18865565633333314,
+     "expectancy_ratio": -0.08248748622982638,
+     "sortino": -0.4724339801340071,
+     "sharpe": -0.5213237159697286,
+     "calmar": -5.357893191723353,
+     "sqn": -0.6777,
+     "p_value": 0.500610959431299,
+     "profit_factor": 0.7643214679147815,
+     "max_drawdown_account": 0.020805192179329735,
+     "max_drawdown_abs": 20.867574049999998
+    },
+    {
+     "key": "XRP/USDT",
+     "trades": 56,
+     "profit_mean": -0.002722252417722153,
+     "profit_mean_pct": -0.27,
+     "profit_total_abs": -15.256153729999998,
+     "profit_total": -0.015256153729999998,
+     "profit_total_pct": -1.53,
+     "duration_avg": "12:09:00",
+     "wins": 32,
+     "draws": 0,
+     "losses": 24,
+     "winrate": 0.5714285714285714,
+     "cagr": -0.028510476535140605,
+     "expectancy": -0.2724313166071428,
+     "expectancy_ratio": -0.1219869382606914,
+     "sortino": -0.6963808630185822,
+     "sharpe": -0.6599884987713005,
+     "calmar": -8.035890827681008,
+     "sqn": -0.8875,
+     "p_value": 0.3786563257621807,
+     "profit_factor": 0.7153638107250536,
+     "max_drawdown_account": 0.018696302690000038,
+     "max_drawdown_abs": 18.69630269
+    },
+    {
+     "key": "ETH/USDT",
+     "trades": 77,
+     "profit_mean": -0.0026205201827785877,
+     "profit_mean_pct": -0.26,
+     "profit_total_abs": -20.174550330000002,
+     "profit_total": -0.020174550330000002,
+     "profit_total_pct": -2.02,
+     "duration_avg": "10:45:00",
+     "wins": 49,
+     "draws": 0,
+     "losses": 28,
+     "winrate": 0.6363636363636364,
+     "cagr": -0.03761951010644926,
+     "expectancy": -0.2620071471428572,
+     "expectancy_ratio": -0.09969654466197775,
+     "sortino": -0.9104418295117394,
+     "sharpe": -0.8753158728214326,
+     "calmar": -7.453985850935854,
+     "sqn": -1.0063,
+     "p_value": 0.3174548643468188,
+     "profit_factor": 0.7258345021795611,
+     "max_drawdown_account": 0.026653853219999975,
+     "max_drawdown_abs": 26.65385322
+    },
+    {
+     "key": "SOL/USDT",
+     "trades": 78,
+     "profit_mean": -0.0032138229586524025,
+     "profit_mean_pct": -0.32,
+     "profit_total_abs": -25.08071173,
+     "profit_total": -0.02508071173,
+     "profit_total_pct": -2.51,
+     "duration_avg": "11:38:00",
+     "wins": 49,
+     "draws": 0,
+     "losses": 29,
+     "winrate": 0.6282051282051282,
+     "cagr": -0.04666581918818713,
+     "expectancy": -0.32154758628205127,
+     "expectancy_ratio": -0.12209492202755445,
+     "sortino": -1.1331611281586509,
+     "sharpe": -1.0874545828032776,
+     "calmar": -7.77195274744684,
+     "sqn": -1.2423,
+     "p_value": 0.21790592666028485,
+     "profit_factor": 0.6716067614431297,
+     "max_drawdown_account": 0.03178003765000005,
+     "max_drawdown_abs": 31.78003765000001
+    },
+    {
+     "key": "BTC/USDT",
+     "trades": 79,
+     "profit_mean": -0.004318140358962888,
+     "profit_mean_pct": -0.43,
+     "profit_total_abs": -34.01988707000002,
+     "profit_total": -0.03401988707000002,
+     "profit_total_pct": -3.4,
+     "duration_avg": "14:05:00",
+     "wins": 45,
+     "draws": 0,
+     "losses": 34,
+     "winrate": 0.569620253164557,
+     "cagr": -0.0630455173669705,
+     "expectancy": -0.4306314818987341,
+     "expectancy_ratio": -0.19874659473910883,
+     "sortino": -1.5818726205674523,
+     "sharpe": -1.5970769142548835,
+     "calmar": -8.711333432945512,
+     "sqn": -1.813,
+     "p_value": 0.07367664864654455,
+     "profit_factor": 0.5382064416356,
+     "max_drawdown_account": 0.03845855238000002,
+     "max_drawdown_abs": 38.45855238000001
+    },
+    {
+     "key": "TOTAL",
+     "trades": 350,
+     "profit_mean": -0.0030271462787635345,
+     "profit_mean_pct": -0.3,
+     "profit_total_abs": -105.85064224000001,
+     "profit_total": -0.10585064224000001,
+     "profit_total_pct": -10.59,
+     "duration_avg": "12:01:00",
+     "wins": 214,
+     "draws": 0,
+     "losses": 136,
+     "winrate": 0.6114285714285714,
+     "cagr": -0.18982133984952265,
+     "expectancy": -0.30243040639999974,
+     "expectancy_ratio": -0.1264559366880722,
+     "sortino": -4.738859545335469,
+     "sharpe": -4.711148819382559,
+     "calmar": -8.318629423802593,
+     "sqn": -2.5534,
+     "p_value": 0.011090869271806957,
+     "profit_factor": 0.6745619276409905,
+     "max_drawdown_account": 0.12531019962000006,
+     "max_drawdown_abs": 125.31019962
+    }
+   ],
+   "results_per_enter_tag": [
+    {
+     "key": "bb-bounce",
+     "trades": 350,
+     "profit_mean": -0.0030271462787635345,
+     "profit_mean_pct": -0.3,
+     "profit_total_abs": -105.85064224000001,
+     "profit_total": -0.10585064224000001,
+     "profit_total_pct": -10.59,
+     "duration_avg": "12:01:00",
+     "wins": 214,
+     "draws": 0,
+     "losses": 136,
+     "winrate": 0.6114285714285714,
+     "cagr": -0.18982133984952265,
+     "expectancy": -0.30243040639999974,
+     "expectancy_ratio": -0.1264559366880722,
+     "sortino": -4.738859545335469,
+     "sharpe": -4.711148819382559,
+     "calmar": -8.318629423802593,
+     "sqn": -2.5534,
+     "p_value": 0.011090869271806957,
+     "profit_factor": 0.6745619276409905,
+     "max_drawdown_account": 0.12531019962000006,
+     "max_drawdown_abs": 125.31019962
+    },
+    {
+     "key": "TOTAL",
+     "trades": 350,
+     "profit_mean": -0.0030271462787635345,
+     "profit_mean_pct": -0.3,
+     "profit_total_abs": -105.85064224000001,
+     "profit_total": -0.10585064224000001,
+     "profit_total_pct": -10.59,
+     "duration_avg": "12:01:00",
+     "wins": 214,
+     "draws": 0,
+     "losses": 136,
+     "winrate": 0.6114285714285714,
+     "cagr": -0.18982133984952265,
+     "expectancy": -0.30243040639999974,
+     "expectancy_ratio": -0.1264559366880722,
+     "sortino": -4.738859545335469,
+     "sharpe": -4.711148819382559,
+     "calmar": -8.318629423802593,
+     "sqn": -2.5534,
+     "p_value": 0.011090869271806957,
+     "profit_factor": 0.6745619276409905,
+     "max_drawdown_account": 0.12531019962000006,
+     "max_drawdown_abs": 125.31019962
+    }
+   ],
+   "exit_reason_summary": [
+    {
+     "key": "roi",
+     "trades": 61,
+     "profit_mean": 0.016971732862574217,
+     "profit_mean_pct": 1.7,
+     "profit_total_abs": 103.47145275999999,
+     "profit_total": 0.10347145275999999,
+     "profit_total_pct": 10.35,
+     "duration_avg": "4:26:00",
+     "wins": 61,
+     "draws": 0,
+     "losses": 0,
+     "winrate": 1.0,
+     "cagr": 0.20351799804804416,
+     "expectancy": 1.6962533239344262,
+     "expectancy_ratio": 100.0,
+     "sortino": -100.0,
+     "sharpe": 20.109790927905816,
+     "calmar": -100.0,
+     "sqn": 25.9304,
+     "p_value": 2.700021147656794e-34,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.0,
+     "max_drawdown_abs": 0.0
+    },
+    {
+     "key": "trailing_stop_loss",
+     "trades": 29,
+     "profit_mean": 0.01189790340048536,
+     "profit_mean_pct": 1.19,
+     "profit_total_abs": 34.486973389999996,
+     "profit_total": 0.034486973389999995,
+     "profit_total_pct": 3.45,
+     "duration_avg": "0:37:00",
+     "wins": 29,
+     "draws": 0,
+     "losses": 0,
+     "winrate": 1.0,
+     "cagr": 0.06587015523643291,
+     "expectancy": 1.1892059789655172,
+     "expectancy_ratio": 100.0,
+     "sortino": -100.0,
+     "sharpe": 8.178853479783845,
+     "calmar": -100.0,
+     "sqn": 15.1541,
+     "p_value": 5.053823017241503e-15,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.0,
+     "max_drawdown_abs": 0.0
+    },
+    {
+     "key": "bb-bounce",
+     "trades": 230,
+     "profit_mean": -0.0025395817528085815,
+     "profit_mean_pct": -0.25,
+     "profit_total_abs": -58.37341706000001,
+     "profit_total": -0.05837341706000001,
+     "profit_total_pct": -5.84,
+     "duration_avg": "15:10:00",
+     "wins": 124,
+     "draws": 0,
+     "losses": 106,
+     "winrate": 0.5391304347826087,
+     "cagr": -0.10699420957479,
+     "expectancy": -0.2537974654782608,
+     "expectancy_ratio": -0.19240802407947755,
+     "sortino": -5.7678183859856755,
+     "sharpe": -4.677990488232121,
+     "calmar": -8.687472106720795,
+     "sqn": -3.1254,
+     "p_value": 0.002005278404363252,
+     "profit_factor": 0.5825108911483036,
+     "max_drawdown_account": 0.06617080161600533,
+     "max_drawdown_abs": 66.31622376999998
+    },
+    {
+     "key": "stop_loss",
+     "trades": 30,
+     "profit_mean": -0.061857076588412184,
+     "profit_mean_pct": -6.19,
+     "profit_total_abs": -185.43565133,
+     "profit_total": -0.18543565133,
+     "profit_total_pct": -18.54,
+     "duration_avg": "14:20:00",
+     "wins": 0,
+     "draws": 0,
+     "losses": 30,
+     "winrate": 0.0,
+     "cagr": -0.3201529969256086,
+     "expectancy": -6.181188377666667,
+     "expectancy_ratio": -1.0,
+     "sortino": -1670.9890029236851,
+     "sharpe": -1670.9890029236851,
+     "calmar": -9.847924316774645,
+     "sqn": -3045.8368,
+     "p_value": 2.209313919039323e-81,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.18543565132999992,
+     "max_drawdown_abs": 185.43565132999996
+    },
+    {
+     "key": "TOTAL",
+     "trades": 350,
+     "profit_mean": -0.0030271462787635345,
+     "profit_mean_pct": -0.3,
+     "profit_total_abs": -105.85064224000001,
+     "profit_total": -0.10585064224000001,
+     "profit_total_pct": -10.59,
+     "duration_avg": "12:01:00",
+     "wins": 214,
+     "draws": 0,
+     "losses": 136,
+     "winrate": 0.6114285714285714,
+     "cagr": -0.18982133984952265,
+     "expectancy": -0.30243040639999974,
+     "expectancy_ratio": -0.1264559366880722,
+     "sortino": -4.738859545335469,
+     "sharpe": -4.711148819382559,
+     "calmar": -8.318629423802593,
+     "sqn": -2.5534,
+     "p_value": 0.011090869271806957,
+     "profit_factor": 0.6745619276409905,
+     "max_drawdown_account": 0.12531019962000006,
+     "max_drawdown_abs": 125.31019962
+    }
+   ],
+   "mix_tag_stats": [
+    {
+     "key": [
+      "bb-bounce",
+      "roi"
+     ],
+     "trades": 61,
+     "profit_mean": 0.016971732862574217,
+     "profit_mean_pct": 1.7,
+     "profit_total_abs": 103.47145275999999,
+     "profit_total": 0.10347145275999999,
+     "profit_total_pct": 10.35,
+     "duration_avg": "4:26:00",
+     "wins": 61,
+     "draws": 0,
+     "losses": 0,
+     "winrate": 1.0,
+     "cagr": 0.20351799804804416,
+     "expectancy": 1.6962533239344262,
+     "expectancy_ratio": 100.0,
+     "sortino": -100.0,
+     "sharpe": 20.109790927905816,
+     "calmar": -100.0,
+     "sqn": 25.9304,
+     "p_value": 2.700021147656794e-34,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.0,
+     "max_drawdown_abs": 0.0
+    },
+    {
+     "key": [
+      "bb-bounce",
+      "trailing_stop_loss"
+     ],
+     "trades": 29,
+     "profit_mean": 0.01189790340048536,
+     "profit_mean_pct": 1.19,
+     "profit_total_abs": 34.486973389999996,
+     "profit_total": 0.034486973389999995,
+     "profit_total_pct": 3.45,
+     "duration_avg": "0:37:00",
+     "wins": 29,
+     "draws": 0,
+     "losses": 0,
+     "winrate": 1.0,
+     "cagr": 0.06587015523643291,
+     "expectancy": 1.1892059789655172,
+     "expectancy_ratio": 100.0,
+     "sortino": -100.0,
+     "sharpe": 8.178853479783845,
+     "calmar": -100.0,
+     "sqn": 15.1541,
+     "p_value": 5.053823017241503e-15,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.0,
+     "max_drawdown_abs": 0.0
+    },
+    {
+     "key": [
+      "bb-bounce",
+      "bb-bounce"
+     ],
+     "trades": 230,
+     "profit_mean": -0.0025395817528085815,
+     "profit_mean_pct": -0.25,
+     "profit_total_abs": -58.37341706000001,
+     "profit_total": -0.05837341706000001,
+     "profit_total_pct": -5.84,
+     "duration_avg": "15:10:00",
+     "wins": 124,
+     "draws": 0,
+     "losses": 106,
+     "winrate": 0.5391304347826087,
+     "cagr": -0.10699420957479,
+     "expectancy": -0.2537974654782608,
+     "expectancy_ratio": -0.19240802407947755,
+     "sortino": -5.7678183859856755,
+     "sharpe": -4.677990488232121,
+     "calmar": -8.687472106720795,
+     "sqn": -3.1254,
+     "p_value": 0.002005278404363252,
+     "profit_factor": 0.5825108911483036,
+     "max_drawdown_account": 0.06617080161600533,
+     "max_drawdown_abs": 66.31622376999998
+    },
+    {
+     "key": [
+      "bb-bounce",
+      "stop_loss"
+     ],
+     "trades": 30,
+     "profit_mean": -0.061857076588412184,
+     "profit_mean_pct": -6.19,
+     "profit_total_abs": -185.43565133,
+     "profit_total": -0.18543565133,
+     "profit_total_pct": -18.54,
+     "duration_avg": "14:20:00",
+     "wins": 0,
+     "draws": 0,
+     "losses": 30,
+     "winrate": 0.0,
+     "cagr": -0.3201529969256086,
+     "expectancy": -6.181188377666667,
+     "expectancy_ratio": -1.0,
+     "sortino": -1670.9890029236851,
+     "sharpe": -1670.9890029236851,
+     "calmar": -9.847924316774645,
+     "sqn": -3045.8368,
+     "p_value": 2.209313919039323e-81,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.18543565132999992,
+     "max_drawdown_abs": 185.43565132999996
+    },
+    {
+     "key": "TOTAL",
+     "trades": 350,
+     "profit_mean": -0.0030271462787635345,
+     "profit_mean_pct": -0.3,
+     "profit_total_abs": -105.85064224000001,
+     "profit_total": -0.10585064224000001,
+     "profit_total_pct": -10.59,
+     "duration_avg": "12:01:00",
+     "wins": 214,
+     "draws": 0,
+     "losses": 136,
+     "winrate": 0.6114285714285714,
+     "cagr": -0.18982133984952265,
+     "expectancy": -0.30243040639999974,
+     "expectancy_ratio": -0.1264559366880722,
+     "sortino": -4.738859545335469,
+     "sharpe": -4.711148819382559,
+     "calmar": -8.318629423802593,
+     "sqn": -2.5534,
+     "p_value": 0.011090869271806957,
+     "profit_factor": 0.6745619276409905,
+     "max_drawdown_account": 0.12531019962000006,
+     "max_drawdown_abs": 125.31019962
+    }
+   ],
+   "left_open_trades": [
+    {
+     "key": "TOTAL",
+     "trades": 0,
+     "profit_mean": 0.0,
+     "profit_mean_pct": 0.0,
+     "profit_total_abs": 0.0,
+     "profit_total": 0.0,
+     "profit_total_pct": 0.0,
+     "duration_avg": "0:00",
+     "wins": 0,
+     "draws": 0,
+     "losses": 0,
+     "winrate": 0.0,
+     "cagr": 0.0,
+     "expectancy": 0.0,
+     "expectancy_ratio": 100.0,
+     "sortino": 0,
+     "sharpe": 0,
+     "calmar": 0.0,
+     "sqn": 0.0,
+     "p_value": 1.0,
+     "profit_factor": 0.0,
+     "max_drawdown_account": 0.0,
+     "max_drawdown_abs": 0.0
+    }
+   ],
+   "total_trades": 350,
+   "trade_count_long": 350,
+   "trade_count_short": 0,
+   "total_volume": 69912.76586764469,
+   "avg_stake_amount": 99.82704380571428,
+   "profit_mean": -0.0030271462787635345,
+   "profit_median": 0.0042086359575226155,
+   "profit_total": -0.10585064224000001,
+   "profit_total_long": -0.10585064224000001,
+   "profit_total_short": 0.0,
+   "profit_total_abs": -105.85064224000001,
+   "profit_total_long_abs": -105.85064224000001,
+   "profit_total_short_abs": 0.0,
+   "cagr": -0.18982133984952243,
+   "expectancy": -0.30243040639999974,
+   "expectancy_ratio": -0.1264559366880722,
+   "sortino": -4.738859545335469,
+   "sharpe": -4.711148819382559,
+   "calmar": -8.318629423802593,
+   "sqn": -2.5534,
+   "p_value": 0.011090869271806957,
+   "wallet_stats": {
+    "start_balance": 1000.0,
+    "end_balance": 894.14935776,
+    "high_balance": 1004.0604347,
+    "low_balance": 869.15443382,
+    "sharpe": -1.881804456229259,
+    "sortino": -1.4450810579444195,
+    "calmar": -7.7583038632151915,
+    "low_date": "2026-06-10 12:00:00",
+    "low_ts": 1781092800000,
+    "high_date": "2026-02-03 16:00:00",
+    "high_ts": 1770134400000,
+    "max_drawdown_account": 0.13436043909080841,
+    "max_relative_drawdown": 0.13436043909080841,
+    "max_drawdown_abs": 134.90600087999997,
+    "drawdown_start": "2026-02-03 16:00:00",
+    "drawdown_start_ts": 1770134400000,
+    "drawdown_end": "2026-06-10 12:00:00",
+    "drawdown_end_ts": 1781092800000,
+    "drawdown_duration": "126 days 20:00:00",
+    "drawdown_duration_s": 10958400.0,
+    "max_drawdown_low": -130.84556618,
+    "max_drawdown_high": 4.060434699999973
+   },
+   "profit_factor": 0.6745619276409905,
+   "backtest_start": "2026-02-02 16:00:00",
+   "backtest_start_ts": 1770048000000,
+   "backtest_end": "2026-08-15 22:00:00",
+   "backtest_end_ts": 1786831200000,
+   "backtest_days": 194,
+   "backtest_run_start_ts": 1786843364,
+   "backtest_run_end_ts": 1786843364,
+   "trades_per_day": 1.8,
+   "market_change": -0.25627957409959945,
+   "pairlist": [
+    "BTC/USDT",
+    "ETH/USDT",
+    "SOL/USDT",
+    "BNB/USDT",
+    "XRP/USDT"
+   ],
+   "stake_amount": 100,
+   "stake_currency": "USDT",
+   "stake_currency_decimals": 3,
+   "starting_balance": 1000,
+   "dry_run_wallet": 1000,
+   "final_balance": 894.14935776,
+   "rejected_signals": 391,
+   "timedout_entry_orders": 0,
+   "timedout_exit_orders": 0,
+   "canceled_trade_entries": 0,
+   "canceled_entry_orders": 0,
+   "replaced_entry_orders": 0,
+   "max_open_trades": 3,
+   "max_open_trades_setting": 3,
+   "timeframe": "1h",
+   "timeframe_detail": "",
+   "timerange": "20260201-",
+   "enable_protections": false,
+   "strategy_name": "UniversalStrategy",
+   "freqaimodel": null,
+   "freqai_identifier": null,
+   "stoploss": -0.06,
+   "trailing_stop": true,
+   "trailing_stop_positive": 0.01,
+   "trailing_stop_positive_offset": 0.02,
+   "trailing_only_offset_is_reached": true,
+   "use_custom_stoploss": false,
+   "minimal_roi": {
+    "0": 0.03,
+    "180": 0.015
+   },
+   "use_exit_signal": true,
+   "exit_profit_only": false,
+   "exit_profit_offset": 0.0,
+   "ignore_roi_if_entry_signal": false,
+   "trading_mode": "spot",
+   "margin_mode": "",
+   "periodic_breakdown": {
+    "day": [
+     {
+      "date": "03/02/2026",
+      "date_ts": 1770076800000,
+      "profit_abs": -3.19225583,
+      "wins": 1,
+      "draws": 0,
+      "losses": 1,
+      "trades": 2,
+      "profit_factor": 0.4843412
+     }
+    ]
+   },
+   "backtest_best_day": 0.11027178413656591,
+   "backtest_worst_day": -0.5917644807221478,
+   "backtest_best_day_abs": 11.02361166,
+   "backtest_worst_day_abs": -59.1316049,
+   "winning_days": 74,
+   "draw_days": 71,
+   "losing_days": 49,
+   "daily_profit": [
+    [
+     "2026-02-03",
+     -3.19225583
+    ],
+    [
+     "2026-02-04",
+     -13.28614727
+    ],
+    [
+     "2026-02-05",
+     -59.1316049
+    ],
+    [
+     "2026-02-06",
+     1.49384422
+    ],
+    [
+     "2026-02-07",
+     1.50039876
+    ],
+    [
+     "2026-02-08",
+     1.15734905
+    ],
+    [
+     "2026-02-09",
+     3.35869513
+    ],
+    [
+     "2026-02-10",
+     0.0
+    ],
+    [
+     "2026-02-11",
+     -8.00058854
+    ],
+    [
+     "2026-02-12",
+     1.88643248
+    ],
+    [
+     "2026-02-13",
+     3.23601779
+    ],
+    [
+     "2026-02-14",
+     0.0
+    ],
+    [
+     "2026-02-15",
+     0.0
+    ],
+    [
+     "2026-02-16",
+     0.98897485
+    ],
+    [
+     "2026-02-17",
+     6.44844344
+    ],
+    [
+     "2026-02-18",
+     0.98627714
+    ],
+    [
+     "2026-02-19",
+     5.0565975
+    ],
+    [
+     "2026-02-20",
+     4.50305716
+    ],
+    [
+     "2026-02-21",
+     0.0
+    ],
+    [
+     "2026-02-22",
+     0.60953473
+    ],
+    [
+     "2026-02-23",
+     -3.33912718
+    ],
+    [
+     "2026-02-24",
+     -6.15986686
+    ],
+    [
+     "2026-02-25",
+     1.49533344
+    ],
+    [
+     "2026-02-26",
+     4.08886576
+    ],
+    [
+     "2026-02-27",
+     1.49774847
+    ],
+    [
+     "2026-02-28",
+     -10.21569908
+    ],
+    [
+     "2026-03-01",
+     3.11443131
+    ],
+    [
+     "2026-03-02",
+     2.49076293
+    ],
+    [
+     "2026-03-03",
+     4.49650208
+    ],
+    [
+     "2026-03-04",
+     0.0
+    ],
+    [
+     "2026-03-05",
+     2.99933578
+    ],
+    [
+     "2026-03-06",
+     0.0
+    ],
+    [
+     "2026-03-07",
+     -5.26233029
+    ],
+    [
+     "2026-03-08",
+     -3.40171296
+    ],
+    [
+     "2026-03-09",
+     1.49182237
+    ],
+    [
+     "2026-03-10",
+     0.0
+    ],
+    [
+     "2026-03-11",
+     0.0
+    ],
+    [
+     "2026-03-12",
+     0.0
+    ],
+    [
+     "2026-03-13",
+     0.0
+    ],
+    [
+     "2026-03-14",
+     0.0
+    ],
+    [
+     "2026-03-15",
+     0.0
+    ],
+    [
+     "2026-03-16",
+     0.0
+    ],
+    [
+     "2026-03-17",
+     0.47185171
+    ],
+    [
+     "2026-03-18",
+     0.0
+    ],
+    [
+     "2026-03-19",
+     -11.62010862
+    ],
+    [
+     "2026-03-20",
+     1.9218064
+    ],
+    [
+     "2026-03-21",
+     0.0
+    ],
+    [
+     "2026-03-22",
+     2.9994127
+    ],
+    [
+     "2026-03-23",
+     5.5311805
+    ],
+    [
+     "2026-03-24",
+     4.30868816
+    ],
+    [
+     "2026-03-25",
+     0.0
+    ],
+    [
+     "2026-03-26",
+     0.0
+    ],
+    [
+     "2026-03-27",
+     -11.39494385
+    ],
+    [
+     "2026-03-28",
+     -3.44505465
+    ],
+    [
+     "2026-03-29",
+     0.57394413
+    ],
+    [
+     "2026-03-30",
+     1.98117012
+    ],
+    [
+     "2026-03-31",
+     6.86506666
+    ],
+    [
+     "2026-04-01",
+     0.0
+    ],
+    [
+     "2026-04-02",
+     -6.72616477
+    ],
+    [
+     "2026-04-03",
+     0.0
+    ],
+    [
+     "2026-04-04",
+     0.44046464
+    ],
+    [
+     "2026-04-05",
+     0.8805198
+    ],
+    [
+     "2026-04-06",
+     0.0
+    ],
+    [
+     "2026-04-07",
+     0.03664438
+    ],
+    [
+     "2026-04-08",
+     0.0
+    ],
+    [
+     "2026-04-09",
+     -0.1724844
+    ],
+    [
+     "2026-04-10",
+     0.0
+    ],
+    [
+     "2026-04-11",
+     0.0
+    ],
+    [
+     "2026-04-12",
+     -0.17494291
+    ],
+    [
+     "2026-04-13",
+     0.0
+    ],
+    [
+     "2026-04-14",
+     0.0
+    ],
+    [
+     "2026-04-15",
+     -0.08051472
+    ],
+    [
+     "2026-04-16",
+     2.33365825
+    ],
+    [
+     "2026-04-17",
+     0.0
+    ],
+    [
+     "2026-04-18",
+     0.0
+    ],
+    [
+     "2026-04-19",
+     -4.16019746
+    ],
+    [
+     "2026-04-20",
+     -0.27112789
+    ],
+    [
+     "2026-04-21",
+     2.99866664
+    ],
+    [
+     "2026-04-22",
+     1.2127171
+    ],
+    [
+     "2026-04-23",
+     -1.47350212
+    ],
+    [
+     "2026-04-24",
+     0.0
+    ],
+    [
+     "2026-04-25",
+     0.43208439
+    ],
+    [
+     "2026-04-26",
+     -0.40577592
+    ],
+    [
+     "2026-04-27",
+     0.0
+    ],
+    [
+     "2026-04-28",
+     -2.09293537
+    ],
+    [
+     "2026-04-29",
+     -1.33985118
+    ],
+    [
+     "2026-04-30",
+     0.95375251
+    ],
+    [
+     "2026-05-01",
+     0.0
+    ],
+    [
+     "2026-05-02",
+     0.1340874
+    ],
+    [
+     "2026-05-03",
+     0.0
+    ],
+    [
+     "2026-05-04",
+     0.0
+    ],
+    [
+     "2026-05-05",
+     0.0
+    ],
+    [
+     "2026-05-06",
+     0.0
+    ],
+    [
+     "2026-05-07",
+     0.0
+    ],
+    [
+     "2026-05-08",
+     -2.81832345
+    ],
+    [
+     "2026-05-09",
+     0.0
+    ],
+    [
+     "2026-05-10",
+     0.0
+    ],
+    [
+     "2026-05-11",
+     0.0
+    ],
+    [
+     "2026-05-12",
+     0.0
+    ],
+    [
+     "2026-05-13",
+     -0.31763846
+    ],
+    [
+     "2026-05-14",
+     -2.71343474
+    ],
+    [
+     "2026-05-15",
+     0.0
+    ],
+    [
+     "2026-05-16",
+     0.0
+    ],
+    [
+     "2026-05-17",
+     -5.47843146
+    ],
+    [
+     "2026-05-18",
+     4.61010834
+    ],
+    [
+     "2026-05-19",
+     0.0
+    ],
+    [
+     "2026-05-20",
+     0.57564532
+    ],
+    [
+     "2026-05-21",
+     0.66991715
+    ],
+    [
+     "2026-05-22",
+     0.0
+    ],
+    [
+     "2026-05-23",
+     -5.42416281
+    ],
+    [
+     "2026-05-24",
+     0.0
+    ],
+    [
+     "2026-05-25",
+     3.71653456
+    ],
+    [
+     "2026-05-26",
+     1.75894174
+    ],
+    [
+     "2026-05-27",
+     1.67208166
+    ],
+    [
+     "2026-05-28",
+     -7.72091401
+    ],
+    [
+     "2026-05-29",
+     0.71482423
+    ],
+    [
+     "2026-05-30",
+     0.0
+    ],
+    [
+     "2026-05-31",
+     0.67537555
+    ],
+    [
+     "2026-06-01",
+     3.63652669
+    ],
+    [
+     "2026-06-02",
+     -18.52639001
+    ],
+    [
+     "2026-06-03",
+     -4.4951385
+    ],
+    [
+     "2026-06-04",
+     -4.76807091
+    ],
+    [
+     "2026-06-05",
+     -15.36372644
+    ],
+    [
+     "2026-06-06",
+     -6.89979774
+    ],
+    [
+     "2026-06-07",
+     0.0
+    ],
+    [
+     "2026-06-08",
+     0.0
+    ],
+    [
+     "2026-06-09",
+     0.0
+    ],
+    [
+     "2026-06-10",
+     -0.44332944
+    ],
+    [
+     "2026-06-11",
+     4.50774911
+    ],
+    [
+     "2026-06-12",
+     0.0
+    ],
+    [
+     "2026-06-13",
+     0.0
+    ],
+    [
+     "2026-06-14",
+     4.50826704
+    ],
+    [
+     "2026-06-15",
+     0.0
+    ],
+    [
+     "2026-06-16",
+     0.0
+    ],
+    [
+     "2026-06-17",
+     4.12117312
+    ],
+    [
+     "2026-06-18",
+     3.21518816
+    ],
+    [
+     "2026-06-19",
+     -5.82580949
+    ],
+    [
+     "2026-06-20",
+     0.0
+    ],
+    [
+     "2026-06-21",
+     0.0
+    ],
+    [
+     "2026-06-22",
+     2.85788707
+    ],
+    [
+     "2026-06-23",
+     -3.73065462
+    ],
+    [
+     "2026-06-24",
+     -2.6760829
+    ],
+    [
+     "2026-06-25",
+     11.02361166
+    ],
+    [
+     "2026-06-26",
+     1.58757508
+    ],
+    [
+     "2026-06-27",
+     0.0
+    ],
+    [
+     "2026-06-28",
+     1.49998876
+    ],
+    [
+     "2026-06-29",
+     -0.18211656
+    ],
+    [
+     "2026-06-30",
+     2.82356856
+    ],
+    [
+     "2026-07-01",
+     2.02240069
+    ],
+    [
+     "2026-07-02",
+     0.0
+    ],
+    [
+     "2026-07-03",
+     0.0
+    ],
+    [
+     "2026-07-04",
+     0.0
+    ],
+    [
+     "2026-07-05",
+     0.2940444
+    ],
+    [
+     "2026-07-06",
+     4.05897306
+    ],
+    [
+     "2026-07-07",
+     0.0
+    ],
+    [
+     "2026-07-08",
+     -5.37505487
+    ],
+    [
+     "2026-07-09",
+     0.0
+    ],
+    [
+     "2026-07-10",
+     0.0
+    ],
+    [
+     "2026-07-11",
+     0.54644688
+    ],
+    [
+     "2026-07-12",
+     2.00093949
+    ],
+    [
+     "2026-07-13",
+     0.0
+    ],
+    [
+     "2026-07-14",
+     -3.53557338
+    ],
+    [
+     "2026-07-15",
+     0.0
+    ],
+    [
+     "2026-07-16",
+     0.52357027
+    ],
+    [
+     "2026-07-17",
+     -5.01017934
+    ],
+    [
+     "2026-07-18",
+     0.0
+    ],
+    [
+     "2026-07-19",
+     0.0
+    ],
+    [
+     "2026-07-20",
+     3.45797435
+    ],
+    [
+     "2026-07-21",
+     0.0
+    ],
+    [
+     "2026-07-22",
+     1.57828261
+    ],
+    [
+     "2026-07-23",
+     0.0
+    ],
+    [
+     "2026-07-24",
+     -2.82497256
+    ],
+    [
+     "2026-07-25",
+     -2.05584661
+    ],
+    [
+     "2026-07-26",
+     0.0
+    ],
+    [
+     "2026-07-27",
+     1.02035648
+    ],
+    [
+     "2026-07-28",
+     -2.48306669
+    ],
+    [
+     "2026-07-29",
+     1.16094496
+    ],
+    [
+     "2026-07-30",
+     0.0
+    ],
+    [
+     "2026-07-31",
+     0.0
+    ],
+    [
+     "2026-08-01",
+     -3.67462606
+    ],
+    [
+     "2026-08-02",
+     -0.721449
+    ],
+    [
+     "2026-08-03",
+     0.81098384
+    ],
+    [
+     "2026-08-04",
+     0.0
+    ],
+    [
+     "2026-08-05",
+     0.06194448
+    ],
+    [
+     "2026-08-06",
+     0.76404339
+    ],
+    [
+     "2026-08-07",
+     -2.16837702
+    ],
+    [
+     "2026-08-08",
+     1.23535296
+    ],
+    [
+     "2026-08-09",
+     0.01552338
+    ],
+    [
+     "2026-08-10",
+     1.20517298
+    ],
+    [
+     "2026-08-11",
+     -0.02372981
+    ],
+    [
+     "2026-08-12",
+     -0.07442755
+    ],
+    [
+     "2026-08-13",
+     1.74978555
+    ],
+    [
+     "2026-08-14",
+     0.72020995
+    ],
+    [
+     "2026-08-15",
+     0.44956556
+    ]
+   ],
+   "wins": 214,
+   "losses": 136,
+   "draws": 0,
+   "winrate": 0.6114285714285714,
+   "holding_avg": "12:01:00",
+   "holding_avg_s": 43260.0,
+   "winner_holding_min": "0d 00:00",
+   "winner_holding_min_s": 0.0,
+   "winner_holding_max": "1d 02:00",
+   "winner_holding_max_s": 93600.0,
+   "winner_holding_avg": "0d 06:26",
+   "winner_holding_avg_s": 23160.0,
+   "loser_holding_min": "0d 00:00",
+   "loser_holding_min_s": 0.0,
+   "loser_holding_max": "2d 15:00",
+   "loser_holding_max_s": 226800.0,
+   "loser_holding_avg": "0d 20:49",
+   "loser_holding_avg_s": 74940.0,
+   "max_consecutive_wins": 13,
+   "max_consecutive_losses": 8,
+   "max_drawdown_account": 0.12531019962000006,
+   "max_relative_drawdown": 0.12531019962000006,
+   "max_drawdown_abs": 125.31019962,
+   "drawdown_start": "2026-02-03 18:00:00",
+   "drawdown_start_ts": 1770141600000.0,
+   "drawdown_end": "2026-06-10 14:00:00",
+   "drawdown_end_ts": 1781100000000.0,
+   "drawdown_duration": "126 days 20:00:00",
+   "drawdown_duration_s": 10958400.0,
+   "max_drawdown_low": -125.31019962,
+   "max_drawdown_high": 0.0,
+   "csum_min": 874.68980038,
+   "csum_max": 996.80774417
+  }
+ },
+ "strategy_comparison": [
+  {
+   "key": "UniversalStrategy",
+   "trades": 350,
+   "profit_mean": -0.0030271462787635345,
+   "profit_mean_pct": -0.3,
+   "profit_total_abs": -105.85064224000001,
+   "profit_total": -0.10585064224000001,
+   "profit_total_pct": -10.59,
+   "duration_avg": "12:01:00",
+   "wins": 214,
+   "draws": 0,
+   "losses": 136,
+   "winrate": 0.6114285714285714,
+   "cagr": -0.18982133984952265,
+   "expectancy": -0.30243040639999974,
+   "expectancy_ratio": -0.1264559366880722,
+   "sortino": -4.738859545335469,
+   "sharpe": -4.711148819382559,
+   "calmar": -8.318629423802593,
+   "sqn": -2.5534,
+   "p_value": 0.011090869271806957,
+   "profit_factor": 0.6745619276409905,
+   "max_drawdown_account": 0.12531019962000006,
+   "max_drawdown_abs": "125.31"
+  }
+ ]
+}

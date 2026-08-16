@@ -3,7 +3,7 @@ import { test } from "node:test";
 
 import { and, eq, isNull } from "drizzle-orm";
 
-import { describe, loadLocale } from "@rudder/ruleset";
+import { describe, localeFor } from "@rudder/ruleset";
 
 import { backtests, bots, exchangeAccounts, rulesets, trades } from "../src/schema.ts";
 import { freshDatabase, sampleRuleset, uuid } from "./helpers.ts";
@@ -310,7 +310,7 @@ test("a stored ruleset round-trips and can still be described", async () => {
     .run();
 
   const row = db.select().from(rulesets).where(eq(rulesets.id, id)).get();
-  const description = describe(row!.body, await loadLocale("tr"), "tr");
+  const description = describe(row!.body, localeFor("tr"), "tr");
 
   assert.equal(description.name, "RSI Dip Alıcı");
   assert.ok(description.entry.sentence.endsWith("AL."));

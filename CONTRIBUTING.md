@@ -37,8 +37,10 @@ pnpm typecheck
 
 ## Contributing a strategy
 
-A strategy is a single JSON file in `rulesets/`. Open a normal pull request
-with it.
+Strategies written in the interface are stored in your own database with
+`source: "local"` and stay on your machine. Contributing one to the project is
+a separate, deliberate act: a strategy is a single JSON file in `rulesets/`,
+and you open a normal pull request with it.
 
 What makes a strategy likely to be merged:
 

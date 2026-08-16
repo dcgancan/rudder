@@ -6,8 +6,10 @@ Bot satırlarını çalışan Freqtrade container'larına çevirir ve geri okur.
 
 | | |
 |---|---|
+| `create` | Bot satırını yazar (container başlatmaz) |
 | `start` / `stop` / `remove` | Container yaşam döngüsü ve bot dizinleri |
 | `refreshStatus` | Satırdaki durumu gerçeğe eşitler |
+| `reconcile` | Bütün botları gerçeğe eşitler, yetim container'ları kaldırır |
 | `client` | O botun tipli API istemcisi |
 | `syncTrades` | Kapanmış işlemleri veritabanına aynalar |
 
@@ -21,6 +23,28 @@ gerektiğinde kimlik bilgileri o botun config dosyasından okunur.
 
 Config dosyası `0600`, bot dizini `0700` ile yazılır. Bir test bunu doğrular.
 
+### Bot, stratejinin ölçüldüğü ayarlarla kurulur
+
+`create()` bütün ayarları `STANDARD_SETUP`'tan alır ve kullanıcıya yalnızca ad
+sorulur. Gerekçesi [`@rudder/freqtrade`](../freqtrade/README.md)'de: ayarları
+sabit tutmak, ekranda görünen ölçümün gerçekten o botun ölçümü olmasını
+sağlıyor.
+
+Mod her zaman `paper`. Gerçek parayla işlem borsa anahtarlarının şifresini
+çözmeyi gerektiriyor ve `packages/crypto` yazılmadı.
+
+### Durdurulan bir bot hata değildir
+
+`refreshStatus()` sıfırdan farklı bir çıkış kodunu çökme sayıyordu. Ölçüldü:
+`docker stop` sonrası Freqtrade container'ı **130** ile çıkıyor, yani kullanıcı
+botu kendi durdurduğunda arayüzde "HATA" görüyordu.
+
+Kural artık şu: **128 ve üstü çıkış kodu sonlandırılma demek, çökme değil**
+(POSIX'te 128 + sinyal). Gerçek çökmeler — Python hatası 1, hatalı argüman 2 —
+hâlâ hata olarak görünür. Kabul edilen bedel, bellek yetersizliğinden
+öldürülen bir botun (137) "durdu" görünmesi; en sık yaşanan yolu yanlış
+işaretlemekten iyi.
+
 ### `start()` beklemez
 
 Freqtrade'in borsa piyasalarını yüklemesi birkaç saniye sürüyor; bir web
@@ -30,16 +54,10 @@ durumu `starting` yapar. Hazır olduğunu görmek için `refreshStatus()` ya da
 
 ### Docker CLI, HTTP API değil
 
-Bağımlılık yok, çıktısı okunabilir, kullanıcının zaten bildiği arayüz, Docker
-Desktop / Colima / Podman arasında taşınabilir. Bu ölçekte (bir makinede
-birkaç düzine bot) süreç başlatma maliyeti önemsiz.
-
-### Sırlar komut satırına yazılmaz
-
-`docker run -e KEY=VALUE` değeri argv'ye koyar ve aynı makinedeki başka
-kullanıcılar `ps` ile görebilir. Bunun yerine değersiz `-e KEY` biçimi
-kullanılır: Docker CLI değeri kendi ortamından okur, biz de onu alt sürecin
-ortamına koyarız.
+Container çalışma zamanı ve `~/.rudder` yerleşimi [`@rudder/host`](../host)'ta;
+gerekçeleri (CLI tercihi, sırların argv'ye yazılmaması, portların yalnızca
+127.0.0.1'e yayınlanması, OS temp'in neden kullanılamayacağı) orada
+belgelenmiştir. Orchestrator o katmanın tüketicisidir.
 
 ### Portlar yalnızca 127.0.0.1'e yayınlanır
 
@@ -47,14 +65,7 @@ Bot API'si makine dışından erişilebilir olmamalı. Her bota `17000-17999`
 aralığından bir port atanır; veritabanında başka bota atanmış portlar atlanır
 ve kalan aday gerçekten dinlenebiliyor mu diye denenir.
 
-## Bot dizinleri OS temp'inde olamaz
-
-macOS'ta `os.tmpdir()` `/var/folders` altındadır ve Colima (ile Docker Desktop)
-bu yolu sanal makineye paylaşmaz. Docker paylaşılmayan bir yolu mount ederken
-**hata vermez** — sessizce bir dizin oluşturur — ve container içinde
-anlaşılmaz bir `IsADirectoryError` çıkar.
-
-Varsayılan kök bu yüzden `~/.rudder`, ve `RUDDER_DATA_DIR` ile değiştirilebilir.
+## Bot dizinleri
 
 ```
 <dataRoot>/bots/<botId>/
@@ -92,10 +103,22 @@ Entegrasyon testi zincirin tamamını gerçek Docker ile doğrular: veritabanı
 satırı → container → çalışan bot → senkronize edilmiş işlem geçmişi → durdurma
 → yeniden başlatma → kaldırma. Borsa anahtarı gerekmez, paper modda çalışır.
 
+### Uzlaştırma açılışta yapılır
+
+Durum yalnızca sorulduğunda güncelleniyor, yani süreç ölüp geri geldiğinde
+satırlar son bilinen hallerinde kalıyor: makine yeniden başlamışsa `running`
+yazan bir botun container'ı çoktan gitmiş olabilir. Durum artık ekranda
+göründüğü için bu, kullanıcıya gösterilen bir yalan.
+
+`reconcile()` bütün botları gerçeğe eşitler ve `BOT_LABEL` etiketli sahipsiz
+container'ları kaldırır. Hiçbir botu başlatmaz ya da durdurmaz — yalnızca ne
+olduğunu yazar. Arayüz bunu açılışta bir kez çağırıyor
+(`apps/web/src/instrumentation.ts`); ölçüldü, uygulama kapalıyken durdurulan
+bir container'ın satırı aksi halde "çalışıyor" kalıyor.
+
 ## Henüz yok
 
 - **Live mod.** Borsa anahtarlarının şifresini çözmek gerekiyor;
   `packages/crypto` yazılana kadar `start()` yalnızca paper modu besliyor.
-- **Uzlaştırma döngüsü.** Şu an durum yalnızca `refreshStatus()` çağrıldığında
-  güncelleniyor. Yetim container'ları bulmak için `BOT_LABEL` etiketi ve
-  `listContainers()` hazır, kullanan yok.
+- **Sürekli izleme.** Uzlaştırma açılışta ve sayfa okundukça yapılıyor; arka
+  planda dönen bir döngü yok.

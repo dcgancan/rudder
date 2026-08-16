@@ -1,13 +1,27 @@
+import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { UnderwaterTrace } from "@/components/UnderwaterTrace";
+import { StrategyTrace } from "@/components/StrategyTrace";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { listStrategies } from "@/lib/strategies";
+
+/*
+  Katalog da statik üretilemez: kartlardaki eğri bir backtest bittiğinde
+  değişiyor ve derleme anında dondurulmuş bir sayfa sonsuza kadar
+  "test edilmedi" derdi.
+*/
+export const dynamic = "force-dynamic";
 
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  // Yol parçası doğrulanmadan aşağı geçemez: `Intl` geçersiz bir locale ile
+  // fırlatıyor ve /favicon.ico gibi eşleşmeyen istekler buraya kadar geliyor.
+  if (!hasLocale(routing.locales, locale)) notFound();
+
   setRequestLocale(locale);
 
   const t = await getTranslations();
@@ -53,7 +67,12 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
             <h2 id="all-strategies" className="label">
               {t("home.listHeading")}
             </h2>
-            <span className="label sounding">{t("home.count", { count: strategies.length })}</span>
+            <span className="flex items-baseline gap-5">
+              <span className="label sounding">{t("home.count", { count: strategies.length })}</span>
+              <Link href="/strategies/new" className="label text-depth no-underline">
+                {t("editor.create")}
+              </Link>
+            </span>
           </div>
 
           <ul className="mt-6 list-none p-0">
@@ -71,11 +90,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                     <p className="label sounding mt-3">{strategy.timeframe}</p>
                   </div>
 
-                  <UnderwaterTrace
-                    points={strategy.drawdown}
-                    label={t("drawdown.label")}
-                    untestedLabel={t("drawdown.untested")}
-                  />
+                  <StrategyTrace strategy={strategy} />
                 </Link>
               </li>
             ))}

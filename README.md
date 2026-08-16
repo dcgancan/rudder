@@ -12,8 +12,8 @@ file, and edit it in a form instead of a code editor.
 > ### ⚠️ Early development
 >
 > The engine works: rulesets are backtested against real data and bots can
-> paper trade. The interface currently shows **only the strategy catalog** —
-> there is no bot management and no live trading.
+> paper trade. The interface shows the **strategy catalog** and can **run a
+> backtest** — there is no bot management and no live trading.
 > See [Status](#status) before you get excited.
 
 ---
@@ -89,9 +89,11 @@ No human wrote either sentence.
 | Validation / security boundary | ✅ Works, tested against malicious rulesets |
 | Description renderer (EN + TR) | ✅ Works |
 | Data model | ✅ Works |
-| Bot lifecycle (paper trading) | ✅ Works, verified against real containers |
-| Web interface | 🚧 Strategy catalog only |
-| Backtesting from the interface | ❌ Not started |
+| Bot engine (paper trading) | ✅ Works, verified against real containers |
+| Web interface | 🚧 Catalog, authoring, backtesting and paper bots |
+| Backtesting from the interface | ✅ Works, verified against real containers |
+| Bot screens (create, run, stop, close) | ✅ Works, driven end to end in a browser |
+| Writing a strategy in the interface | ✅ Works — write, measure, run |
 | Live trading | ⏳ Needs credential encryption |
 | Strategy sharing | ❌ Not started |
 
@@ -151,6 +153,8 @@ Then `http://localhost:3000` — `/en` for English, `/tr` for Turkish.
 | `packages/db/` | SQLite schema and client |
 | `packages/freqtrade/` | Config generation and typed REST client |
 | `packages/orchestrator/` | Turns bot rows into running containers |
+| `packages/backtest/` | Runs rulesets over past data and stores the result |
+| `packages/host/` | Container runtime and disk layout |
 | `engine/` | The Freqtrade interpreter — the only Python in the project |
 | `ft_lab/` | Throwaway Freqtrade exploration environment |
 
@@ -159,6 +163,8 @@ Docs: [`apps/web/README.md`](apps/web/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
 [`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
 [`packages/orchestrator/README.md`](packages/orchestrator/README.md) ·
+[`packages/backtest/README.md`](packages/backtest/README.md) ·
+[`packages/host/README.md`](packages/host/README.md) ·
 [`engine/README.md`](engine/README.md) ·
 [`ft_lab/README.md`](ft_lab/README.md)
 

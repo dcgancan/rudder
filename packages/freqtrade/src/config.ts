@@ -39,6 +39,29 @@ export const CONTAINER_PATHS = {
 export const STRATEGY_NAME = "UniversalStrategy";
 
 /**
+ * Standart kurulum: bir stratejinin hem ÖLÇÜLDÜĞÜ hem ÇALIŞTIRILDIĞI ayarlar.
+ *
+ * Tek bir yerde durmasının sebebi kolaylık değil, doğruluk. Bir bot ölçümden
+ * farklı bir sermaye ya da parite listesiyle kurulursa, kullanıcının ekranda
+ * gördüğü sayı o botun sayısı olmaktan çıkar. Aynı sabiti kullanmak "ayarlar
+ * aynı" cümlesini bir tesadüf olmaktan çıkarıp yapısal hale getiriyor.
+ *
+ * Kullanıcıya sorulmaz. Bunları sormak, ürünün kaçınmaya çalıştığı Freqtrade
+ * yüzeyini geri getirir; dahası her strateji farklı sermayeyle ölçülürse
+ * sonuçlar birbiriyle kıyaslanamaz.
+ */
+export const STANDARD_SETUP = {
+  exchange: "binance",
+  stakeCurrency: "USDT",
+  pairs: ["BTC/USDT", "ETH/USDT", "BNB/USDT", "SOL/USDT", "XRP/USDT"],
+  /** Başlangıç bakiyesi. Paper modda cüzdan, backtest'te başlangıç sermayesi. */
+  wallet: 1000,
+  /** İşlem başına ayrılan tutar. */
+  stake: 100,
+  maxOpenTrades: 3,
+} as const;
+
+/**
  * Kural setine ait olan ve bu yüzden config'de ASLA görünmemesi gereken
  * anahtarlar. Freqtrade bunların hepsinde config'i stratejiden üstün tutar.
  */
@@ -65,7 +88,7 @@ export type BotSpec = {
   stakeCurrency: string;
   stakeAmount: number;
   maxOpenTrades: number;
-  pairs: string[];
+  pairs: readonly string[];
   /** Yalnızca paper modda kullanılır. */
   paperWallet?: number | null;
 };

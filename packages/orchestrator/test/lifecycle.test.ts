@@ -22,7 +22,7 @@ import { bots, createDatabase, rulesets, trades } from "@rudder/db";
 import type { Database } from "@rudder/db";
 import { parseRuleset } from "@rudder/ruleset";
 
-import { removeContainer } from "../src/docker.ts";
+import { removeContainer } from "@rudder/host";
 import { Orchestrator } from "../src/orchestrator.ts";
 import { botPaths, containerName } from "../src/paths.ts";
 
@@ -162,6 +162,14 @@ test("stopping releases the port and clears the container", { skip: !enabled }, 
   assert.equal(bot?.status, "stopped");
   assert.equal(bot?.containerId, null);
   assert.equal(bot?.apiPort, null);
+});
+
+// Durdurulmuş container hâlâ duruyor ve Freqtrade SIGTERM aldığında 143 ile
+// çıkıyor. Bunu çökme saymak, kullanıcının kendi durdurduğu botu "hata" olarak
+// göstermek demek — arayüzde tam olarak öyle oldu.
+test("a bot stopped on purpose does not read as an error", { skip: !enabled }, async () => {
+  assert.equal(await orchestrator.refreshStatus(botId), "stopped");
+  assert.equal(row()?.status, "stopped");
 });
 
 test("a stopped bot can be started again", { skip: !enabled }, async () => {

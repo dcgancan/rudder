@@ -3,8 +3,8 @@
  *
  * HTTP API yerine CLI kullanılıyor: bağımlılık yok, çıktısı okunabilir,
  * kullanıcının zaten bildiği arayüz, ve Docker Desktop / Colima / Podman
- * arasında taşınabilir. Bu ölçekte (bir makinede birkaç düzine bot) süreç
- * başlatma maliyeti önemsiz.
+ * arasında taşınabilir. Bu ölçekte (bir makinede birkaç düzine container)
+ * süreç başlatma maliyeti önemsiz.
  *
  * Sırlar KOMUT SATIRINA yazılmaz. `docker run -e KEY=VALUE` değeri argv'ye
  * koyar ve aynı makinedeki başka kullanıcılar bunu `ps` ile görebilir. Bunun
@@ -17,6 +17,13 @@ import { promisify } from "node:util";
 
 const run = promisify(execFile);
 
+/**
+ * Freqtrade bir backtest sırasında megabaytlarca log üretebiliyor ve Node'un
+ * 1 MB'lık varsayılanı aşıldığında süreç ÖLDÜRÜLÜR — yani sınırı çalışan bir
+ * backtest'i keserek fark ederiz.
+ */
+const MAX_OUTPUT_BYTES = 32 * 1024 * 1024;
+
 export type Mount = {
   host: string;
   container: string;
@@ -24,7 +31,7 @@ export type Mount = {
 };
 
 export type PortPublish = {
-  /** Varsayılan 127.0.0.1 — bot API'si makine dışına açılmamalı. */
+  /** Varsayılan 127.0.0.1 — container API'leri makine dışına açılmamalı. */
   hostIp?: string;
   hostPort: number;
   containerPort: number;
@@ -39,8 +46,20 @@ export type RunOptions = {
   env?: Record<string, string>;
   publish?: PortPublish[];
   labels?: Record<string, string>;
-  /** Varsayılan "unless-stopped": bot makine yeniden başlasa da geri gelsin. */
+  /** Varsayılan "unless-stopped": container makine yeniden başlasa da geri gelsin. */
   restart?: "no" | "unless-stopped" | "on-failure";
+};
+
+/** Bitene kadar çalışan tek seferlik iş. Uzun ömürlü servis değil. */
+export type RunOnceOptions = {
+  name: string;
+  image: string;
+  command: string[];
+  mounts?: Mount[];
+  env?: Record<string, string>;
+  labels?: Record<string, string>;
+  /** Aşılırsa container kaldırılır ve hata fırlatılır. Varsayılan 30 dakika. */
+  timeoutMs?: number;
 };
 
 export type ContainerState = {
@@ -53,9 +72,18 @@ export type ContainerState = {
 };
 
 export class DockerError extends Error {
-  constructor(message: string) {
+  /**
+   * Container'ın o ana kadar ürettiği çıktı.
+   *
+   * Hata mesajının kendisi kısaltılmış olabilir; teşhis için tam metin lazım
+   * ve tek kaynağı ölen sürecin akışları.
+   */
+  output: string;
+
+  constructor(message: string, output = "") {
     super(message);
     this.name = "DockerError";
+    this.output = output;
   }
 }
 
@@ -82,9 +110,7 @@ export async function runContainer(options: RunOptions): Promise<string> {
 
   const args = ["run", "--detach", "--name", name, "--restart", restart];
 
-  for (const mount of mounts) {
-    args.push("--volume", `${mount.host}:${mount.container}${mount.readonly ? ":ro" : ""}`);
-  }
+  for (const mount of mounts) args.push("--volume", volumeArg(mount));
 
   for (const port of publish) {
     args.push("--publish", `${port.hostIp ?? "127.0.0.1"}:${port.hostPort}:${port.containerPort}`);
@@ -102,6 +128,60 @@ export async function runContainer(options: RunOptions): Promise<string> {
     return stdout.trim();
   } catch (error) {
     throw new DockerError(`failed to start container ${name}: ${describeError(error)}`);
+  }
+}
+
+/**
+ * Container'ı ön planda çalıştırır ve çıktısını döndürür.
+ *
+ * `--rm` yalnızca container KENDİ durduğunda temizler; Docker CLI'ını öldürmek
+ * container'ı öldürmez. Bu yüzden zaman aşımında ve hatada container açıkça
+ * kaldırılır — yoksa arkada çalışmaya devam eder ve adı bir sonraki denemeyi
+ * bloke eder.
+ */
+export async function runOnce(options: RunOnceOptions): Promise<string> {
+  const {
+    name,
+    image,
+    command,
+    mounts = [],
+    env = {},
+    labels = {},
+    timeoutMs = 30 * 60_000,
+  } = options;
+
+  // Önceki bir çalıştırmadan kalan aynı adlı container `docker run`'ı isim
+  // çakışmasıyla düşürür.
+  await removeContainer(name);
+
+  const args = ["run", "--rm", "--name", name];
+
+  for (const mount of mounts) args.push("--volume", volumeArg(mount));
+  for (const key of Object.keys(env)) args.push("--env", key);
+  for (const [key, value] of Object.entries(labels)) args.push("--label", `${key}=${value}`);
+
+  args.push(image, ...command);
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const { stdout, stderr } = await run("docker", args, {
+      env: { ...process.env, ...env },
+      signal: controller.signal,
+      maxBuffer: MAX_OUTPUT_BYTES,
+    });
+    return joinStreams(stderr, stdout);
+  } catch (error) {
+    await removeContainer(name);
+
+    const output = errorOutput(error);
+    if (controller.signal.aborted) {
+      throw new DockerError(`container ${name} exceeded ${timeoutMs}ms and was removed`, output);
+    }
+    throw new DockerError(`container ${name} failed: ${describeError(error)}`, output);
+  } finally {
+    clearTimeout(timer);
   }
 }
 
@@ -155,7 +235,7 @@ export async function containerLogs(name: string, tail = 50): Promise<string> {
   try {
     const { stdout, stderr } = await run("docker", ["logs", "--tail", String(tail), name]);
     // Freqtrade stderr'e loglar; ikisini de döndürüyoruz.
-    return [stderr, stdout].filter(Boolean).join("\n").trim();
+    return joinStreams(stderr, stdout);
   } catch {
     return "";
   }
@@ -171,6 +251,21 @@ export async function listContainers(label: string): Promise<string[]> {
   } catch {
     return [];
   }
+}
+
+export function volumeArg(mount: Mount): string {
+  return `${mount.host}:${mount.container}${mount.readonly ? ":ro" : ""}`;
+}
+
+function joinStreams(stderr: string, stdout: string): string {
+  return [stderr, stdout].filter(Boolean).join("\n").trim();
+}
+
+/** Ölen sürecin akışları. Kesilmiş çıktı da hiç yoktan iyidir. */
+function errorOutput(error: unknown): string {
+  if (!error || typeof error !== "object") return "";
+  const { stdout, stderr } = error as { stdout?: unknown; stderr?: unknown };
+  return joinStreams(stderr ? String(stderr) : "", stdout ? String(stdout) : "");
 }
 
 function describeError(error: unknown): string {

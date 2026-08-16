@@ -16,6 +16,14 @@
     "cross_above": "{left} crosses above {right}",
     "cross_below": "{left} crosses below {right}"
   },
+  "picker_ops": {
+    "lt": "falls below",
+    "lte": "is at or below",
+    "gt": "rises above",
+    "gte": "is at or above",
+    "cross_above": "crosses above",
+    "cross_below": "crosses below"
+  },
   "columns": {
     "open": "the candle open",
     "high": "the candle high",

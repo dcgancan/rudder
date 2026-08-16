@@ -4,6 +4,21 @@ Freqtrade'i bilen tek katman: yapılandırma üretimi ve tipli REST istemcisi.
 Bu paketin dışında hiçbir yer Freqtrade'in config şemasını ya da uç noktalarını
 bilmek zorunda değil.
 
+## Standart kurulum
+
+`STANDARD_SETUP`, bir stratejinin hem **ölçüldüğü** hem **çalıştırıldığı**
+ayarlar: borsa, pariteler, cüzdan, pozisyon büyüklüğü, en fazla açık işlem.
+
+Burada durmasının sebebi kolaylık değil, doğruluk. `@rudder/backtest` ve
+`@rudder/orchestrator` aynı sabiti kullanıyor, yani bir botun ayarları ölçümün
+ayarlarından sapamıyor ve kullanıcının ekranda gördüğü sayı gerçekten o botun
+sayısı oluyor. Sabit iki pakete kopyalansaydı "aynı ayarlar" bir tesadüf
+olurdu; iki tüketicinin de bağımlı olduğu bu paket, tek doğal ev.
+
+Kullanıcıya sorulmaz: sormak, ürünün kaçınmaya çalıştığı Freqtrade yüzeyini
+geri getirir ve her strateji farklı sermayeyle ölçülürse sonuçlar birbiriyle
+kıyaslanamaz.
+
 ## İki değişmez
 
 ### 1. Sırlar dosyaya yazılmaz

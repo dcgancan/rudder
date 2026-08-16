@@ -3,8 +3,9 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { test } from "node:test";
 
-import { describe, loadLocale, toText } from "../src/describe.ts";
+import { describe, toText } from "../src/describe.ts";
 import type { Locale } from "../src/describe.ts";
+import { loadLocale } from "../src/load-locale.ts";
 import { parseRuleset } from "../src/schema.ts";
 
 const RULESETS = resolve(import.meta.dirname, "../../../rulesets");

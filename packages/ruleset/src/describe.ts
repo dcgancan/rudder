@@ -22,16 +22,15 @@
  *     İngilizce "BUY when X", Türkçe "X AL".
  *   - Büyük harf locale duyarlıdır: "işlem" -> "İşlem", "Islem" değil.
  *   - Sayı ve yüzde biçimi Intl'e bırakılır: TR'de %8, %1,5 ve 1.000.
+ *
+ * BU MODÜL SAF. Dosya sistemine dokunmaz, çünkü editörün canlı önizlemesi onu
+ * tarayıcıda çalıştırıyor: önizlemedeki cümle ile katalogdaki cümle aynı kodun
+ * çıktısı, yani ayrışabilecekleri bir yer yok. Diskten okuyan `loadLocale()`
+ * ayrı bir modülde (`load-locale.ts`, yalnızca CLI).
  */
-
-import { readFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 
 import { OHLCV_COLUMNS } from "./schema.ts";
 import type { ComparisonOp, Condition, OhlcvColumn, Operand, Ruleset } from "./schema.ts";
-
-const LOCALE_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "locales");
 
 export type Locale = {
   timeframe_line: string;
@@ -44,6 +43,13 @@ export type Locale = {
   join_any: string;
   not: string;
   ops: Partial<Record<ComparisonOp, string>>;
+  /**
+   * Operatörlerin tek başına okunan hali — editördeki seçim kutusu için.
+   *
+   * `ops` cümle şablonu ({left}/{right} ile), bu ise etiket. Aynı kelimenin
+   * iki biçimi ve ikisi de burada: yeni bir dil eklemek hâlâ tek dosya.
+   */
+  picker_ops: Partial<Record<ComparisonOp, string>>;
   columns: Partial<Record<OhlcvColumn, string>>;
   indicators: Record<string, string | Record<string, string>>;
   risk_heading: string;
@@ -95,13 +101,8 @@ const num = (locale: string, value: number): string => new Intl.NumberFormat(loc
 
 // Locale duyarlı olmak zorunda: Türkçe'de "işlem" -> "İşlem" (noktalı İ),
 // düz toUpperCase() "Islem" üretir ve yanlıştır.
-const capitalize = (locale: string, text: string): string =>
+export const capitalize = (locale: string, text: string): string =>
   text.charAt(0).toLocaleUpperCase(locale) + text.slice(1);
-
-export async function loadLocale(code: string): Promise<Locale> {
-  if (!/^[a-z]{2}$/.test(code)) throw new Error(`invalid locale code: ${code}`);
-  return JSON.parse(await readFile(resolve(LOCALE_DIR, `${code}.json`), "utf8")) as Locale;
-}
 
 function duration(L: Locale, locale: string, minutes: number): string {
   if (minutes % 1440 === 0) return fill(L.dur_days, { n: num(locale, minutes / 1440) });
@@ -114,8 +115,7 @@ function duration(L: Locale, locale: string, minutes: number): string {
  *
  * Arayüz bunu "neye bakıyor" listesi için kullanıyor, o yüzden dışa açık.
  */
-export function indicatorLabels(ruleset: Ruleset, L: Locale): Map<string, string> {
-  const labels = new Map<string, string>();
+export function indicatorLabels(ruleset: Ruleset, L: Locale): Map<string, string> {  const labels = new Map<string, string>();
   for (const spec of ruleset.indicators) {
     const entry = L.indicators[spec.fn];
     const template =

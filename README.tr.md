@@ -12,8 +12,8 @@ kod editörü yerine bir formda düzenleyebilirsiniz.
 > ### ⚠️ Erken geliştirme aşaması
 >
 > Motor çalışıyor: kural setleri gerçek veriyle backtest ediliyor ve botlar
-> kağıt üzerinde işlem yapabiliyor. Arayüz **yalnızca strateji kataloğunu**
-> gösteriyor — bot yönetimi ve gerçek parayla işlem henüz yok.
+> kağıt üzerinde işlem yapabiliyor. Arayüz **strateji kataloğunu** gösteriyor ve
+> **backtest çalıştırabiliyor** — bot yönetimi ve gerçek parayla işlem henüz yok.
 > Heyecanlanmadan önce [Durum](#durum) bölümüne bakın.
 
 ---
@@ -89,9 +89,11 @@ Aynı kural seti, iki dilde:
 | Doğrulama / güvenlik sınırı | ✅ Çalışıyor, kötü niyetli kural setlerine karşı test edildi |
 | Açıklama render'ı (TR + EN) | ✅ Çalışıyor |
 | Veri modeli | ✅ Çalışıyor |
-| Bot yaşam döngüsü (paper trading) | ✅ Çalışıyor, gerçek container'larla doğrulandı |
-| Web arayüzü | 🚧 Yalnızca strateji kataloğu |
-| Arayüzden backtest | ❌ Başlanmadı |
+| Bot motoru (kağıt üzerinde) | ✅ Çalışıyor, gerçek container'larla doğrulandı |
+| Web arayüzü | 🚧 Katalog, strateji yazma, backtest ve kağıt üzerinde botlar |
+| Arayüzden backtest | ✅ Çalışıyor, gerçek container'larla doğrulandı |
+| Bot ekranları (kur, çalıştır, durdur, kapat) | ✅ Çalışıyor, tarayıcıda uçtan uca sürüldü |
+| Arayüzden strateji yazma | ✅ Çalışıyor — yaz, ölç, çalıştır |
 | Gerçek parayla işlem | ⏳ Kimlik bilgisi şifrelemesi gerekiyor |
 | Strateji paylaşımı | ❌ Başlanmadı |
 
@@ -152,6 +154,8 @@ pnpm --filter @rudder/web dev
 | `packages/db/` | SQLite şeması ve bağlantısı |
 | `packages/freqtrade/` | Config üretimi ve tipli REST istemcisi |
 | `packages/orchestrator/` | Bot satırlarını çalışan container'lara çevirir |
+| `packages/backtest/` | Kural setlerini geçmiş veri üzerinde çalıştırır ve sonucu saklar |
+| `packages/host/` | Container çalışma zamanı ve disk yerleşimi |
 | `engine/` | Freqtrade yorumlayıcısı — projedeki tek Python |
 | `ft_lab/` | Tek kullanımlık Freqtrade keşif ortamı |
 
@@ -160,6 +164,8 @@ Belgeler: [`apps/web/README.md`](apps/web/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
 [`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
 [`packages/orchestrator/README.md`](packages/orchestrator/README.md) ·
+[`packages/backtest/README.md`](packages/backtest/README.md) ·
+[`packages/host/README.md`](packages/host/README.md) ·
 [`engine/README.md`](engine/README.md) ·
 [`ft_lab/README.md`](ft_lab/README.md)
 

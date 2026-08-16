@@ -34,12 +34,13 @@ export const INDICATOR_OUTPUTS = ["macd", "signal", "hist", "upper", "middle", "
 export const TIMEFRAMES = ["1m", "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d"] as const;
 
 /** Tek seri üreten indikatörler; `params.period` zorunludur. */
-const SINGLE_OUTPUT_FNS = ["rsi", "ema", "sma", "atr", "adx"] as const;
+export const SINGLE_OUTPUT_FNS = ["rsi", "ema", "sma", "atr", "adx"] as const;
 /** Birden çok seri üreten indikatörler; `output` zorunludur. */
-const MULTI_OUTPUT_FNS = ["macd", "bbands"] as const;
+export const MULTI_OUTPUT_FNS = ["macd", "bbands"] as const;
 
 export type OhlcvColumn = (typeof OHLCV_COLUMNS)[number];
 export type IndicatorFn = (typeof INDICATOR_FNS)[number];
+export type IndicatorOutput = (typeof INDICATOR_OUTPUTS)[number];
 export type ComparisonOp = (typeof COMPARISON_OPS)[number];
 export type Timeframe = (typeof TIMEFRAMES)[number];
 

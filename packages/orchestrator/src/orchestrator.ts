@@ -20,7 +20,6 @@
  */
 
 import { chmod, mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 
 import { and, eq, isNotNull, isNull, ne } from "drizzle-orm";
@@ -34,41 +33,41 @@ import {
   CONTAINER_PATHS,
   FreqtradeClient,
   generateApiCredentials,
+  STANDARD_SETUP,
 } from "@rudder/freqtrade";
 import type { ApiCredentials, BotSpec } from "@rudder/freqtrade";
-
 import {
   containerLogs,
+  dataRoot,
+  engineDir,
   inspectContainer,
+  listContainers,
   removeContainer,
   runContainer,
   stopContainer,
-} from "./docker.ts";
-import { botPaths, containerName, dataRoot } from "./paths.ts";
+} from "@rudder/host";
+
+import { botPaths, containerName } from "./paths.ts";
 import { allocatePort, DEFAULT_PORT_RANGE } from "./ports.ts";
 
 export const DEFAULT_IMAGE = "freqtradeorg/freqtrade:stable";
 export const BOT_LABEL = "rudder.bot";
 
 /**
- * Host üzerinde `universal_strategy.py`'nin bulunduğu dizin.
+ * Bu değerin üstündeki çıkış kodları "sonlandırıldı" demek, "çöktü" değil.
  *
- * Modül yüklenirken DEĞİL, ihtiyaç duyulduğunda hesaplanır: bu modül bir
- * bundler'dan geçtiğinde `import.meta.dirname` tanımsız olur ve modül seviyesi
- * bir `resolve()` çağrısı, orchestrator hiç kullanılmasa bile uygulamayı
- * çökertir.
+ * POSIX geleneği 128 + sinyal numarası. Ölçülen: `docker stop` sonrası
+ * Freqtrade container'ı **130** ile çıkıyor (kendi kesme yolu), makinenin
+ * kapanması 143 (SIGTERM) ya da 137 (SIGKILL) veriyor. Bunları çökme saymak,
+ * kullanıcının kendi durdurduğu botu "hata" olarak göstermek demek — arayüzde
+ * tam olarak öyle oldu.
+ *
+ * Kabul edilen bedel: bellek yetersizliğinden öldürülen bir bot (137) da
+ * "durdu" görünür. Yanlış yön olarak bu, en sık yaşanan yolu yanlış
+ * işaretlemekten iyi; gerçek çökmeler (Python hatası 1, hatalı argüman 2)
+ * hâlâ hata olarak görünüyor.
  */
-function defaultEngineDir(): string {
-  const configured = process.env["RUDDER_ENGINE_DIR"];
-  if (configured) return resolve(configured);
-
-  if (!import.meta.dirname) {
-    throw new Error(
-      "cannot locate the engine directory from a bundled build — set RUDDER_ENGINE_DIR",
-    );
-  }
-  return resolve(import.meta.dirname, "../../../engine");
-}
+const SIGNAL_EXIT_FLOOR = 128;
 
 export type OrchestratorOptions = {
   db: Database;
@@ -102,12 +101,54 @@ export class Orchestrator {
   }
 
   get #engine(): string {
-    return this.#engineDir ?? defaultEngineDir();
+    return this.#engineDir ?? engineDir();
   }
 
   // ----------------------------------------------------------------- //
   // Yaşam döngüsü
   // ----------------------------------------------------------------- //
+
+  /**
+   * Bot satırını yazar ve id'sini döndürür. Container BAŞLATMAZ.
+   *
+   * Ayarlar `STANDARD_SETUP`'tan gelir, yani bot stratejinin ÖLÇÜLDÜĞÜ
+   * ayarlarla çalışır. Kullanıcıya sorulan tek şey ad: ölçümün ayarlarından
+   * sapan bir bot, ekranda gördüğü sayıyı kendi sayısı olmaktan çıkarır.
+   *
+   * Mod her zaman `paper`. Gerçek parayla işlem borsa anahtarlarının
+   * şifresini çözmeyi gerektiriyor ve `packages/crypto` yazılmadı.
+   */
+  create(input: { rulesetId: string; name: string }): string {
+    const name = input.name.trim();
+    if (!name) throw new Error("a bot needs a name");
+
+    const ruleset = this.#db
+      .select()
+      .from(rulesets)
+      .where(eq(rulesets.id, input.rulesetId))
+      .get();
+    if (!ruleset) throw new Error(`no such ruleset: ${input.rulesetId}`);
+
+    const id = crypto.randomUUID();
+
+    this.#db
+      .insert(bots)
+      .values({
+        id,
+        name,
+        rulesetId: input.rulesetId,
+        mode: "paper",
+        exchange: STANDARD_SETUP.exchange,
+        stakeCurrency: STANDARD_SETUP.stakeCurrency,
+        stakeAmount: STANDARD_SETUP.stake,
+        maxOpenTrades: STANDARD_SETUP.maxOpenTrades,
+        pairs: [...STANDARD_SETUP.pairs],
+        paperWallet: STANDARD_SETUP.wallet,
+      })
+      .run();
+
+    return id;
+  }
 
   /**
    * Botu ayağa kaldırır ve `starting` durumuna geçirir.
@@ -213,9 +254,11 @@ export class Orchestrator {
     }
 
     if (!state.running) {
-      // Sıfırdan farklı çıkış kodu botun çöktüğü anlamına gelir; sebebi
-      // kullanıcıya gösterilebilmesi için logdan alınır.
-      if (state.exitCode !== 0) {
+      // Sıfırdan farklı çıkış kodu botun ÇÖKTÜĞÜ anlamına gelir — sinyalle
+      // sonlandırılmış olması hariç (bkz. SIGNAL_EXIT_FLOOR).
+      const crashed = state.exitCode !== null && state.exitCode !== 0 && state.exitCode < SIGNAL_EXIT_FLOOR;
+
+      if (crashed) {
         const logs = await containerLogs(containerName(botId));
         this.#update(botId, { status: "error", lastError: logs.slice(-2000) });
         return "error";
@@ -251,6 +294,38 @@ export class Orchestrator {
     throw new Error(`bot ${botId} did not become ready within ${timeoutMs}ms`);
   }
 
+  /**
+   * Bütün botları gerçeğe eşitler ve sahipsiz container'ları kaldırır.
+   *
+   * Durum yalnızca `refreshStatus()` çağrıldığında güncelleniyor, yani süreç
+   * ölüp geri geldiğinde satırlar son bilinen hallerinde kalıyor: makine
+   * yeniden başlamışsa `running` yazan bir botun container'ı çoktan gitmiş
+   * olabilir. Durum artık ekranda görüldüğü için bu yalan bir kullanıcıya
+   * gösterilen yalan.
+   *
+   * Uygulama açılışında bir kez çağrılır. Hiçbir botu başlatmaz ya da
+   * durdurmaz — yalnızca ne olduğunu yazar.
+   */
+  async reconcile(): Promise<void> {
+    const known = this.#db
+      .select({ id: bots.id })
+      .from(bots)
+      .where(isNull(bots.deletedAt))
+      .all();
+
+    for (const bot of known) {
+      // Bir botun okunamaması diğerlerini engellememeli.
+      await this.refreshStatus(bot.id).catch(() => undefined);
+    }
+
+    // Silinmiş ya da hiç tanınmayan botlara ait container'lar geride kalmış
+    // olabilir; portu ve adı tutuyorlar.
+    const live = new Set(known.map((bot) => containerName(bot.id)));
+
+    for (const name of await listContainers(BOT_LABEL)) {
+      if (!live.has(name)) await removeContainer(name);
+    }
+  }
   /**
    * Bu botun API istemcisi.
    *

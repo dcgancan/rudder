@@ -50,6 +50,37 @@ Son ikisi güvenlik değil, sessiz sürpriz önlemidir: `bbands` varsayılana
 düşerse kullanıcı yazdığını sandığından farklı bir strateji çalıştırır, ve
 `positive` olmadan trailing açık bırakılırsa hata bot ayağa kalkarken çıkar.
 
+## Taslak: formun düzenlediği model
+
+`compose.ts` kural seti ile arayüz formu arasındaki çevrimi yapıyor. Kural
+setinin kendisi bir form için fazla serbest ve iki şeyi kaldırıyor:
+
+**Tek seviye.** Şema iç içe `all`/`any`/`not` ağaçlarına izin veriyor; taslak
+vermiyor. Bir kural, "hepsi" ya da "herhangi biri" ile birleştirilmiş en fazla
+8 karşılaştırmadan ibaret. Repodaki üç kural setinin üçü de zaten böyle. Bu
+şekle uymayan bir kural seti `fromRuleset()`'ten `null` döner ve editör
+**açılmaz**: sessizce düzleştirmek, kullanıcının okuduğu cümle ile kaydettiği
+kuralı ayırırdı.
+
+**İd yok.** Şemada indikatörler önce bir `id` ile tanımlanıp koşulda o id ile
+anılıyor — tam olarak gizlemeye çalıştığımız programlama kavramı. Formda
+karşılaştırmanın tarafı doğrudan "RSI · 14" olarak seçiliyor; `indicators`
+listesi ve id'leri `toRuleset()` üretiyor ve aynı indikatör iki kez
+kullanılırsa tekilleştiriyor. Üretilen id'ler (`rsi_14`, `bbands_20_2_lower`)
+iç detay, kullanıcı hiç görmüyor.
+
+Asıl sözleşme bir testle sabitlenmiş: bir kural setini forma açıp geri
+kapatmak **anlamını değiştirmez**. İd'ler değişebilir, `describe()` cümleleri
+birebir aynı kalır.
+
+## `describe` saf, `loadLocale` değil
+
+Editörün canlı önizlemesi `toRuleset` + `describe` zincirini tarayıcıda
+çalıştırıyor — yani önizlemedeki cümle ile katalogdaki cümle aynı kodun
+çıktısı. Bunun için `describe.ts` dosya sistemine dokunmuyor; diskten okuyan
+`loadLocale()` ayrı bir modülde (`load-locale.ts`) ve yalnızca CLI kullanıyor.
+Bundle'lanmış ortamlar `locales.ts`'teki statik haritayı kullanır.
+
 ## Dil ekleme
 
 `src/locales/<kod>.json` ekle. Kod değişmez — değişmesi gerekiyorsa

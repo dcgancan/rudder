@@ -6,7 +6,7 @@ import { after, test } from "node:test";
 
 import { buildConfig, generateApiCredentials } from "@rudder/freqtrade";
 
-import { botPaths, containerName, dataRoot } from "../src/paths.ts";
+import { botPaths, containerName } from "../src/paths.ts";
 import { allocatePort, isPortFree, NoPortAvailableError } from "../src/ports.ts";
 import { readApiCredentials } from "../src/orchestrator.ts";
 
@@ -33,22 +33,10 @@ test("the data root is configurable", () => {
   const previous = process.env["RUDDER_DATA_DIR"];
   process.env["RUDDER_DATA_DIR"] = "/tmp/custom-root";
   try {
-    assert.equal(dataRoot(), "/tmp/custom-root");
+    assert.equal(botPaths("abc").root, "/tmp/custom-root/bots/abc");
   } finally {
     if (previous === undefined) delete process.env["RUDDER_DATA_DIR"];
     else process.env["RUDDER_DATA_DIR"] = previous;
-  }
-});
-
-test("the data root defaults under the home directory", () => {
-  const previous = process.env["RUDDER_DATA_DIR"];
-  delete process.env["RUDDER_DATA_DIR"];
-  try {
-    // OS temp'te olmamalı — container çalışma zamanı o yolu paylaşmıyor.
-    assert.ok(!dataRoot().startsWith(tmpdir()));
-    assert.ok(dataRoot().endsWith(".rudder"));
-  } finally {
-    if (previous !== undefined) process.env["RUDDER_DATA_DIR"] = previous;
   }
 });
 

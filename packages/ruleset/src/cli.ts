@@ -7,7 +7,8 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import { describe, loadLocale, toText } from "./describe.ts";
+import { describe, toText } from "./describe.ts";
+import { loadLocale } from "./load-locale.ts";
 import { validateRuleset } from "./schema.ts";
 
 const [path, locale = "en"] = process.argv.slice(2);

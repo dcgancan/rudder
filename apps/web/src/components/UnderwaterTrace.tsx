@@ -9,15 +9,22 @@
  * İngilizcedeki adı zaten "underwater".
  *
  * Çizim bir ÖLÇÜM ALANI olarak kuruluyor: üstte datum çizgisi (zirve, 0),
- * altta ölçüm tabanı. Test edilmemiş bir strateji bu alanı boş bırakır — boş
+ * altta ölçüm tabanı. Ölçülmemiş bir strateji bu alanı boş bırakır — boş
  * bir alan "ölçülmedi" der; başıboş bir çizgi hiçbir şey demez.
  */
 
 type Props = {
-  /** Negatif oranlar (-0.12 = %12 düşüş). null: hiç test edilmemiş. */
+  /**
+   * Negatif oranlar (-0.12 = %12 düşüş).
+   *
+   *   null → hiç test edilmedi
+   *   [0]  → test edildi ama hiç işlem açmadı
+   *
+   * İki durum da ölçüm alanını boş bırakır; ayrımı başlık söyler.
+   */
   points: number[] | null;
-  label: string;
-  untestedLabel: string;
+  /** Alanın altındaki metin ve ekran okuyucunun duyduğu etiket. */
+  caption: string;
 };
 
 const WIDTH = 148;
@@ -25,8 +32,11 @@ const HEIGHT = 46;
 const DATUM = 11;
 const FLOOR = HEIGHT - 5;
 
-export function UnderwaterTrace({ points, label, untestedLabel }: Props) {
-  const tested = points !== null && points.length > 1;
+/** Çizim genişliği piksel cinsinden bu kadar; daha fazla nokta ayrıntı katmıyor. */
+const RESOLUTION = 74;
+
+export function UnderwaterTrace({ points, caption }: Props) {
+  const measured = points !== null && points.length > 1;
 
   return (
     <figure className="m-0 w-[9.25rem] shrink-0">
@@ -34,7 +44,7 @@ export function UnderwaterTrace({ points, label, untestedLabel }: Props) {
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full overflow-visible"
         role="img"
-        aria-label={tested ? label : untestedLabel}
+        aria-label={caption}
       >
         {/* Datum: stratejinin kendi zirvesi. Soundings bir referansa göre okunur. */}
         <text
@@ -60,7 +70,7 @@ export function UnderwaterTrace({ points, label, untestedLabel }: Props) {
           strokeWidth={1}
         />
 
-        {tested ? <Contour points={points} /> : null}
+        {measured ? <Contour points={points} /> : null}
 
         {/* Ölçüm tabanı. */}
         <line
@@ -74,20 +84,19 @@ export function UnderwaterTrace({ points, label, untestedLabel }: Props) {
         />
       </svg>
 
-      <figcaption className="label mt-1.5 block leading-snug">
-        {tested ? label : untestedLabel}
-      </figcaption>
+      <figcaption className="label mt-1.5 block leading-snug">{caption}</figcaption>
     </figure>
   );
 }
 
 function Contour({ points }: { points: number[] }) {
-  const deepest = Math.min(...points, -0.0001);
-  const step = WIDTH / (points.length - 1);
+  const shown = downsample(points, RESOLUTION);
+  const deepest = Math.min(...shown, -0.0001);
+  const step = WIDTH / (shown.length - 1);
 
   const toY = (value: number) => DATUM + (Math.abs(value) / Math.abs(deepest)) * (FLOOR - DATUM);
 
-  const line = points.map((value, i) => `${i === 0 ? "M" : "L"}${i * step},${toY(value)}`).join(" ");
+  const line = shown.map((value, i) => `${i === 0 ? "M" : "L"}${i * step},${toY(value)}`).join(" ");
   const area = `${line} L${WIDTH},${DATUM} L0,${DATUM} Z`;
 
   return (
@@ -96,4 +105,24 @@ function Contour({ points }: { points: number[] }) {
       <path d={line} fill="none" stroke="var(--color-depth)" strokeWidth={1.25} />
     </>
   );
+}
+
+/**
+ * Her kovanın ORTALAMASI değil EN DÜŞÜĞÜ alınıyor.
+ *
+ * Ortalama en derin çukuru yumuşatır, ve bu grafiğin tek işi o çukuru
+ * göstermek — yumuşatmak düşüşü olduğundan sığ gösterirdi.
+ */
+function downsample(points: number[], count: number): number[] {
+  if (points.length <= count) return points;
+
+  const buckets: number[] = [];
+
+  for (let index = 0; index < count; index++) {
+    const from = Math.floor((index * points.length) / count);
+    const to = Math.max(from + 1, Math.floor(((index + 1) * points.length) / count));
+    buckets.push(Math.min(...points.slice(from, to)));
+  }
+
+  return buckets;
 }

@@ -1,0 +1,27 @@
+{
+  "name": "@rudder/backtest",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "description": "Runs rulesets against historical data and stores the result",
+  "exports": {
+    ".": "./src/index.ts",
+    "./result": "./src/result.ts"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rudder/db": "workspace:*",
+    "@rudder/freqtrade": "workspace:*",
+    "@rudder/host": "workspace:*",
+    "@rudder/ruleset": "workspace:*",
+    "drizzle-orm": "^0.44.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^5.9.3"
+  }
+}

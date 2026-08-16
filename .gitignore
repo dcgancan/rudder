@@ -10,6 +10,14 @@ build/
 *.tsbuildinfo
 next-env.d.ts
 
+# Agent instructions that `next dev` writes and re-writes for itself. Their
+# contents describe the installed Next.js version, not this project, so they
+# would churn on every upgrade. The project's own entry point is AGENTS.md at
+# the repo root, which is committed. Leave these generated — they are useful
+# locally — just not tracked.
+apps/web/AGENTS.md
+apps/web/CLAUDE.md
+
 # Local data
 .rudder-dev/
 
