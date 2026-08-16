@@ -95,7 +95,18 @@ export function classify({ state, reachable }: Observation): BotStatus {
 /** Bir botun iki yoklama arasında karşılaştırılan hali. */
 export type Snapshot = {
   status: BotStatus;
-  /** En son gözlenen Docker yeniden başlatma sayacı. */
+  /**
+   * Botun en son SAĞLIKLI görüldüğü andaki Docker yeniden başlatma sayacı.
+   *
+   * Her yoklamada değil, yalnızca bot `running` iken ilerletilir — ve bu bir
+   * ayrıntı değil, olay kaydının okunabilir kalmasının şartı. Ölçüldü: gerçek
+   * bir crash loop'ta sayaç saniyede bir büyüyor, ve her yoklamada
+   * saklansaydı tek bir çökme için art arda "kendiliğinden yeniden başladı"
+   * satırları yazılırdı. Cevap vermeyen bir bot için o cümle zaten yanlış.
+   *
+   * Sağlıklı anı taban almak, sayacı "en son çalışırken buradaydı" haline
+   * getiriyor; toparlanan bot tek bir satırla kayda geçiyor.
+   */
   restartCount: number;
 };
 
@@ -110,26 +121,46 @@ export type Snapshot = {
  * üretmez; `stopped` yalnızca satır botun AYAKTA olmasını beklerken container
  * gittiyse yazılır. Niyetin kaydı satırın kendisinde: `stop()` önce
  * `stopping` yazıyor.
+ *
+ * `latest` — bu bot için kaydedilmiş SON olay — üçüncü girdi olmak zorunda,
+ * ve bunu ölçüm öğretti. İki yoklamayı karşılaştırmak yetmiyor: çöküp duran
+ * bir botun durumu arada bir an `starting` görünüyor (Docker container'ı yeni
+ * kaldırmışken örneklenirse), ve yalnızca bir önceki yoklamaya bakan bir kural
+ * bunu "çökme bitti, yeni bir çökme başladı" diye okuyor. Gerçek koşuda tek
+ * bir crash loop önce üç, sonra iki satır yazdı; doğrusu bir.
+ *
+ * Bir "epizot" son kaydedilen olayla tanımlanıyor: bot düştü olarak yazıldıysa,
+ * tekrar çalışana kadar düşmüş sayılır.
  */
-export function eventsFor(previous: Snapshot, next: Snapshot): BotEventKind[] {
-  // Çöken bir bot BİR kez yazılır. Docker onu geri getirmeye devam ettiği ve
-  // sayaç her tıkta büyüdüğü için, buradan erken dönmemek kaydı boğardı.
+export function eventsFor(
+  previous: Snapshot,
+  next: Snapshot,
+  latest: BotEventKind | null,
+): BotEventKind[] {
+  /** Botun düştüğünü söyleyen olaylar. Bir epizot bunlarla açılır. */
+  const down = latest === "failed" || latest === "stopped";
+
   if (next.status === "error") {
-    return previous.status === "error" ? [] : ["failed"];
+    // Aynı çökme ikinci kez yazılmaz. Docker onu geri getirmeye devam ettiği
+    // için bu koşul olmadan kayıt saniyeler içinde okunmaz hale gelir.
+    return latest === "failed" ? [] : ["failed"];
   }
 
-  const expectedUp = previous.status === "running" || previous.status === "starting";
+  if (next.status === "stopped") {
+    const expectedUp = previous.status === "running" || previous.status === "starting";
+    return expectedUp && latest !== "stopped" ? ["stopped"] : [];
+  }
 
-  if (next.status === "stopped" && expectedUp) return ["stopped"];
+  if (next.status === "running") {
+    // Açık bir epizot varsa kapanışı budur — arada `starting` görülmüş olsa da.
+    if (down) return ["recovered"];
 
-  // Düşmüş bir botun kendiliğinden toparlanması. Kullanıcı botu elle yeniden
-  // başlattıysa arada `starting` olduğu için bu yazılmaz — zaten o durumda
-  // botun düştüğünü kullanıcı biliyor. Sessiz olan yol bu.
-  if (next.status === "running" && previous.status === "error") return ["recovered"];
+    // Sayacın büyümesi, Docker'ın botu kimse istemeden geri getirdiği demek.
+    // AZALMASI yeni bir container demek (`start()` sayacı sıfırlar), olay değil.
+    if (next.restartCount > previous.restartCount) return ["restarted"];
+  }
 
-  // Sayacın büyümesi, Docker'ın botu kimse istemeden geri getirdiği demek.
-  // AZALMASI yeni bir container demek (`start()` sayacı sıfırlar), olay değil.
-  if (next.restartCount > previous.restartCount) return ["restarted"];
-
+  // `starting` hiçbir zaman olay değildir: cevap vermeyen bir bot henüz ne
+  // düşmüş ne toparlanmıştır, ve bir sonraki yoklama hangisi olduğunu söyler.
   return [];
 }

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { Orchestrator } from "@rudder/orchestrator";
+import { Orchestrator, Watchdog } from "@rudder/orchestrator";
 
 import { db } from "./db";
 
@@ -14,6 +14,7 @@ import { db } from "./db";
 const cache = globalThis as unknown as {
   rudderOrchestrator?: Orchestrator;
   rudderReconcile?: Promise<void>;
+  rudderWatchdog?: Watchdog;
 };
 
 /**
@@ -28,5 +29,21 @@ export function orchestrator(): Orchestrator {
     console.error("bot reconciliation failed:", error);
   });
 
+  /*
+   * Uzlaştırma yalnızca AÇILIŞTA çalışıyor, durum tazelemesi ise yalnızca
+   * sayfa okunduğunda. İkisinin arasında kalan zamanda bir bot düşerse kimse
+   * fark etmiyordu. Gözcü o boşluğu kapatıyor; hiçbir bota müdahale etmiyor.
+   *
+   * Aynı `??=` kalıbı burada da gerekli: geliştirme modunda modül yeniden
+   * yüklendiğinde ikinci bir zamanlayıcı kurulurdu.
+   */
+  cache.rudderWatchdog ??= startWatchdog(instance);
+
   return instance;
+}
+
+function startWatchdog(instance: Orchestrator): Watchdog {
+  const watchdog = new Watchdog({ db, monitor: instance });
+  watchdog.start();
+  return watchdog;
 }

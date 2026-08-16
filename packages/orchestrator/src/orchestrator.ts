@@ -22,7 +22,7 @@
 import { chmod, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { setTimeout as sleep } from "node:timers/promises";
 
-import { and, eq, isNotNull, isNull, ne } from "drizzle-orm";
+import { and, desc, eq, isNotNull, isNull, ne } from "drizzle-orm";
 
 import { botEvents, bots, rulesets, trades } from "@rudder/db";
 import type { Database, BotRow } from "@rudder/db";
@@ -279,7 +279,16 @@ export class Orchestrator {
     const current = this.#db.select().from(bots).where(eq(bots.id, botId)).get();
     if (!current) return;
 
-    for (const kind of eventsFor(current, next)) {
+    const latest =
+      this.#db
+        .select({ kind: botEvents.kind })
+        .from(botEvents)
+        .where(eq(botEvents.botId, botId))
+        .orderBy(desc(botEvents.at))
+        .limit(1)
+        .get()?.kind ?? null;
+
+    for (const kind of eventsFor(current, next, latest)) {
       this.#db
         .insert(botEvents)
         .values({
@@ -294,7 +303,10 @@ export class Orchestrator {
 
     this.#update(botId, {
       status: next.status,
-      restartCount: next.restartCount,
+      // Sayaç yalnızca bot SAĞLIKLI iken ilerler. Gerekçesi `Snapshot`'ta:
+      // her yoklamada saklamak, tek bir crash loop'u art arda "yeniden
+      // başladı" satırlarına çeviriyordu.
+      ...(next.status === "running" ? { restartCount: next.restartCount } : {}),
       // Container gitmişse elde tutulan id ölü bir referans.
       ...(exists ? {} : { containerId: null }),
       ...(next.status === "error" ? { lastError: detail?.slice(-2000) ?? null } : {}),

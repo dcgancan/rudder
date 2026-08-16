@@ -2,8 +2,8 @@ import "server-only";
 
 import { and, desc, eq, isNull } from "drizzle-orm";
 
-import { bots, rulesets, trades } from "@rudder/db";
-import type { BotRow, RulesetRow, TradeRow } from "@rudder/db";
+import { botEvents, bots, rulesets, trades } from "@rudder/db";
+import type { BotEventRow, BotRow, RulesetRow, TradeRow } from "@rudder/db";
 import { describe, localeFor } from "@rudder/ruleset";
 
 import { db } from "./db";
@@ -59,6 +59,15 @@ export type ClosedTrade = {
   exitReason: string;
 };
 
+/** Botun başına gelen, kullanıcının istemediği bir şey. */
+export type BotEvent = {
+  id: string;
+  /** `botEvent.*` altındaki çeviri anahtarı; ham enum kullanıcıya gösterilmez. */
+  kind: BotEventRow["kind"];
+  at: number;
+  detail: string | null;
+};
+
 export type BotDetail = BotSummary & {
   setup: {
     mode: BotRow["mode"];
@@ -70,11 +79,20 @@ export type BotDetail = BotSummary & {
   };
   positions: Position[];
   history: ClosedTrade[];
+  events: BotEvent[];
   lastError: string | null;
 };
 
 /** Geçmiş sayfalama olmadan da okunabilir kalmalı. */
 const HISTORY_LIMIT = 50;
+
+/**
+ * Olay listesinin sınırı.
+ *
+ * Daha kısa: bir botun başına gelenler seyrek olmalı. Liste uzuyorsa okunacak
+ * şey zaten "bu bot sağlıklı değil", tek tek satırlar değil.
+ */
+const EVENT_LIMIT = 20;
 
 // ---------------------------------------------------------------------------
 // Okuma
@@ -115,6 +133,7 @@ export async function getBot(botId: string, locale: string): Promise<BotDetail |
     },
     positions: summary.status === "running" ? await readPositions(botId) : [],
     history: readHistory(botId),
+    events: readEvents(botId),
     lastError: current.lastError,
   };
 }
@@ -246,5 +265,29 @@ function readHistory(botId: string): ClosedTrade[] {
     profitRatio: row.profitRatio,
     profitAbs: row.profitAbs,
     exitReason: exitReasonKey(row.exitReason),
+  }));
+}
+
+/**
+ * Botun başına gelenler.
+ *
+ * Durum alanının söyleyemediği şeyi söylüyor: bot şu an çalışıyor olabilir ama
+ * gece üç kez düşmüş olabilir. Docker onu geri getirdiği için durum alanında
+ * bundan hiçbir iz kalmıyor.
+ */
+function readEvents(botId: string): BotEvent[] {
+  const rows: BotEventRow[] = db
+    .select()
+    .from(botEvents)
+    .where(eq(botEvents.botId, botId))
+    .orderBy(desc(botEvents.at))
+    .limit(EVENT_LIMIT)
+    .all();
+
+  return rows.map((row) => ({
+    id: row.id,
+    kind: row.kind,
+    at: row.at.getTime(),
+    detail: row.detail,
   }));
 }

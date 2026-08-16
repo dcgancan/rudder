@@ -176,6 +176,29 @@ Ad kullanıcı verisi; varsayılanı kurulduğu dildeki strateji adından geliyo
 sonrasında olduğu gibi kalıyor. İngilizce sayfada Türkçe bir bot adı görmek
 doğru davranış — o adı kullanıcı verdi.
 
+### "Olaylar" durumun söyleyemediğini söyler
+
+Bot detayında, kapanmış işlemlerin altında. Durum alanı yalnızca **şu anı**
+anlatabiliyor, ve bu bir botun sağlığı için yeterli değil: Docker çöken botu
+geri getirdiği için, gece üç kez düşmüş bir bot sabah "çalışıyor" görünüyor.
+Olay listesi o geçmişi tutuyor.
+
+Yalnızca kullanıcının **istemediği** şeyler yazılıyor — çöktü, kendiliğinden
+durdu, kendiliğinden yeniden başladı, tekrar çalışmaya başladı. Botu durdurmak
+listeye girmez; kullanıcının kendi yaptığı şeyi ona geri anlatmanın anlamı yok.
+Sağlıklı bir bot bu bölümde tek satır göstermez, ve bu bir eksiklik değil,
+listenin okunur kalmasının sebebi.
+
+Renk kuralı korunuyor: yalnızca "Çöktü" uyarı renginde. Bir botun geri gelmesi
+kutlanacak bir şey değil, sadece bir durum — kâr için renk kullanmama kuralının
+aynısı. Zaman `format.dateTime` ile; Freqtrade'in hazır İngilizce dizgeleri
+hiçbir yerde ekrana basılmıyor.
+
+Arka planda dönen döngünün kendisi arayüzde değil
+([`@rudder/orchestrator`](../../packages/orchestrator/README.md)); buradaki tek
+iş onu süreç başına bir kez ayağa kaldırmak, uzlaştırma ile aynı `globalThis`
+önbelleğinde.
+
 ## Metin
 
 Sayfadaki hiçbir strateji cümlesi elle yazılmadı. Hepsi kural setinin yapısından

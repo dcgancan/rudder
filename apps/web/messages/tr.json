@@ -137,7 +137,15 @@
     "closeConfirm": "Kapatmayı onayla",
     "closeHelp": "Pozisyon piyasa fiyatından kapatılır ve kâr ya da zarar kesinleşir.",
     "startingHelp": "Bot açılıyor. Freqtrade borsa piyasalarını yüklüyor; bu yarım dakika sürebilir.",
-    "started": "Başlangıç"
+    "started": "Başlangıç",
+    "events": "Olaylar",
+    "noEvents": "Bu bot hiç kendiliğinden düşmedi."
+  },
+  "botEvent": {
+    "failed": "Çöktü",
+    "stopped": "Kendiliğinden durdu",
+    "restarted": "Kendiliğinden yeniden başladı",
+    "recovered": "Tekrar çalışmaya başladı"
   },
   "botStatus": {
     "stopped": "Durdu",

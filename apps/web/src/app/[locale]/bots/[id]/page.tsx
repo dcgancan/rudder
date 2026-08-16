@@ -195,7 +195,7 @@ export default async function BotPage({ params }: Props) {
           </section>
         ) : null}
 
-        <section className="py-8">
+        <section className="border-rule border-b py-8">
           <h2 className="label">{t("bots.history")}</h2>
 
           {bot.history.length === 0 ? (
@@ -219,6 +219,44 @@ export default async function BotPage({ params }: Props) {
                   >
                     {trade.profitRatio === null ? "—" : percent(trade.profitRatio)}
                   </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        {/*
+          Durum alanının söyleyemediği şey. Bot şu an çalışıyor olabilir ama
+          gece üç kez düşmüş olabilir; Docker onu geri getirdiği için durumda
+          bundan hiçbir iz kalmıyor.
+        */}
+        <section className="py-8">
+          <h2 className="label">{t("bots.events")}</h2>
+
+          {bot.events.length === 0 ? (
+            <p className="text-ink-soft mt-4 text-[0.95rem]">{t("bots.noEvents")}</p>
+          ) : (
+            <ul className="mt-4 list-none p-0">
+              {bot.events.map((event) => (
+                <li key={event.id} className="border-rule border-t py-3">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    {/* Yalnızca çökme renkli — kâr için renk kullanmama kuralının aynısı. */}
+                    <span className={event.kind === "failed" ? "text-alert" : ""}>
+                      {t(`botEvent.${event.kind}`)}
+                    </span>
+                    <span className="sounding text-ink-soft text-[0.9rem]">
+                      {moment(event.at)}
+                    </span>
+                  </div>
+
+                  {event.detail ? (
+                    <details className="mt-2">
+                      <summary className="label cursor-pointer">{t("bots.errorDetail")}</summary>
+                      <pre className="text-ink-soft border-rule mt-3 max-h-64 overflow-auto border p-3 font-mono text-xs whitespace-pre-wrap">
+                        {event.detail}
+                      </pre>
+                    </details>
+                  ) : null}
                 </li>
               ))}
             </ul>

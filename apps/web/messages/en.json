@@ -137,7 +137,15 @@
     "closeConfirm": "Confirm closing",
     "closeHelp": "The position is closed at the market price and the profit or loss becomes final.",
     "startingHelp": "The bot is starting. Freqtrade is loading exchange markets; this can take half a minute.",
-    "started": "Started with"
+    "started": "Started with",
+    "events": "What happened",
+    "noEvents": "This bot has never gone down on its own."
+  },
+  "botEvent": {
+    "failed": "Crashed",
+    "stopped": "Stopped on its own",
+    "restarted": "Restarted on its own",
+    "recovered": "Running again"
   },
   "botStatus": {
     "stopped": "Stopped",
