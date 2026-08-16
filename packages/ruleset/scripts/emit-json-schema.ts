@@ -32,7 +32,9 @@ const jsonSchema = z.toJSONSchema(rulesetSchema, {
 
 const document = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
-  $id: "https://github.com/rudder/rudder/ruleset.schema.json",
+  // $id çözülebilir bir adres olmalı: bir JSON Schema tüketicisi bu URL'den
+  // şemayı gerçekten indirebilmeli.
+  $id: "https://raw.githubusercontent.com/dcgancan/rudder/main/packages/ruleset/ruleset.schema.json",
   title: "Rudder Ruleset",
   description:
     "Generated from packages/ruleset/src/schema.ts — do not edit by hand. " +

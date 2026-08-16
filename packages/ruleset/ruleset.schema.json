@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/rudder/rudder/ruleset.schema.json",
+  "$id": "https://raw.githubusercontent.com/dcgancan/rudder/main/packages/ruleset/ruleset.schema.json",
   "title": "Rudder Ruleset",
   "description": "Generated from packages/ruleset/src/schema.ts — do not edit by hand. Structural checks only; semantic checks live in validateRuleset().",
   "type": "object",

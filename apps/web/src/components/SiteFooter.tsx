@@ -8,7 +8,7 @@ export async function SiteFooter() {
       <div className="text-ink-soft mx-auto flex max-w-4xl flex-wrap items-baseline gap-x-4 gap-y-2 px-6 py-8 text-sm">
         <span>{t("license")}</span>
         <a
-          href="https://github.com/rudder/rudder"
+          href="https://github.com/dcgancan/rudder"
           className="text-depth underline underline-offset-4"
         >
           {t("source")}
