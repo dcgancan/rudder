@@ -65,8 +65,18 @@ export type RunOnceOptions = {
 export type ContainerState = {
   id: string;
   running: boolean;
+  /** Docker'ın kendi durumu: created · running · restarting · exited · dead. */
   status: string;
   exitCode: number | null;
+  /**
+   * Docker'ın yeniden başlatma politikasını kaç kez uyguladığı.
+   *
+   * Çöküp duran bir container'ı anlamanın TEK güvenilir yolu bu. Ölçüldü:
+   * `--restart unless-stopped` ile saniyede bir çöken bir container her
+   * örneklemede `running=true` diyor ve `exitCode` örnekleme anına göre 0 ya
+   * da 1 dönüyor. Bu sayaç ise yalnızca artıyor.
+   */
+  restartCount: number;
   startedAt: string | null;
   finishedAt: string | null;
 };
@@ -185,25 +195,45 @@ export async function runOnce(options: RunOnceOptions): Promise<string> {
   }
 }
 
+/**
+ * `docker inspect --format` çıktısının alan sırası.
+ *
+ * Sıra bu dizede ve `parseInspect`'te aynı olmak zorunda; kayan bir alan
+ * sessizce yanlış değeri okur. Ayrıştırma ayrı bir fonksiyon olduğu için
+ * Docker olmadan test edilebiliyor.
+ */
+const INSPECT_FORMAT = [
+  "{{.Id}}",
+  "{{.State.Running}}",
+  "{{.State.Status}}",
+  "{{.State.ExitCode}}",
+  "{{.RestartCount}}",
+  "{{.State.StartedAt}}",
+  "{{.State.FinishedAt}}",
+].join("\t");
+
+export function parseInspect(line: string): ContainerState {
+  const [id, running, status, exitCode, restartCount, startedAt, finishedAt] = line
+    .trim()
+    .split("\t");
+
+  return {
+    id: id ?? "",
+    running: running === "true",
+    status: status ?? "unknown",
+    exitCode: exitCode === undefined ? null : Number(exitCode),
+    // Alan eksikse 0 saymak, "hiç yeniden başlamadı" demek — yokluğu bir
+    // yeniden başlatma gibi okumaktan iyi.
+    restartCount: restartCount === undefined ? 0 : Number(restartCount),
+    startedAt: startedAt ?? null,
+    finishedAt: finishedAt ?? null,
+  };
+}
+
 export async function inspectContainer(name: string): Promise<ContainerState | null> {
   try {
-    const { stdout } = await run("docker", [
-      "inspect",
-      "--format",
-      "{{.Id}}\t{{.State.Running}}\t{{.State.Status}}\t{{.State.ExitCode}}\t{{.State.StartedAt}}\t{{.State.FinishedAt}}",
-      name,
-    ]);
-
-    const [id, running, status, exitCode, startedAt, finishedAt] = stdout.trim().split("\t");
-
-    return {
-      id: id ?? "",
-      running: running === "true",
-      status: status ?? "unknown",
-      exitCode: exitCode === undefined ? null : Number(exitCode),
-      startedAt: startedAt ?? null,
-      finishedAt: finishedAt ?? null,
-    };
+    const { stdout } = await run("docker", ["inspect", "--format", INSPECT_FORMAT, name]);
+    return parseInspect(stdout);
   } catch {
     // Olmayan container için docker sıfırdan farklı çıkar — bu bir hata değil.
     return null;

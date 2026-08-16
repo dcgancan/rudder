@@ -45,6 +45,38 @@ hâlâ hata olarak görünür. Kabul edilen bedel, bellek yetersizliğinden
 öldürülen bir botun (137) "durdu" görünmesi; en sık yaşanan yolu yanlış
 işaretlemekten iyi.
 
+### Çöküp duran bir bot "açılıyor" değildir
+
+Botlar `--restart unless-stopped` ile başlatılıyor, yani çöken bir botu Docker
+geri getiriyor. Bu sırada container **çalışıyor görünüyor** — ölçüm
+[`@rudder/host`](../host/README.md)'ta. Sonuç: sürekli çöken bir bot
+`running=true` veriyor, API cevap vermiyor, ve eski kural onu `starting`
+yazıyordu. **Arayüzde çöküp duran bot sonsuza kadar "Açılıyor" görünüyordu**,
+"Hata" değil.
+
+Kural artık şu: **`restarting` durumu çökmedir.** Sağlıklı bir açılışta bu değer
+hiç görülmüyor; container `created`'dan doğrudan `running`'e geçiyor. Çıkış
+koduna güvenmek işe yaramıyor, çünkü örnekleme anına göre 0 ya da 1 dönüyor.
+
+### Sınıflandırma saf, ayrı bir dosyada
+
+`health.ts` bir gözlemi (container hali + API cevap veriyor mu) bot durumuna
+çevirir ve ne Docker'a ne veritabanına dokunur. `refreshStatus()` yalnızca
+gözlemi toplar ve sonucu yazar.
+
+Sebep: bu kuralların yanlış olması ekranda görünen her durumu yanlış yapıyor ve
+bunu container başlatmadan doğrulayabilmek gerekiyor. Kuyruğun
+`BacktestExecutor` dar arayüzüyle aynı gerekçe.
+
+| Gözlem | Durum |
+|---|---|
+| container yok | `stopped` |
+| `status = restarting` | `error` |
+| çalışmıyor, çıkış kodu 0 < n < 128 | `error` |
+| çalışmıyor, sinyal ya da temiz çıkış | `stopped` |
+| çalışıyor, API sessiz | `starting` |
+| çalışıyor, API cevap veriyor | `running` |
+
 ### `start()` beklemez
 
 Freqtrade'in borsa piyasalarını yüklemesi birkaç saniye sürüyor; bir web

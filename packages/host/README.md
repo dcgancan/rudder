@@ -56,6 +56,30 @@ ortamına koyarız.
 denemeyi isim çakışmasıyla düşürür. `runOnce` bu yüzden zaman aşımında ve
 hatada container'ı açıkça kaldırır, başlarken de aynı adlı kalıntıyı siler.
 
+### `inspectContainer` yeniden başlatma sayacını da okur
+
+`--restart unless-stopped` ile başlatılan bir container çöktüğünde Docker onu
+geri getiriyor. Sorun şu ki bu sırada container **çalışıyor görünüyor.**
+Ölçüldü — saniyede bir çöken bir container, iki saniyede bir örneklendiğinde:
+
+```
+running=true   status=running     exit=0   restarts=1
+running=true   status=running     exit=0   restarts=3
+running=true   status=running     exit=0   restarts=4
+running=true   status=restarting  exit=1   restarts=5
+running=true   status=restarting  exit=1   restarts=6
+```
+
+`running` hiçbir örneklemede false olmuyor ve `exitCode` örnekleme anına göre
+değişiyor. Ayırt eden iki alan `status` (`restarting`) ve **monoton artan**
+`RestartCount`; ikincisi eskiden hiç okunmuyordu.
+
+`ContainerState` ham kalır — bunun ne anlama geldiğine
+[`@rudder/orchestrator`](../orchestrator/README.md) karar verir. Ayrıştırma
+`parseInspect` olarak ayrıldı ki Docker olmadan test edilebilsin; format
+dizesindeki alan sırası ile ayrıştırmadaki sıra elle eşleşiyor ve kayan bir
+alan sessizce yanlış değeri okur.
+
 ### Çıktı sınırı
 
 `runOnce` alt sürecin çıktı tamponunu 32 MB'a çıkarır. Node'un 1 MB'lık

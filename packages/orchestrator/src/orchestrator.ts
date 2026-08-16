@@ -48,26 +48,11 @@ import {
 } from "@rudder/host";
 
 import { botPaths, containerName } from "./paths.ts";
+import { classify } from "./health.ts";
 import { allocatePort, DEFAULT_PORT_RANGE } from "./ports.ts";
 
 export const DEFAULT_IMAGE = "freqtradeorg/freqtrade:stable";
 export const BOT_LABEL = "rudder.bot";
-
-/**
- * Bu değerin üstündeki çıkış kodları "sonlandırıldı" demek, "çöktü" değil.
- *
- * POSIX geleneği 128 + sinyal numarası. Ölçülen: `docker stop` sonrası
- * Freqtrade container'ı **130** ile çıkıyor (kendi kesme yolu), makinenin
- * kapanması 143 (SIGTERM) ya da 137 (SIGKILL) veriyor. Bunları çökme saymak,
- * kullanıcının kendi durdurduğu botu "hata" olarak göstermek demek — arayüzde
- * tam olarak öyle oldu.
- *
- * Kabul edilen bedel: bellek yetersizliğinden öldürülen bir bot (137) da
- * "durdu" görünür. Yanlış yön olarak bu, en sık yaşanan yolu yanlış
- * işaretlemekten iyi; gerçek çökmeler (Python hatası 1, hatalı argüman 2)
- * hâlâ hata olarak görünüyor.
- */
-const SIGNAL_EXIT_FLOOR = 128;
 
 export type OrchestratorOptions = {
   db: Database;
@@ -243,39 +228,46 @@ export class Orchestrator {
   // Durum
   // ----------------------------------------------------------------- //
 
-  /** Container ve API'ye bakıp satırdaki durumu gerçeğe eşitler. */
+  /**
+   * Container ve API'ye bakıp satırdaki durumu gerçeğe eşitler.
+   *
+   * Sınıflandırma kuralları `health.ts`'te ve SAF; burada kalan yalnızca
+   * gözlemi toplamak ve sonucu yazmak.
+   */
   async refreshStatus(botId: string): Promise<BotRow["status"]> {
     const bot = this.#requireBot(botId);
     const state = await inspectContainer(containerName(botId));
 
-    if (!state) {
-      this.#update(botId, { status: "stopped", containerId: null });
-      return "stopped";
+    // API yalnızca container ayaktayken sorulur; durmuş bir bota atılan ping
+    // her tazelemeye bir zaman aşımı eklemekten başka işe yaramaz.
+    //
+    // Config dosyası okunamazsa "cevap vermiyor" sayılır, hata fırlatılmaz:
+    // gözcü bunu saniyede bir çağırıyor ve fırlatan bir tazeleme satırı
+    // sonsuza kadar eski halinde bırakırdı. Container'ın kendisi zaten
+    // birincil sinyal.
+    const reachable =
+      state?.running && bot.apiPort
+        ? await this.#clientFor(bot)
+            .then((client) => client.ping())
+            .catch(() => false)
+        : false;
+
+    const status = classify({ state, reachable });
+
+    if (status === "error") {
+      const logs = await containerLogs(containerName(botId));
+      this.#update(botId, { status, lastError: logs.slice(-2000) });
+      return status;
     }
 
-    if (!state.running) {
-      // Sıfırdan farklı çıkış kodu botun ÇÖKTÜĞÜ anlamına gelir — sinyalle
-      // sonlandırılmış olması hariç (bkz. SIGNAL_EXIT_FLOOR).
-      const crashed = state.exitCode !== null && state.exitCode !== 0 && state.exitCode < SIGNAL_EXIT_FLOOR;
+    this.#update(botId, {
+      status,
+      // Container gitmişse elde tutulan id ölü bir referans.
+      ...(state ? {} : { containerId: null }),
+      ...(status === "running" ? { lastSeenAt: new Date(), lastError: null } : {}),
+    });
 
-      if (crashed) {
-        const logs = await containerLogs(containerName(botId));
-        this.#update(botId, { status: "error", lastError: logs.slice(-2000) });
-        return "error";
-      }
-      this.#update(botId, { status: "stopped" });
-      return "stopped";
-    }
-
-    const reachable = bot.apiPort ? await this.#clientFor(bot).then((c) => c.ping()) : false;
-    if (!reachable) {
-      // Container ayakta ama API henüz cevap vermiyor — hâlâ açılıyor.
-      this.#update(botId, { status: "starting" });
-      return "starting";
-    }
-
-    this.#update(botId, { status: "running", lastSeenAt: new Date(), lastError: null });
-    return "running";
+    return status;
   }
 
   async waitUntilRunning(botId: string, timeoutMs = 120_000): Promise<void> {
