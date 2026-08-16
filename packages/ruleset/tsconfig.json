@@ -10,6 +10,7 @@
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
 
     // Node strips types at runtime rather than compiling them, so the source
     // must contain only syntax that can be erased. This flag enforces that:

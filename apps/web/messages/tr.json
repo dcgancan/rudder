@@ -1,0 +1,42 @@
+{
+  "site": {
+    "name": "Rudder",
+    "tagline": "Okuyabileceğiniz alım-satım stratejileri"
+  },
+  "nav": {
+    "strategies": "Stratejiler",
+    "skipToContent": "İçeriğe geç"
+  },
+  "home": {
+    "eyebrow": "Strateji kataloğu",
+    "leadIn": "Buradaki her strateji, baştan sona yazılmış bir kurallar bütünü:",
+    "leadOut": "Kod yok. Gizli bir şey yok. Okuyabiliyorsanız, güvenip güvenmeyeceğinize kendiniz karar verebilirsiniz.",
+    "listHeading": "Tüm stratejiler",
+    "count": "{count, plural, other {# strateji}}"
+  },
+  "strategy": {
+    "buyRule": "Ne zaman alır",
+    "sellRule": "Ne zaman satar",
+    "riskHeading": "Risk kontrolleri",
+    "indicators": "Neye bakar",
+    "timeframe": "Zaman dilimi",
+    "readMore": "Kuralların tamamını oku",
+    "backToList": "Tüm stratejiler"
+  },
+  "drawdown": {
+    "label": "Kendi zirvesinden en sert düşüşü",
+    "untested": "Henüz test edilmedi",
+    "untestedHelp": "Bu stratejinin kayıtlı bir backtest'i yok. Nasıl davrandığı hakkında hiçbir şey bilinmiyor.",
+    "axisNow": "şimdi"
+  },
+  "disclaimer": {
+    "heading": "Sayıları okumadan önce",
+    "winRate": "Bir strateji işlemlerinin %82'sini kazanıp yine de para kaybettirebilir. Bu projenin kendi testinde biri tam olarak bunu yaptı: kârlar %1–4 arasında alınmış, zararlar %10'a kadar koşmuştu.",
+    "backtest": "Backtest, bir kuralın kendisine göre seçildiği veri üzerinde nasıl davrandığını gösterir. Tahmin değildir.",
+    "risk": "Alım-satım gerçek kayıp riski taşır. Kağıt üzerinde işlem varsayılandır. Bir stratejinin ne yaptığını anlayana kadar orada kalın."
+  },
+  "footer": {
+    "license": "AGPL-3.0 altında özgür yazılım.",
+    "source": "Kaynak kodu"
+  }
+}

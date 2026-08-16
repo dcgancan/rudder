@@ -11,8 +11,10 @@ kod editörü yerine bir formda düzenleyebilirsiniz.
 
 > ### ⚠️ Erken geliştirme aşaması
 >
-> Kural seti motoru çalışıyor ve gerçek piyasa verisiyle test edildi.
-> **Henüz web arayüzü yok.** Heyecanlanmadan önce [Durum](#durum) bölümüne bakın.
+> Motor çalışıyor: kural setleri gerçek veriyle backtest ediliyor ve botlar
+> kağıt üzerinde işlem yapabiliyor. Arayüz **yalnızca strateji kataloğunu**
+> gösteriyor — bot yönetimi ve gerçek parayla işlem henüz yok.
+> Heyecanlanmadan önce [Durum](#durum) bölümüne bakın.
 
 ---
 
@@ -88,12 +90,13 @@ Aynı kural seti, iki dilde:
 | Açıklama render'ı (TR + EN) | ✅ Çalışıyor |
 | Veri modeli | ✅ Çalışıyor |
 | Bot yaşam döngüsü (paper trading) | ✅ Çalışıyor, gerçek container'larla doğrulandı |
+| Web arayüzü | 🚧 Yalnızca strateji kataloğu |
+| Arayüzden backtest | ❌ Başlanmadı |
 | Gerçek parayla işlem | ⏳ Kimlik bilgisi şifrelemesi gerekiyor |
-| Web arayüzü | ❌ Başlanmadı |
 | Strateji paylaşımı | ❌ Başlanmadı |
 
-Bugün Rudder, etrafında ürün olmayan çalışan bir motordan ibaret. Hemen
-kullanabileceğiniz bir bot arıyorsanız
+Bugün Rudder çalışan bir motor ve onun üzerinde ince bir arayüz. Hemen
+kullanabileceğiniz olgun bir bot arıyorsanız
 [Freqtrade](https://github.com/freqtrade/freqtrade) veya
 [OctoBot](https://github.com/Drakkar-Software/OctoBot) kullanın.
 
@@ -129,11 +132,22 @@ pnpm describe rulesets/bb-bounce.json tr
 pnpm test
 ```
 
+## Arayüzü çalıştırmak
+
+```sh
+pnpm install
+pnpm --filter @rudder/web seed    # migration + hazır kural setleri
+pnpm --filter @rudder/web dev
+```
+
+`http://localhost:3000` — Türkçe için `/tr`, İngilizce için `/en`.
+
 ## Depo yapısı
 
 | Yol | Ne |
 |---|---|
 | `rulesets/` | Küratörlü stratejiler ve reddedilmesi gereken `_invalid/` fixture'ları |
+| `apps/web/` | Arayüz — Next.js, iki dilli |
 | `packages/ruleset/` | Şema, doğrulama ve açıklama render'ı (TypeScript) |
 | `packages/db/` | SQLite şeması ve bağlantısı |
 | `packages/freqtrade/` | Config üretimi ve tipli REST istemcisi |
@@ -141,7 +155,8 @@ pnpm test
 | `engine/` | Freqtrade yorumlayıcısı — projedeki tek Python |
 | `ft_lab/` | Tek kullanımlık Freqtrade keşif ortamı |
 
-Belgeler: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
+Belgeler: [`apps/web/README.md`](apps/web/README.md) ·
+[`packages/ruleset/README.md`](packages/ruleset/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
 [`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
 [`packages/orchestrator/README.md`](packages/orchestrator/README.md) ·

@@ -6,7 +6,8 @@
   "license": "AGPL-3.0-or-later",
   "description": "Turns bot rows into running Freqtrade containers",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./paths": "./src/paths.ts"
   },
   "scripts": {
     "test": "node --test \"test/**/*.test.ts\"",

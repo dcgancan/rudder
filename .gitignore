@@ -8,6 +8,10 @@ out/
 dist/
 build/
 *.tsbuildinfo
+next-env.d.ts
+
+# Local data
+.rudder-dev/
 
 # Environment / secrets
 .env

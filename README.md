@@ -11,8 +11,10 @@ file, and edit it in a form instead of a code editor.
 
 > ### ⚠️ Early development
 >
-> The ruleset engine works and has been tested against real market data.
-> **There is no web interface yet.** See [Status](#status) before you get excited.
+> The engine works: rulesets are backtested against real data and bots can
+> paper trade. The interface currently shows **only the strategy catalog** —
+> there is no bot management and no live trading.
+> See [Status](#status) before you get excited.
 
 ---
 
@@ -88,12 +90,13 @@ No human wrote either sentence.
 | Description renderer (EN + TR) | ✅ Works |
 | Data model | ✅ Works |
 | Bot lifecycle (paper trading) | ✅ Works, verified against real containers |
+| Web interface | 🚧 Strategy catalog only |
+| Backtesting from the interface | ❌ Not started |
 | Live trading | ⏳ Needs credential encryption |
-| Web interface | ❌ Not started |
 | Strategy sharing | ❌ Not started |
 
-Today Rudder is a working engine with no product around it. If you want a bot
-you can actually use right now, use [Freqtrade](https://github.com/freqtrade/freqtrade)
+Today Rudder is a working engine with a thin interface on top. If you want a
+mature bot you can use right now, use [Freqtrade](https://github.com/freqtrade/freqtrade)
 or [OctoBot](https://github.com/Drakkar-Software/OctoBot).
 
 ## Trying the engine
@@ -128,11 +131,22 @@ pnpm describe rulesets/bb-bounce.json tr
 pnpm test
 ```
 
+## Running the interface
+
+```sh
+pnpm install
+pnpm --filter @rudder/web seed    # migrations and the built-in strategies
+pnpm --filter @rudder/web dev
+```
+
+Then `http://localhost:3000` — `/en` for English, `/tr` for Turkish.
+
 ## Repository layout
 
 | Path | What |
 |---|---|
 | `rulesets/` | Curated strategies, plus `_invalid/` fixtures that must be rejected |
+| `apps/web/` | The interface — Next.js, bilingual |
 | `packages/ruleset/` | Schema, validation and description rendering (TypeScript) |
 | `packages/db/` | SQLite schema and client |
 | `packages/freqtrade/` | Config generation and typed REST client |
@@ -140,7 +154,8 @@ pnpm test
 | `engine/` | The Freqtrade interpreter — the only Python in the project |
 | `ft_lab/` | Throwaway Freqtrade exploration environment |
 
-Docs: [`packages/ruleset/README.md`](packages/ruleset/README.md) ·
+Docs: [`apps/web/README.md`](apps/web/README.md) ·
+[`packages/ruleset/README.md`](packages/ruleset/README.md) ·
 [`packages/db/README.md`](packages/db/README.md) ·
 [`packages/freqtrade/README.md`](packages/freqtrade/README.md) ·
 [`packages/orchestrator/README.md`](packages/orchestrator/README.md) ·

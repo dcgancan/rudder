@@ -109,8 +109,12 @@ function duration(L: Locale, locale: string, minutes: number): string {
   return fill(L.dur_minutes, { n: num(locale, minutes) });
 }
 
-/** Indicator id -> insan tarafından okunabilir ad. */
-function indicatorLabels(ruleset: Ruleset, L: Locale): Map<string, string> {
+/**
+ * Indicator id -> insan tarafından okunabilir ad.
+ *
+ * Arayüz bunu "neye bakıyor" listesi için kullanıyor, o yüzden dışa açık.
+ */
+export function indicatorLabels(ruleset: Ruleset, L: Locale): Map<string, string> {
   const labels = new Map<string, string>();
   for (const spec of ruleset.indicators) {
     const entry = L.indicators[spec.fn];

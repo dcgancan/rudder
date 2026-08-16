@@ -1,0 +1,42 @@
+{
+  "site": {
+    "name": "Rudder",
+    "tagline": "Trading strategies you can read"
+  },
+  "nav": {
+    "strategies": "Strategies",
+    "skipToContent": "Skip to content"
+  },
+  "home": {
+    "eyebrow": "Strategy catalog",
+    "leadIn": "Every strategy here is a set of rules, written out in full:",
+    "leadOut": "No code. Nothing hidden. If you can read it, you can decide whether you trust it.",
+    "listHeading": "All strategies",
+    "count": "{count, plural, one {# strategy} other {# strategies}}"
+  },
+  "strategy": {
+    "buyRule": "When it buys",
+    "sellRule": "When it sells",
+    "riskHeading": "Risk controls",
+    "indicators": "What it watches",
+    "timeframe": "Timeframe",
+    "readMore": "Read the full rules",
+    "backToList": "All strategies"
+  },
+  "drawdown": {
+    "label": "Worst fall from its own peak",
+    "untested": "Not tested yet",
+    "untestedHelp": "This strategy has no backtest on record. Nothing is known about how it behaved.",
+    "axisNow": "now"
+  },
+  "disclaimer": {
+    "heading": "Before you read the numbers",
+    "winRate": "A strategy can win 82% of its trades and still lose money. In this project's own testing, one did: small wins taken at 1–4%, losses left to run to 10%.",
+    "backtest": "A backtest shows how a rule would have done on data it was chosen against. It is not a prediction.",
+    "risk": "Trading carries real risk of loss. Paper trading is the default. Stay there until you understand what a strategy does."
+  },
+  "footer": {
+    "license": "Free software under the AGPL-3.0.",
+    "source": "Source code"
+  }
+}

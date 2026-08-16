@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/*
+ * Görsel yön: deniz haritası.
+ *
+ * Bu ürün trading terminali olmamak üzerine kurulu. Bir deniz haritası sakin,
+ * seyrek ve otoriterdir; nereye gitmen gerektiğini söylemez, orada ne olduğunu
+ * söyler. Ürünün duruşu da bu.
+ *
+ * KÂR İÇİN RENK YOK. Kripto arayüzlerinin tamamı yeşil/kırmızı sayı üzerine
+ * kurulu ve bu, insanları kazanma oranı gibi yanıltıcı metriklere bağlıyor.
+ * Burada kazanç nötr mürekkep renginde; yalnızca kayıp ve risk işaretlenir.
+ * Kâr kutlanmaz.
+ */
+
+@theme {
+  /* Gündüz — kâğıt harita */
+  --color-ground: #e7ecea;      /* sığ su */
+  --color-surface: #f2f5f3;     /* yükseltilmiş alan */
+  --color-ink: #15302b;         /* harita mürekkebi, saf siyah değil */
+  --color-ink-soft: #4a625c;    /* ikincil metin */
+  --color-depth: #2e5f66;       /* derinlik konturu — bağlantılar, vurgu */
+  --color-shoal: #c9b78c;       /* okra — tek sıcak not, çok seyrek */
+  --color-rule: #c3ceca;        /* saç teli çizgiler */
+  --color-alert: #9c4a32;       /* kiremit — YALNIZCA kayıp ve uyarı */
+
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --text-hero: clamp(1.75rem, 1.1rem + 2.6vw, 3.25rem);
+  --text-title: clamp(1.35rem, 1.05rem + 1.2vw, 2rem);
+}
+
+/* Gece — ECDIS gece modu: aynı harita, kısılmış işaretler */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-ground: #0f1a18;
+    --color-surface: #16221f;
+    --color-ink: #dde6e2;
+    --color-ink-soft: #8fa39d;
+    --color-depth: #6fa8ac;
+    --color-shoal: #b39c6b;
+    --color-rule: #2a3936;
+    --color-alert: #c2705a;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-ground: #0f1a18;
+  --color-surface: #16221f;
+  --color-ink: #dde6e2;
+  --color-ink-soft: #8fa39d;
+  --color-depth: #6fa8ac;
+  --color-shoal: #b39c6b;
+  --color-rule: #2a3936;
+  --color-alert: #c2705a;
+}
+
+@layer base {
+  html {
+    background: var(--color-ground);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Haritalardaki küçük, geniş harf aralıklı büyük harf etiketleri. */
+  .label {
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .sounding {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-depth);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background: var(--color-shoal);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

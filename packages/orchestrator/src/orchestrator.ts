@@ -50,8 +50,25 @@ import { allocatePort, DEFAULT_PORT_RANGE } from "./ports.ts";
 export const DEFAULT_IMAGE = "freqtradeorg/freqtrade:stable";
 export const BOT_LABEL = "rudder.bot";
 
-/** Repo içindeki `engine/` dizini. Paketlenmiş bir dağıtımda değişir. */
-const DEFAULT_ENGINE_DIR = resolve(import.meta.dirname, "../../../engine");
+/**
+ * Host üzerinde `universal_strategy.py`'nin bulunduğu dizin.
+ *
+ * Modül yüklenirken DEĞİL, ihtiyaç duyulduğunda hesaplanır: bu modül bir
+ * bundler'dan geçtiğinde `import.meta.dirname` tanımsız olur ve modül seviyesi
+ * bir `resolve()` çağrısı, orchestrator hiç kullanılmasa bile uygulamayı
+ * çökertir.
+ */
+function defaultEngineDir(): string {
+  const configured = process.env["RUDDER_ENGINE_DIR"];
+  if (configured) return resolve(configured);
+
+  if (!import.meta.dirname) {
+    throw new Error(
+      "cannot locate the engine directory from a bundled build — set RUDDER_ENGINE_DIR",
+    );
+  }
+  return resolve(import.meta.dirname, "../../../engine");
+}
 
 export type OrchestratorOptions = {
   db: Database;
@@ -73,15 +90,19 @@ export class Orchestrator {
   #db: Database;
   #image: string;
   #root: string;
-  #engineDir: string;
+  #engineDir: string | undefined;
   #portRange: readonly [number, number];
 
   constructor(options: OrchestratorOptions) {
     this.#db = options.db;
     this.#image = options.image ?? DEFAULT_IMAGE;
     this.#root = options.dataRoot ?? dataRoot();
-    this.#engineDir = options.engineDir ?? DEFAULT_ENGINE_DIR;
+    this.#engineDir = options.engineDir;
     this.#portRange = options.portRange ?? DEFAULT_PORT_RANGE;
+  }
+
+  get #engine(): string {
+    return this.#engineDir ?? defaultEngineDir();
   }
 
   // ----------------------------------------------------------------- //
@@ -132,7 +153,7 @@ export class Orchestrator {
         mounts: [
           { host: paths.userData, container: CONTAINER_PATHS.userData },
           { host: paths.ruleset, container: CONTAINER_PATHS.ruleset, readonly: true },
-          { host: this.#engineDir, container: CONTAINER_PATHS.strategyDir, readonly: true },
+          { host: this.#engine, container: CONTAINER_PATHS.strategyDir, readonly: true },
         ],
         // Paper modda borsa anahtarı yok; live mod şifre çözmeyi gerektirir ve
         // henüz uygulanmadı.
